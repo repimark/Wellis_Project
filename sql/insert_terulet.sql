@@ -1,0 +1,1 @@
+INSERT INTO `terulet` (`t_id`, `t_elnevezes`) VALUES (NULL, 'Leltár és Oktatás'), (NULL, 'Előkészítő'), (NULL, 'Termelés - Sorok'), (NULL, 'Swim Spa'), (NULL, 'Burkolás, Csomagolás'), (NULL, 'Tetőgyártás'), (NULL, 'Extruder'), (NULL, 'Lakatosüzem');
