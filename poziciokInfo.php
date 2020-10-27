@@ -17,7 +17,7 @@
 
 	?>
 	<div class="container p-5">
-		<table class="table table-borderless table-md text-center rounded">
+		<table class="table table-borderless table-sm text-center rounded">
 			<?php
 				$t_id = $_GET["id"];
 				$pozicioSQL = "SELECT pozicio.p_elnevezes AS 'p_elnevezes', pozicio.p_id AS 'p_id' FROM pozicio WHERE pozicio.t_id = '$t_id'";
