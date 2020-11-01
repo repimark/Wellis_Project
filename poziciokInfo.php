@@ -314,7 +314,7 @@
           	<input type="text" name="datum" class="form-control" id="k_datum" placeholder="pl. 2020-01-01">
           </div>
           <div class="form-group">
-          	<label for="kilepo">Szeretnéd a kiléptetett dolgoóz igényként felvenni ?</label>
+          	<label for="kilepo">Szeretnéd a kiléptetett dolgozót igényként felvenni ?</label>
           	<input type="checkbox" name="kileptetes" value="kilep" id="kilepo">
           </div>
         </form>
@@ -439,7 +439,7 @@
 					},
 					success: function(KileptetesResult){
 						console.log(KileptetesResult)
-						//location.reload()
+						location.reload()
 					}
 				});
 			}else{
@@ -459,8 +459,7 @@
 
 					},
 					success: function(KileptetesResult){
-						console.log(KileptetesResult)
-						//location.reload()
+						//console.log(KileptetesResult)
 					}
 				});
 				if (allapot_id ==  4) {
@@ -475,6 +474,7 @@
 						},
 						success: function(igenyRendezesResult){
 							console.log(igenyRendezesResult)
+							location.reload()
 						}
 					});
 				}else{
@@ -489,6 +489,8 @@
 						},
 						success: function(igenyRendezesResult){
 							console.log(igenyRendezesResult)
+							location.reload()
+
 						}
 					});
 				}
