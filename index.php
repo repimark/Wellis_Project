@@ -22,6 +22,11 @@
       }
   	</style>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript">
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
 </head>
 <body>
 
