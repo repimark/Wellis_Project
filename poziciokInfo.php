@@ -26,9 +26,9 @@
 				while ($rowPozicio = $pozicioResult->fetch_assoc()) {
 					$igenySQL  = "SELECT i_id, i_db, i_sajat FROM igeny WHERE p_id = '".$rowPozicio["p_id"]."'";
 					$igenyResult = $conn->query($igenySQL); ?>
-					<thead class="text-center">
-						<tr class="table-dark rounded">
-							<td colspan="3"><h2><?php echo $rowPozicio["p_elnevezes"]; ?></h2></td>
+					<thead class="text-center table-dark bg-dark">
+						<tr class="table-dark bg-dark rounded">
+							<td colspan="3" class="bg-dark"><h2><?php echo $rowPozicio["p_elnevezes"]; ?></h2></td>
 					<?php
 						while ($rowIgeny = $igenyResult->fetch_assoc()) { 
 							if ($rowIgeny["i_sajat"] == 0) { 
@@ -40,7 +40,7 @@
 							
 					?>
 
-							<td colspan="1" class="">
+							<td colspan="1" class="bg-dark">
 								<p style="margin:0">Saját igény: <?php echo $veglegesSajat;?></p>
 								<button class="btn btn-secondary igenyPlus" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
 								<button class="btn btn-secondary igenyMinus" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">-</button>
@@ -54,7 +54,7 @@
 										$veglegesKolcson = (int)$rowIgeny["i_db"] - (int)$rowDB_2["db"];
 								}
 					?>
-						<td colspan="1">
+						<td colspan="1" class="bg-dark">
 								<p style="margin:0">Kölcsönzött igény: <?php echo $veglegesKolcson;
 								?></p>
 								<button class="btn btn-secondary igenyPlus" data-menny= "<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
@@ -69,11 +69,11 @@
 						</tr>
 					</thead>
 					<tbody class="table-dark rounded">
-						<tr class="table-dark border-bottom border-top-0">
-							<td>Név</td>
-							<td>Állapot</td>
-							<td>Műveletek</td>
-							<td colspan="2">Megjegyzés</td>
+						<tr class="table-dark border-bottom bg-dark border-top-0">
+							<td class="bg-dark">Név</td>
+							<td class="bg-dark">Állapot</td>
+							<td class="bg-dark">Műveletek</td>
+							<td class="bg-dark" colspan="2">Megjegyzés</td>
 						</tr>
 						
 				<?php
@@ -85,10 +85,10 @@
 					if ($rowDolgozo["a_id"] == 1) {
 				?>	
 					<tr class="table-success" style="">
-					<td><?php echo $rowDolgozo["nev"];  ?></td>
-					<td><?php echo $rowDolgozo["allapot"]; ?></td>
+					<td class="bg-dark text-success"><?php echo $rowDolgozo["nev"];  ?></td>
+					<td class="bg-success"><?php echo $rowDolgozo["allapot"]; ?></td>
 					
-					<td colspan="" class="text-right">
+					<td colspan="" class="bg-success text-right">
 						<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev'];?>" data-id="<?php echo $rowDolgozo['id'];?>" data-terulet="<?php echo $rowDolgozo['ter_id'];?>" data-pozicio="<?php echo $rowDolgozo['pozi_id'];?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id'];?>">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
@@ -102,7 +102,7 @@
                 			</svg>
 						</button>
 					</td>
-					<td colspan="2">
+					<td colspan="2" class="bg-success">
 						<form class="form-inline">
 						<input type="text" class="form-control" width="" id="<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
 						<button type="button" class="btn btn-secondary addMegjegyzes" id="<?php echo $rowDolgozo['m_id']; ?>" style="margin:2px">
@@ -119,7 +119,7 @@
 				
 			<?php 	}elseif ($rowDolgozo["a_id"] == 2) { ?>
 						<tr class="table-danger">
-							<td><?php echo $rowDolgozo["nev"];  ?></td>
+							<td class="bg-danger"><?php echo $rowDolgozo["nev"];  ?></td>
 							<td><?php echo $rowDolgozo["allapot"]; ?></td>
 							
 							<td class="text-right">

@@ -26,11 +26,11 @@
 	<form class="">
 	  <div class="form-group">
 	    <label for="dolgozoNev">Név</label>
-	    <input type="text" class="form-control" id="dolgozoNev" placeholder="Teljes Név">
+	    <input type="text" class="form-control" id="dolgozoNev" placeholder="Teljes Név" required autofocus>
 	  </div>
 	  <div class="form-group">
 	    <label for="teruletSelect">Terület</label>
-	    <select class="form-control" id="teruletSelect">
+	    <select class="form-control" id="teruletSelect" required>
 	    	<?php 
 	    		$result = $conn->query("SELECT terulet.t_elnevezes AS terulet, t_id FROM terulet");
 	    		while($row = $result->fetch_assoc()) {
@@ -41,13 +41,13 @@
 	  </div>
 	  <div class="form-group">
 	    <label for="pozicioSelect">Pozíció</label>
-	    <select class="form-control" id="pozicioSelect">
+	    <select class="form-control" id="pozicioSelect" required>
 	      <!-- PHP BETÖLTI AZ TERÜLET ALAPJÁN A POZICÍÓKAT -->
 	    </select>
 	  </div>
 	  <div class="form-group">
 	  	<label for="allapotSelect">Állapot</label>
-	  	<select class="form-control" id="allapotSelect">
+	  	<select class="form-control" id="allapotSelect" required>
 	  		<?php 
 	    		$result = $conn->query("SELECT a_id, a_elnevezes  FROM allapot");
 	    		while($row = $result->fetch_assoc()) {
