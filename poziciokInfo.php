@@ -9,6 +9,20 @@
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="style.css">
+  	<style type="text/css">
+  		.igenyPlus{
+		  width: 2rem;
+		  height: 2rem;
+		  text-align: center;
+		  
+		}
+		.igenyMinus{
+		  width: 2rem;
+		  height: 2rem;
+		  text-align: center;
+		  
+		}
+  	</style>
 </head>
 <body>
 	<?php
@@ -28,14 +42,14 @@
 					$igenyResult = $conn->query($igenySQL); ?>
 					<thead class="text-center table-dark bg-dark">
 						<tr class="table-dark bg-dark rounded">
-							<td colspan="3" class="bg-dark"><h2><?php echo $rowPozicio["p_elnevezes"]; ?></h2></td>
+							<td colspan="3" class="bg-dark"><p><?php echo ($rowPozicio["p_elnevezes"]); ?></p></td>
 					<?php
 						while ($rowIgeny = $igenyResult->fetch_assoc()) { 
 							if ($rowIgeny["i_sajat"] == 0) { 
-								$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE a_id = 1 AND a_id = 3 AND p_id = ".$rowPozicio["p_id"]."";
+								$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '".$rowPozicio["p_id"]."' AND a_id = 1 OR a_id = 3 ";
 								$sajatDolgozo = $conn->query($darabSQL);
 								while ($rowDB = $sajatDolgozo->fetch_assoc()) {
-									$veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"];
+									$veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"] + 1;
 								}
 							
 					?>
@@ -370,7 +384,7 @@
 			$('.igenyMinus').click(function(){
 				var mennyiseg = parseInt($(this).attr('data-menny'))
 				var newMennyiseg = 0
-				if (mennyiseg > 0) {
+				if (mennyiseg >= 0) {
 					var newMennyiseg = mennyiseg  - 1
 				}else{
 					alert('nem mehetsz minuszba !')

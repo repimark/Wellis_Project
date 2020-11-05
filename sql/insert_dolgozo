@@ -1,3 +1,4 @@
+INSERT INTO `dolgozok` (`d_id`, `d_nev`, `a_id`, `t_id`, `p_id`) VALUES (NULL, 'a', '', '', '')
 LELTÁR ÉS OKTATÁS
 	LELTÁROS
 		Szabóné Drjenovszky Anikó
@@ -189,9 +190,6 @@ MEO
 		Varsányi Tamás
 		Surányi Zsolt
 		Koleff Sándor Miklós
-		
-	ADMIN
-		Nagy-Pintér Ágnes
 	REWORK VEZETŐ
 		Kecskés János
 	REWORK	
@@ -201,4 +199,213 @@ MEO
 		Rusznyák Dániel
 		Rabné Szerényi Zita
 		Mohácsi Zsolt
-	Molnár Ádám
+		Molnár Ádám
+	Műszak vezető	
+		Ritz József
+		Szabó István
+		Mile Tamás 
+		Kajzinger Barnabás
+	Vezető	
+		Mihalics József
+	PU 	
+		Kanyik Bence
+		Lengyel Bence
+		Nagy Roland Zsolt
+		Rózsahegyi Elemér
+		Rukrigel Zsolt
+		Kovács Árpád
+		Wágenhoffer Róbert
+		Podoba Dávid
+		Csinos Attila
+		Balogh István
+		Kiss Gusztáv 
+		Harkai Zoltán 
+	FÚRÓ ROBOT 
+		Schneider Gábor
+		Szabó József
+		Józsa Dániel
+		Dóczi István
+		Czinege Gábor
+		Szalai Xavér
+		Schneider János 10.12.
+	VÁGÓ 	
+		Sztratyinszky Márk
+		Balogh Krisztián 
+		Lakatos Tamás 
+		Garas Tamás
+	VÁKUUM 	
+		Wirt Gábor
+		Márton Zoltán
+		Csikós János Tamás
+		Farkas László
+		Péter Márton
+		Litóczki József Krisztián
+		Péter Zoltán 
+		Csonka János 
+		Balogh Ádám 
+		Csikós Tóbiás 
+		Domján Imre 
+	TÁLCA VÁKUUM 	
+		Slezák József
+		Ónódi András
+	KÉZI FÚRÓ 
+		Kiss Róbert Ferencz
+		Kovács Tamás
+		Balogh László
+		Pekker István
+		Jónás Miklós
+		Halenkár Károly
+		Schrick Ferenc György
+		Szabó Péter
+		Szente László 
+		Lingurár György
+		Lakatos László
+		Mráz István
+		Török Péter
+		Lövei Csaba
+		Turányi László
+		Németh Izsák Krisztián 
+		Varga Bálint
+		Katona József 
+		Vadász Benedek
+		Kovács Máté Péter
+		Nagy Richárd László 
+		Balogh Antal András
+		Fehér József
+		Nagy István Zoltán
+	Fúró - Javítós	
+		Kovács Attila
+	Fúró - Oktató	
+		Tusor Péter
+	FELRAKÓ 
+		Balogh Bence
+		Nagy Károly
+		Kecskeméti Lajos (meo)
+		Ajtai Sándor
+		Farkas András Imre
+		Kolompár András
+		Kolompár Ferenc
+		Kozma Gábor
+		Makula János Dávid
+		Makula Norbert
+		Makula Gusztáv
+		Mező Attila
+		Balogh Tivadar
+		Kovács Kálmán
+		Nagy János Csaba (meo)
+		Nagy Krisztián Zsolt
+		Nagy József Levente
+		Nagy András
+		Balogh Tamás
+		Mátyás Szebasztián
+	LAPSZABÁSZAT (4)	
+		Demeter Dávid
+		Bábel Benjámin
+		Halfinger József
+		Karlik László
+	KERET SZABÁSZAT (4)	
+		Horváth Lajos
+		Tinca Levente
+		Györe Béla
+		Rottenberg  Tamás 
+	KERETEZÉS (12)	
+		Fekete János
+		Kaszás Péter Sebestyén
+		Szilveszter Imre
+		Németh András
+		
+		Lánczos Zsolt
+		Szennai István
+		Andaházy Krisztián
+		Rafael Pál
+		Sári Noémi Klára
+		Ivanics Tamás 
+		Kovács József
+	BURKOLAT KÉSZÍTŐ (6)	
+		Medve Pál
+		Avacz Tamás 
+		Györfi Imre
+		Dohány József 10.12.
+	SZIGETELŐ (4)	
+		Farkas Tamásné
+		Botlik Angéla
+		Herpai Szilvia
+	SAROK GYÁRTÁS (4)	
+		Vellai Edit
+	ElŐKÉSZÍTŐ (2)	
+		Fazekas Dávid
+		Parászka Péter
+	DÍSZKERETEZÉS	
+		Vitárizs Dávid
+	HUNGAROCELL 
+		Petrik Amanda
+		Málinger Richárdné
+		Lánczosné Zelenák Regina
+		Klein Mónika
+		Balogh Tiborné
+	SZABÁSZAT (6)	
+		Lukácsi Judit
+		Bálint Gabriella
+		Böcsödi Barbara
+		Tóthegyi Tímea
+		Fabula Mária
+		Balog Nikolett
+	VARRODA (17+1 = 17 varr, 1 munkaosztó)	
+		Kondor Tiborné
+		Nagyné Fogarasi Ágnes
+		Szaller Brigitta
+		Kabai Irén
+		Farcas Claudia Tereza
+		Lingvai Attiláné
+		Haraszti Krisztina
+		Tyukodi Mária
+		Hideghétiné Garai Margit Aranka
+		Somogyi Márta
+		Józsa Lászlóné
+		Sághi Anikó
+		Karácsony Sándorné
+		Üröginé Nagy Anna
+		Polczer Gabriella
+		Volter Mária
+		Jugovitsné Pakó Katalin
+		Horváthné Kátai Kinga
+	SZITÁZÓ (1)	
+		Mráz Mária
+	TÖMÉSZET (8)	
+		Sánta Beatrix
+		Fehér Tibor
+		Tulecz Márk
+		Tóth Arnold
+		Nagy Bence
+		Szabó Richárd
+		Deményné Palkó Brigitta
+		Ivanics Szabolcs 
+	EXTRUDER	
+		Kovács Krisztián János
+		Rizmajer Krisztina
+		Gazsó Csaba
+		Pajor József
+		Nagy László
+		Kreisz Erik
+		Göcs Tibor
+		Bakonyiné Sipos Renáta
+		Bobric Dominik
+		Soós Zoltán
+	DOMBORNYOMÓ - SZÁLCSISZOLÓ	
+		Saláta Ferenc Kálmán
+		Mányoki Lajosné
+		Kabai Diána Vivien
+		Varga Zoltánné
+		Sándor Mercédesz 
+		Szász Katalin	
+	HEGESZTŐ 
+		Nyitrai Béla
+		Kőbányai Ferenc József
+		Ogrin Antal
+		Romanek Károly
+		Takács László
+		Bán Ferenc 
+	DARABOLÓS 
+		Vas József
+		Fehér Zoltán
+	

@@ -25,9 +25,10 @@ $result = $conn->query($sql);
 
 			//ADATOK KINYERÉSE
 			$dolgozoMenny = (int) $dolgozAdat[0];
-			$igenyMenny = (int) $igenyAdat[0];
-			$kolcsonIgenyMenny = (int) $kolcsonzottIgenyAdat[0];
+			$igenyMenny = (int) $igenyAdat[0] - $dolgozoMenny;
 			$kolcsonDolgozoMenny = (int) $kolcsonzottAdat[0];
+			$kolcsonIgenyMenny = (int) $kolcsonzottIgenyAdat[0] - $kolcsonDolgozoMenny;
+			
 
 			//Összegek
 			$osszes = $dolgozoMenny + $igenyMenny;
