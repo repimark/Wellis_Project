@@ -25,14 +25,14 @@
 </head>
 <body class="text-center">
 
-    <form class="form-signin">
+    <form class="form-signin" action="php/login.php" method="POST">
 	  <img class="mb-4" src="../wellislogo.png" alt="" style="background-color: black"  height="72">
 	  <h1 class="h3 mb-3 font-weight-normal">Kérlek jelentkezz be.</h1>
 	  <label for="inputEmail" class="sr-only">Felhasználónév</label>
-	  <input type="text" id="username" class="form-control" placeholder="Felhasználónév" required="" autofocus="">
+	  <input type="text" id="uname" name="uname" class="form-control" placeholder="Felhasználónév" required="" autofocus="">
 	  <label for="inputPassword" class="sr-only">Jelszó</label>
-	  <input type="password" id="password" class="form-control" placeholder="Jelszó" required="">
-	  <button class="btn btn-lg btn-primary btn-block" type="" id="login">Bejelentkezés</button>
+	  <input type="password" id="pword" name="pword" class="form-control" placeholder="Jelszó" required="">
+	  <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">Bejelentkezés</button>
 	  <p class="mt-5 mb-3 text-muted">© 2020-2021</p>
 </form>
 
@@ -69,7 +69,7 @@
 		}
 	</style>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$('.form-signin').submit(function(){
 			//alert('fuck valaki be akar jelentkezni')
 			var userName = $('#username').val()
@@ -91,6 +91,6 @@
 				}
 			});
 		});
-	</script>
+	</script> -->
 </body>
 </html>
