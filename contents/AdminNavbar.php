@@ -12,7 +12,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="../Admin/editTerulet.php">Területek kezelése</a>
-          <a class="dropdown-item" href="#">Poziciók kezelése</a>
+          <a class="dropdown-item" href="../Admin/editPozicio.php">Poziciók kezelése</a>
           <a class="dropdown-item" href="#"><span class="badge badge-dannger">VIP</span></a>
         </div>
       </li> 
