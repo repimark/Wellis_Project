@@ -8,7 +8,7 @@ if (!isset($_SESSION["a_id"])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Wellis Admin oldal</title>
 	<?php include '../contents/links.php'; ?>
 	<style type="text/css">
 		.add{
