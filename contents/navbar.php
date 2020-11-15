@@ -16,6 +16,7 @@
           <a class="dropdown-item" href="kilepett.php">Kiléptetett Dolgozók</a>
         </div>
       </li>
+      
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Igények kezelése
@@ -24,7 +25,8 @@
           <a class="dropdown-item" href="#">Igény változtatása</a>
           <a class="dropdown-item" href="#">Igény hozzáadása</a>
         </div> --> 
-      </li>
+      
     </ul>
+    <span class="navbar-text p-1"><?php echo $_SESSION["u_id"]; ?>  <a href="php/logout.php">Kijelentkezés</a></span>
   </div>
 </nav>

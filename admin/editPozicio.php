@@ -219,14 +219,14 @@ if (!isset($_SESSION["a_id"])) {
   						lines += '<option class="list-group-item" data-terulet="'+objJSON[i].t_id+'">'+objJSON[i].t_elnevezes+'   </option>'
   					}
   					$(terulet).html(lines)
-  					
+  					getPozicio('#pozicio')		
 				}
 			});
 		};
 
 		$('.container').ready(function(){
 			getTerulet('#terulet')
-			getPozicio('#pozicio')
+			
 		});
 	</script>
 </body>
