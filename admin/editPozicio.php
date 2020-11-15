@@ -23,7 +23,7 @@ if (!isset($_SESSION["a_id"])) {
 			</form>
 			<button class="btn btn-primary" id="deletePozicio" data-toggle="modal" data-target="#deleteModal">Pozicíó Törlése</button>
 				<button class="btn btn-success" id="addPozicio" data-toggle="modal" data-target="#addModal">Pozicíó létrehozása</button>
-				<button class="btn btn-warning" id="movePozicio">Pozició Áthelyezése <span class="badge badge-danger">Beta</span></button>
+				<button class="btn btn-warning" id="movePozicio" data-toggle="modal" data-target="#moveModal">Pozició Áthelyezése <span class="badge badge-danger">Beta</span></button>
 		</div>
 		<!-- HOZZÁADÁS -->
 		<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,14 +66,38 @@ if (!isset($_SESSION["a_id"])) {
 		    </div>
 		  </div>
 		</div>
+		<!-- ÁTHELYEZÉS -->
+		<div class="modal fade" id="moveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Pozició áthelyezése</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="form-group">
+		      		<label for="#moveTerulet" id="moveTeruletLabel">Hova szeretnéd áthelyezni (X) pozíciót ? </label>
+		      		<select class="form-control" id="moveTerulet"></select>
+		      	</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégsem</button>
+		        <button type="button" class="btn btn-primary movePozicio" id="moveBtn">Áthelyezés</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 	</div>
 	<script type="text/javascript">
 		$('#terulet').on('change', function(){
 			//alert('valtozott')
-			valtozott()
+			getPozicio('#pozicio')
 		});
 
-		var valtozott = function(){
+		var getPozicio = function(pozicio){
 			var data = $('#terulet :selected').data('terulet')
 			//alert(data)
 			$.ajax({
@@ -86,17 +110,17 @@ if (!isset($_SESSION["a_id"])) {
 				success: function(Result){
 					var obj = JSON.parse(Result);
 					var lines = [];
-					if (obj.length >= 0) {
+					if (obj.length > 0) {
 						for (var i = obj.length - 1; i >= 0; i--) {
 							lines += '<option class="" data-pozicio="'+obj[i].p_id+'">'+obj[i].p_elnevezes+'</option>'
 						}
 					}else{
 						lines+= 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 					}
-					$('#pozicio').html(lines)
+					$(pozicio).html(lines)
 				}
-			})
-		}
+			});
+		};
 
 		$('#addModal').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget) // Button that triggered the modal
@@ -112,6 +136,16 @@ if (!isset($_SESSION["a_id"])) {
 		  var modal = $(this)
 		  modal.find('.modal-body').html('<p>Biztosan szeretnéd kitörölni a '+poziNev+' poziciót?</p>')
 		  modal.find('#deleteBtn').data('pozicio', pozi)
+		});
+		$('#moveModal').on('show.bs.modal', function (event) {
+		  //var ter = $('#terulet :selected').data('terulet')
+		  var pozi = $('#pozicio :selected').data('pozicio')
+		  var poziNev = $('#pozicio :selected').val()
+		  getTerulet('#moveTerulet')
+		  var modal = $(this)
+		  modal.find('#moveTeruletLabel').html('<p>Hova szeretnéd áthelyezni '+poziNev+' pozíciót ?</p>')
+		  
+		  modal.find('#moveBtn').data('pozicio', pozi)
 		});
 
 		$('#addBtn').click(function(event){
@@ -151,8 +185,28 @@ if (!isset($_SESSION["a_id"])) {
 				}
 			});
 		});
+		
+		$('#moveBtn').click(function(event){
+			var pozi = $(this).data('pozicio')
+			var terulet = $('#moveTerulet :selected').data('terulet')
+			$.ajax({
+				url: 'php/movePozicio.php',
+				type: 'POST',
+				cache: false, 
+				data: {
+					p_id: pozi,
+					t_id: terulet
+				},
+				success: function(Result){
+					console.log(Result)
+					if (Result == 'Sikeres') {
+						location.reload()
+					}
+				}
+			});
+		});
 
-		$('.container').ready(function(){
+		var getTerulet = function(terulet){
 			$.ajax({
 				url: 'php/getTerulet.php',
 				type: 'POST',
@@ -164,10 +218,15 @@ if (!isset($_SESSION["a_id"])) {
   					for (var i = objJSON.length - 1; i >= 0; i--) {
   						lines += '<option class="list-group-item" data-terulet="'+objJSON[i].t_id+'">'+objJSON[i].t_elnevezes+'   </option>'
   					}
-  					$('#terulet').html(lines)
-  					valtozott()
+  					$(terulet).html(lines)
+  					
 				}
 			});
+		};
+
+		$('.container').ready(function(){
+			getTerulet('#terulet')
+			getPozicio('#pozicio')
 		});
 	</script>
 </body>
