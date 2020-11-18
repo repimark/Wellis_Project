@@ -32,7 +32,7 @@ if (isset($_SESSION["a_id"])) {
 <body class="text-center">
 
     <form class="form-signin" action="php/login.php" method="POST">
-	  <img class="mb-4" src="../wellislogo.png" alt="" style="background-color: black"  height="72">
+	  <img class="mb-4" src="../wellislogoblack.png" alt=""  height="72">
 	  <h1 class="h3 mb-3 font-weight-normal">Kérlek jelentkezz be.</h1>
 	  <label for="inputEmail" class="sr-only">Felhasználónév</label>
 	  <input type="text" id="uname" name="uname" class="form-control" placeholder="Felhasználónév" required="" autofocus="">

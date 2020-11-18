@@ -55,7 +55,7 @@ if (!isset($_SESSION["u_id"])) {
 								$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '".$rowPozicio["p_id"]."' AND a_id = 1 OR a_id = 3 ";
 								$sajatDolgozo = $conn->query($darabSQL);
 								while ($rowDB = $sajatDolgozo->fetch_assoc()) {
-									$veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"] + 1;
+									$veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"] + 2;
 								}
 							
 					?>

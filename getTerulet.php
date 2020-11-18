@@ -8,31 +8,31 @@ $result = $conn->query($sql);
 			//SQL LEKÉRDEZÉSEK
 			$sqligenyMennyiseg = "SELECT SUM(i_db) FROM `igeny` WHERE t_id = '".$row["id"]."' AND i_sajat = '0'";
 			$sqlDolgozoMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '1' OR a_id = '3'";
-			$sqligenyMennyisegKolcson = "SELECT SUM(i_db) FROM `igeny` WHERE t_id = '".$row["id"]."' AND i_sajat = '1'";
+			// $sqligenyMennyisegKolcson = "SELECT SUM(i_db) FROM `igeny` WHERE t_id = '".$row["id"]."' AND i_sajat = '1'";
 			$sqlDolgozoMennyisegKolcson = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '4'";
 
 			//QUERY FUTTATÁSOK
 			$resultIgeny = $conn->query($sqligenyMennyiseg);
 			$resultDolgozok = $conn->query($sqlDolgozoMennyiseg);
 			$resultKolcsonzottDolgozok = $conn->query($sqlDolgozoMennyisegKolcson);
-			$resultKolcsonzottIgeny = $conn->query($sqligenyMennyisegKolcson);
+			// $resultKolcsonzottIgeny = $conn->query($sqligenyMennyisegKolcson);
 
 			//FETCH ROW FUTTATÁS
 			$igenyAdat = mysqli_fetch_row($resultIgeny);
 			$dolgozAdat = mysqli_fetch_row($resultDolgozok);
 			$kolcsonzottAdat = mysqli_fetch_row($resultKolcsonzottDolgozok);
-			$kolcsonzottIgenyAdat = mysqli_fetch_row($resultKolcsonzottIgeny);
+			// $kolcsonzottIgenyAdat = mysqli_fetch_row($resultKolcsonzottIgeny);
 
 			//ADATOK KINYERÉSE
 			$dolgozoMenny = (int) $dolgozAdat[0];
 			$igenyMenny = (int) $igenyAdat[0] - $dolgozoMenny;
 			$kolcsonDolgozoMenny = (int) $kolcsonzottAdat[0];
-			$kolcsonIgenyMenny = (int) $kolcsonzottIgenyAdat[0] - $kolcsonDolgozoMenny;
+			// $kolcsonIgenyMenny = (int) $kolcsonzottIgenyAdat[0] - $kolcsonDolgozoMenny;
 			
 
 			//Összegek
 			$osszes = $dolgozoMenny + $igenyMenny;
-			$kolcsonOsszes = $kolcsonDolgozoMenny + $kolcsonIgenyMenny;
+			// $kolcsonOsszes = $kolcsonDolgozoMenny + $kolcsonIgenyMenny;
 ?>	
 	<div class="card mg-1 text-center " style="background: #E9967A; border: none;">
 			<div class="card-header bg-dribble" style="border:none; ">
@@ -56,7 +56,7 @@ $result = $conn->query($sql);
     					</div>
     				</div>
     				<div class="row p-2">
-    					<div class="col">
+    					<!-- <div class="col">
         					<div class="progress mx-auto" data-value='<?php echo ($kolcsonDolgozoMenny/$kolcsonOsszes)*100; ?>'>
           						<span class="progress-left" data-toggle="tooltip" data-placement="top" title="Igény Mennyiség: <?php echo $kolcsonIgenyMenny; ?>">
                         			<span class="progress-bar border-danger"></span>
@@ -68,7 +68,7 @@ $result = $conn->query($sql);
             						<div class="h5 font-weight-bold"><?php echo $kolcsonOsszes." fő"; ?></div>
           						</div>
         					</div>
-    					</div>
+    					</div> -->
 					</div>
 				</div>
 				<a class="btn text-monospace" data-toggle="collapse" data-target="#c<?php echo $row['id'];?>" aria-expanded="false" aria-controls="collapseExample" style="">Részletek</a>
