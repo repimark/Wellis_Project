@@ -67,9 +67,11 @@ if (!isset($_SESSION["u_id"])) {
 	  </div>
 	</form>
 	<script type="text/javascript">
-		$("#teruletSelect").change(function(){
-    		//alert('változott')
-    		var terulet_id = $("#teruletSelect option:selected").data('id')
+		$(document).ready(function(){
+			updatePozicio()
+		});
+		var updatePozicio = function(){
+			var terulet_id = $("#teruletSelect option:selected").data('id')
     		console.log(terulet_id)
     		$.ajax({
 				url: "getPozicioForUserAdd.php",
@@ -82,10 +84,21 @@ if (!isset($_SESSION["u_id"])) {
 					console.log(getPozicioResult);
 					//alert("update success");
 					$('#pozicioSelect').html(getPozicioResult);
+			}
+		
+	});
+    	}
+			$("#teruletSelect").change(function(){
+    		
+    		updatePozicio()
 
-				}
-			});
   		});
+
+		var kolcsonzottCeg = function(){
+			if ($('#allapotSelect :selected').data('id') == '5') {
+				alert('Kölcsönzött dolgozó')
+			}
+		}
   		$("#addDolgozoButton").click(function(){
   			var nev = $('#dolgozoNev').val()
   			var terulet = $('#teruletSelect option:selected').data('id')

@@ -14,18 +14,32 @@ if (!isset($_SESSION["u_id"])) {
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   	<style type="text/css">
-  		.card-header{
-        background: #50C9C3;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to left, #96DEDA, #50C9C3);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #96DEDA, #50C9C3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  		.card-header {
+      background: #232526;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to top, #414345, #232526);   Chrome 10-25, Safari 5.1-6 
+      background: linear-gradient(to top, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */*/
+      color:white;
 
       }
-      .btn{
-        background: #50C9C3;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to left, #96DEDA, #50C9C3);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #96DEDA, #50C9C3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        color: grey;
+      .btn-reszletek{
+      background-color: #343a40;  /* fallback for old browsers */
+      /*background: -webkit-linear-gradient(to bottom, #414345, #232526);   Chrome 10-25, Safari 5.1-6 
+      background: linear-gradient(to bottom, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      /*color: grey;*/
+      color: rgba(255,255,255,.5);
+      
       }
+      .btn-reszletek:hover{
+        color: rgba(255,255,255,.75);
+      }
+
+      .card-header h5 a{
+        color: rgba(255,255,255,.5);
+      }
+      .card-header h5 a:hover{
+         color:  rgba(255,255,255,.75);
+      }
+
   	</style>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript">

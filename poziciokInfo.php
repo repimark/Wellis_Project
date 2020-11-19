@@ -28,6 +28,13 @@ if (!isset($_SESSION["u_id"])) {
 		  text-align: center;
 		  
 		}
+		.bg-dark{
+			font-size: 1rem;
+		}
+		.bg-success{
+			font-size: 1rem;
+			background-color: #9ad3bc!important;
+		}
   	</style>
 </head>
 <body>
@@ -52,10 +59,10 @@ if (!isset($_SESSION["u_id"])) {
 					<?php
 						while ($rowIgeny = $igenyResult->fetch_assoc()) { 
 							if ($rowIgeny["i_sajat"] == 0) { 
-								$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '".$rowPozicio["p_id"]."' AND a_id = 1 OR a_id = 3 ";
+								$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '".$rowPozicio["p_id"]."' AND a_id = 1 OR p_id = '".$rowPozicio["p_id"]."' AND a_id = 3 OR p_id = '".$rowPozicio["p_id"]."' AND a_id = 4";
 								$sajatDolgozo = $conn->query($darabSQL);
 								while ($rowDB = $sajatDolgozo->fetch_assoc()) {
-									$veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"] + 2;
+									$veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"];
 								}
 							
 					?>
@@ -96,6 +103,7 @@ if (!isset($_SESSION["u_id"])) {
 							<td class="bg-dark" colspan="2">Megjegyzés</td>
 						</tr>
 						
+						
 				<?php
 				$pid = $rowPozicio["p_id"];
 				$dolgozoSQL = "SELECT dolgozok.d_id AS 'id', dolgozok.t_id AS 'ter_id', dolgozok.p_id AS 'pozi_id', dolgozok.d_nev AS 'nev', allapot.a_elnevezes AS 'allapot', dolgozok.a_id AS 'a_id', megjegyzes.m_szoveg AS 'Megjegyzes', megjegyzes.m_id AS 'm_id' FROM dolgozok, allapot, megjegyzes WHERE dolgozok.d_id = megjegyzes.d_id AND dolgozok.a_id = allapot.a_id AND megjegyzes.m_szoveg IS NOT NULL AND dolgozok.p_id = '".$pid."'";
@@ -105,7 +113,7 @@ if (!isset($_SESSION["u_id"])) {
 					if ($rowDolgozo["a_id"] == 1) {
 				?>	
 					<tr class="table-success" style="">
-					<td class="bg-dark text-success"><?php echo $rowDolgozo["nev"];  ?></td>
+					<td class="bg-dark" style=""><?php echo $rowDolgozo["nev"];  ?></td>
 					<td class="bg-success"><?php echo $rowDolgozo["allapot"]; ?></td>
 					
 					<td colspan="" class="bg-success text-right">
@@ -276,7 +284,7 @@ if (!isset($_SESSION["u_id"])) {
 			</tbody> -->
 		</table>
 
-		<!-- FELUGRO ABLAK KEZDETE -->
+		<!-- SZEEKESZTÉS -->
 	<div class="modal" tabindex="-1" id="editModal">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -313,7 +321,7 @@ if (!isset($_SESSION["u_id"])) {
 	    </div>
 	  </div>
 	</div>
-
+	<!-- KILÉPTETÉS -->
 	<div class="modal" tabindex="-1" id="deleteModal">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -362,7 +370,7 @@ if (!isset($_SESSION["u_id"])) {
 						m_text: szoveg
 					},
 					success: function(NotesResult){
-						alert(NotesResult)
+						//alert(NotesResult)
 						location.reload()
 					}
 				});
@@ -390,13 +398,7 @@ if (!isset($_SESSION["u_id"])) {
 			$('.igenyMinus').click(function(){
 				var mennyiseg = parseInt($(this).attr('data-menny'))
 				var newMennyiseg = 0
-				if (mennyiseg >= 0) {
-					var newMennyiseg = mennyiseg  - 1
-				}else{
-					alert('nem mehetsz minuszba !')
-					var newMennyiseg = mennyiseg
-				}
-				
+				var newMennyiseg = mennyiseg  - 1
 				var id = $(this).attr('data-id')
 				console.log(id + ' , '+newMennyiseg)
 				//alert(id+' igényben '+(mennyiseg+1)+' darab lesz')
@@ -426,7 +428,13 @@ if (!isset($_SESSION["u_id"])) {
 			var modal = $(this)
 			modal.find('#Modaltitle').text(nev + " kiléptetése")
 			modal.find('#dolgozo-nev').val(nev)
-			modal.find('#k_datum').val()
+			var d = new Date();
+			var month = d.getMonth()+1;
+			var day = d.getDate();
+			var output = d.getFullYear() + '/' +
+    		(month<10 ? '0' : '') + month + '/' +
+    		(day<10 ? '0' : '') + day;
+			modal.find('#k_datum').val(d.getFullYear()+'.'+(d.getMonth()+1)+'.'+d.getDate())
 			modal.find('#delete_button').attr('data-pozicio', pozicio_id)
 			modal.find('#delete_button').attr('data-terulet', terulet_id)
 			modal.find('#delete_button').attr('data-allapot', allapot_id)
@@ -443,7 +451,7 @@ if (!isset($_SESSION["u_id"])) {
 			var d_nev = button.data('nev')
 			if ($('#kilepo').is(':checked')) {
 				//KILÉPTETŐ ELKÉSZÍTÉSE IGÉNYFELVÉTELLEL
-				alert(d_nev+' igényként kell felvenni id'+dolgozo_id+' pozi_id'+ pozicio_id+' terület_id '+terulet_id+' allapot_id'+allapot_id)
+				//alert(d_nev+' igényként kell felvenni id'+dolgozo_id+' pozi_id'+ pozicio_id+' terület_id '+terulet_id+' allapot_id'+allapot_id)
 				$.ajax({
 					url: 'kileptetes.php',
 					type: 'POST',
@@ -458,13 +466,12 @@ if (!isset($_SESSION["u_id"])) {
 
 					},
 					success: function(KileptetesResult){
-						console.log(KileptetesResult)
+						//console.log(KileptetesResult)
 						location.reload()
 					}
 				});
 			}else{
 				//KILÉPTETŐ ELKÉSZÍTÉSE IGÉNYFELVÉTEL NÉLKÜL
-				alert('nem kell igényként felvenni')
 				$.ajax({
 					url: 'kileptetes.php',
 					type: 'POST',
@@ -479,25 +486,24 @@ if (!isset($_SESSION["u_id"])) {
 
 					},
 					success: function(KileptetesResult){
-						//console.log(KileptetesResult)
 					}
 				});
-				if (allapot_id ==  4) {
-					var kolcsonzott = 1
-					$.ajax({
-						url: 'igenyRendezes.php',
-						type: 'POST',
-						cache: false,
-						data: {
-							i_sajat: kolcsonzott,
-							p_id: pozicio_id
-						},
-						success: function(igenyRendezesResult){
-							console.log(igenyRendezesResult)
-							location.reload()
-						}
-					});
-				}else{
+				// if (allapot_id ==  4) {
+				// 	var kolcsonzott = 1
+				// 	$.ajax({
+				// 		url: 'igenyRendezes.php',
+				// 		type: 'POST',
+				// 		cache: false,
+				// 		data: {
+				// 			i_sajat: kolcsonzott,
+				// 			p_id: pozicio_id
+				// 		},
+				// 		success: function(igenyRendezesResult){
+				// 			console.log(igenyRendezesResult)
+				// 			location.reload()
+				// 		}
+				// 	});
+				// }else{
 					var kolcsonzott = 0
 					$.ajax({
 						url: 'igenyRendezes.php',
@@ -513,7 +519,7 @@ if (!isset($_SESSION["u_id"])) {
 
 						}
 					});
-				}
+				//}
 			}
 
 		});
