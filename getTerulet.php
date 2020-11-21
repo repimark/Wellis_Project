@@ -7,31 +7,42 @@ $result = $conn->query($sql);
 		while($row = $result->fetch_assoc()) {
 			//SQL LEKÉRDEZÉSEK
 			$sqligenyMennyiseg = "SELECT SUM(i_db) FROM `igeny` WHERE t_id = '".$row["id"]."'";
-			$sqlDolgozoMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '1' OR t_id = '".$row["id"]."' AND a_id = '3' OR t_id = '".$row["id"]."' AND a_id = '4'";
-			// $sqligenyMennyisegKolcson = "SELECT SUM(i_db) FROM `igeny` WHERE t_id = '".$row["id"]."' AND i_sajat = '1'";
-			//$sqlDolgozoMennyisegKolcson = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '4'";
+			$sqlDolgozoMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '1' OR t_id = '".$row["id"]."' AND a_id = '3'";
+			$sqlkolcsonzottMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '4'";
+			$sqlbelepoMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '5' OR t_id = '".$row["id"]."' AND a_id = '6'";
+			
 
 			//QUERY FUTTATÁSOK
 			$resultIgeny = $conn->query($sqligenyMennyiseg);
 			$resultDolgozok = $conn->query($sqlDolgozoMennyiseg);
+			$resultKolcsonzottDolgozok = $conn->query($sqlkolcsonzottMennyiseg);
+			$resultbelepoDolgozok = $conn ->query($sqlbelepoMennyiseg);
 			//$resultKolcsonzottDolgozok = $conn->query($sqlDolgozoMennyisegKolcson);
 			// $resultKolcsonzottIgeny = $conn->query($sqligenyMennyisegKolcson);
 
 			//FETCH ROW FUTTATÁS
 			$igenyAdat = mysqli_fetch_row($resultIgeny);
 			$dolgozAdat = mysqli_fetch_row($resultDolgozok);
+			$kolcsonzottAdat = mysqli_fetch_row($resultKolcsonzottDolgozok);
+			$belepoAdat = mysqli_fetch_row($resultbelepoDolgozok);
+
 			//$kolcsonzottAdat = mysqli_fetch_row($resultKolcsonzottDolgozok);
 			// $kolcsonzottIgenyAdat = mysqli_fetch_row($resultKolcsonzottIgeny);
 
 			//ADATOK KINYERÉSE
 			$dolgozoMenny = (int) $dolgozAdat[0];
-			$igenyMenny = (int) $igenyAdat[0] - $dolgozoMenny;
+			$kolcsonzottMenny = (int)$kolcsonzottAdat[0];
+			$belepoMenny = (int)$belepoAdat[0];
+			$igenyMenny = (int) $igenyAdat[0] - $dolgozoMenny - $kolcsonzottMenny - $belepoMenny;
+			if ($igenyMenny < 0) {
+				$igenyMenny = 0;
+			}
 			//$kolcsonDolgozoMenny = (int) $kolcsonzottAdat[0];
 			// $kolcsonIgenyMenny = (int) $kolcsonzottIgenyAdat[0] - $kolcsonDolgozoMenny;
 			
 
 			//Összegek
-			$osszes = $dolgozoMenny + $igenyMenny;
+			$osszes = (int)$igenyAdat[0];
 			// $kolcsonOsszes = $kolcsonDolgozoMenny + $kolcsonIgenyMenny;
 ?>	
 	<div class="card mg-2 text-center shadow rounded " style="background: white; border:;">
@@ -42,7 +53,48 @@ $result = $conn->query($sql);
 				<div class="container">
 					<div class="row ">
 						<div class="col" >
-							<div class="progress mx-auto" data-value='<?php echo ($dolgozoMenny/$osszes)*100; ?>'>
+							<div id="t-<?php echo $row['id']; ?>" data-adat1="<?php echo $dolgozoMenny ?>" data-adat2="<?php echo $kolcsonzottMenny ?>" data-adat3="<?php echo $belepoMenny ?>" data-adat4="<?php echo $igenyMenny ?>"></div>
+							  <script type="text/javascript">
+								// Load Charts and the corechart package.
+								      google.charts.load('current', {'packages':['corechart']});
+
+								      // Draw the pie chart for Sarah's pizza when Charts is loaded.
+								      google.charts.setOnLoadCallback(<?php echo "t".$row["id"]; ?>);
+
+								      // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+
+
+								      // Callback that draws the pie chart for Sarah's pizza.
+								      function <?php echo "t".$row["id"]; ?>() {
+								      	var data1 = $('#t-<?php echo $row['id']; ?>').data('adat1')
+								      	var data2 = $('#t-<?php echo $row['id']; ?>').data('adat2')
+								      	var data3 = $('#t-<?php echo $row['id']; ?>').data('adat3')
+								      	var data4 = $('#t-<?php echo $row['id']; ?>').data('adat4')
+								        // Create the data table for Sarah's pizza.
+								        var data = new google.visualization.DataTable();
+								        data.addColumn('string', 'Topping');
+								        data.addColumn('number', 'Slices');
+								        data.addRows([
+								          ['Dolgozók', data1],
+								          ['Kölcsönzött', data2],
+								          ['Belépő', data3],
+								          ['Igény', data4]
+								        ]);
+
+								        // Set options for Sarah's pie chart.
+								        var options = {
+								                       width:250,
+								                       height:150,
+								                   		is3D: true};
+
+								        // Instantiate and draw the chart for Sarah's pizza.
+								        var chart = new google.visualization.PieChart(document.getElementById('t-<?php echo $row['id'];?>'));
+								        chart.draw(data, options);
+								      }
+
+							</script>
+
+							<!-- <div class="progress mx-auto" data-value='<?php echo ($dolgozoMenny/$osszes)*100; ?>'>
           						<span class="progress-left" data-toggle="tooltip" data-placement="top" title="Igény Mennyiség: <?php echo $igenyMenny; ?>">
                         			<span class="progress-bar" style="border-color:#2c3e50"></span>
           						</span>
@@ -52,7 +104,7 @@ $result = $conn->query($sql);
           					<div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
             					<div class="h5 font-weight-bold"><?php echo $osszes."/".$dolgozoMenny." fő"; ?></div>
           					</div>
-        					</div>
+        					</div> -->
     					</div>
     				</div>
     				<div class="p-2 row"></div>

@@ -62,6 +62,23 @@ if (!isset($_SESSION["u_id"])) {
   			?>
 	  	</select>
 	  </div>
+	  <div id="kolcsonzo" class="">
+	  	<div class="form-group">
+	  		<label for="#kolcsonzoCeg">Kölcsönző cég</label>
+	  		<select id="kolcsonzoCeg" class="form-control">
+	  			<option></option>
+	  			<option>Trenkwalder</option>
+	  			<option>Workforce</option>
+	  			<option>Melicom</option>
+	  		</select>
+	  	</div>
+	  </div>
+	  <div id="belepes" class="">
+	  	<div class="form-group">
+	  		<label for="#belepesIdo">Belépési idő</label>
+	  		<input type="text" id="belepesIdo" class="form-control">
+	  	</div>
+	  </div>
 	  <div class="form-group">
 	  	<button type="button" class="btn" id="addDolgozoButton">Dolgozó Felvétele</button>
 	  </div>
@@ -69,7 +86,13 @@ if (!isset($_SESSION["u_id"])) {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			updatePozicio()
+			//kolcsonzottCeg()
+			udpateHiddenStats()
 		});
+		var udpateHiddenStats = function(){
+			$('#kolcsonzo').hide()
+			$('#belepes').hide()
+		}
 		var updatePozicio = function(){
 			var terulet_id = $("#teruletSelect option:selected").data('id')
     		console.log(terulet_id)
@@ -88,15 +111,26 @@ if (!isset($_SESSION["u_id"])) {
 		
 	});
     	}
-			$("#teruletSelect").change(function(){
-    		
+		$("#teruletSelect").change(function(){
     		updatePozicio()
-
   		});
-
+		$('#allapotSelect').change(function(){
+			kolcsonzottCeg()
+		});
 		var kolcsonzottCeg = function(){
-			if ($('#allapotSelect :selected').data('id') == '5') {
-				alert('Kölcsönzött dolgozó')
+			if ($('#allapotSelect option:selected').data('id') == '4') {
+				//alert('Kölcsönzött dolgozó')
+				$('#kolcsonzo').show()
+				$('#belepes').hide()
+			}else if ($('#allapotSelect option:selected').data('id') == "5") {
+				$('#kolcsonzo').hide()
+				$('#belepes').show()
+			}else if ($('#allapotSelect option:selected').data('id') == "6") {
+				$('#kolcsonzo').show()
+				$('#belepes').show()
+			}else{
+				$('#kolcsonzo').hide()
+				$('#belepes').hide()
 			}
 		}
   		$("#addDolgozoButton").click(function(){
@@ -104,15 +138,25 @@ if (!isset($_SESSION["u_id"])) {
   			var terulet = $('#teruletSelect option:selected').data('id')
   			var pozicio = $('#pozicioSelect option:selected').data('id')
   			var allapot = $('#allapotSelect option:selected').data('id')
+  			var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
+  			var newNev = nev+' '+kolcsonzo.substring(0,1)
+  			var	datum = ''
+  			if ($('#belepesIdo').text().length > 0) {
+  				var d = new Date();
+    			datum = d.getFullYear()+'.'+d.getMonth()+1+'.'+d.getDate()
+  			}else{
+  				datum = $('#belepesIdo').val()
+  			}
   			$.ajax({
   				url: "addDolgozo.php",
   				type: "POST",
   				cache: false,
   				data:{
-  					d_nev: nev,
+  					d_nev: newNev,
   					t_id: terulet,
   					p_id: pozicio,
-  					a_id: allapot
+  					a_id: allapot,
+  					b_datum: datum
   				},
   				success: function(addDolgozoResult){
   					if (addDolgozoResult == 'Sikeres') {

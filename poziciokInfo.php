@@ -44,6 +44,9 @@ if (!isset($_SESSION["u_id"])) {
 
 	?>
 	<div class="container p-5">
+		<div class="row bg-dark text-white text-middle rounded w-50 m-1">
+			<h4 class="p-1 text-center" id="addDolgozo" data-toggle="modal" data-target="#addModal"><span class="badge-success badge">+</span> Új dolgozó hozzáadása</h4>
+		</div>
 		<table class="table table-borderless table-sm text-center rounded">
 			<?php
 				$t_id = $_GET["id"];
@@ -106,7 +109,7 @@ if (!isset($_SESSION["u_id"])) {
 						
 				<?php
 				$pid = $rowPozicio["p_id"];
-				$dolgozoSQL = "SELECT dolgozok.d_id AS 'id', dolgozok.t_id AS 'ter_id', dolgozok.p_id AS 'pozi_id', dolgozok.d_nev AS 'nev', allapot.a_elnevezes AS 'allapot', dolgozok.a_id AS 'a_id', megjegyzes.m_szoveg AS 'Megjegyzes', megjegyzes.m_id AS 'm_id' FROM dolgozok, allapot, megjegyzes WHERE dolgozok.d_id = megjegyzes.d_id AND dolgozok.a_id = allapot.a_id AND megjegyzes.m_szoveg IS NOT NULL AND dolgozok.p_id = '".$pid."'";
+				$dolgozoSQL = "SELECT dolgozok.d_id AS 'id', dolgozok.t_id AS 'ter_id', dolgozok.p_id AS 'pozi_id', dolgozok.d_nev AS 'nev', allapot.a_elnevezes AS 'allapot', dolgozok.a_id AS 'a_id', megjegyzes.m_szoveg AS 'Megjegyzes', megjegyzes.m_id AS 'm_id', dolgozok.b_datum as 'belepes' FROM dolgozok, allapot, megjegyzes WHERE dolgozok.d_id = megjegyzes.d_id AND dolgozok.a_id = allapot.a_id AND megjegyzes.m_szoveg IS NOT NULL AND dolgozok.p_id = '".$pid."'";
 				$dolgozoResult = $conn->query($dolgozoSQL);
 				if ($dolgozoResult->num_rows > 0) {
 				while ($rowDolgozo = $dolgozoResult->fetch_assoc()) {
@@ -145,9 +148,9 @@ if (!isset($_SESSION["u_id"])) {
 					</td>
 				</tr>
 				
-			<?php 	}elseif ($rowDolgozo["a_id"] == 2) { ?>
+			<?php 	}elseif ($rowDolgozo["a_id"] == 6) { ?>
 						<tr class="table-danger">
-							<td class="bg-danger"><?php echo $rowDolgozo["nev"];  ?></td>
+							<td class="bg-danger"><?php echo $rowDolgozo["nev"];  ?><br>(<?php echo $rowDolgozo["belepes"]; ?>)</td>
 							<td><?php echo $rowDolgozo["allapot"]; ?></td>
 							
 							<td class="text-right">
@@ -236,7 +239,7 @@ if (!isset($_SESSION["u_id"])) {
 						</tr>
 				<?php }else{ ?>
 					<tr class="table-warning">
-							<td><?php echo $rowDolgozo["nev"];  ?></td>
+							<td><?php echo $rowDolgozo["nev"];  ?><br>(<?php echo $rowDolgozo["belepes"]; ?>)</td>
 							<td><?php echo $rowDolgozo["allapot"]; ?></td>
 							<td class="text-right">
 								<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev'];?>" data-id="<?php echo $rowDolgozo['id'];?>" data-terulet="<?php echo $rowDolgozo['ter_id'];?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id'];?>">
@@ -354,8 +357,81 @@ if (!isset($_SESSION["u_id"])) {
 	    </div>
 	  </div>
 	</div>
+	<!-- ÚJ DOLGOZÓ HOZZÁADÁSA -->
+	<div class="modal" tabindex="-1" id="addModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="Modaltitle">Dolgozó hozzáadása</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form class="">
+	  <div class="form-group">
+	    <label for="dolgozoNev">Név</label>
+	    <input type="text" class="form-control" id="dolgozoNev" placeholder="Teljes Név" required autofocus>
+	  </div>
+	  <div class="form-group">
+	    <label for="teruletSelect">Terület</label>
+	    <select class="form-control" id="teruletSelect" required>
+	    	<?php 
+	    		$result = $conn->query("SELECT terulet.t_elnevezes AS terulet, t_id FROM terulet");
+	    		while($row = $result->fetch_assoc()) {
+    				echo "<option data-id=".$row["t_id"].">".$row["terulet"]."</option>";
+  				}
+  			?>
+	    </select>
+	  </div>
+	  <div class="form-group">
+	    <label for="pozicioSelect">Pozíció</label>
+	    <select class="form-control" id="pozicioSelect" required>
+	      <!-- PHP BETÖLTI AZ TERÜLET ALAPJÁN A POZICÍÓKAT -->
+	    </select>
+	  </div>
+	  <div class="form-group">
+	  	<label for="allapotSelect">Állapot</label>
+	  	<select class="form-control" id="allapotSelect" required>
+	  		<?php 
+	    		$result = $conn->query("SELECT a_id, a_elnevezes  FROM allapot");
+	    		while($row = $result->fetch_assoc()) {
+    				echo "<option data-id=".$row["a_id"].">".$row["a_elnevezes"]."</option>";
+  				}
+  			?>
+	  	</select>
+	  </div>
+	   <div id="kolcsonzo" class="">
+	  	<div class="form-group">
+	  		<label for="#kolcsonzoCeg">Kölcsönző cég</label>
+	  		<select id="kolcsonzoCeg" class="form-control">
+	  			<option></option>
+	  			<option>Trenkwalder</option>
+	  			<option>Workforce</option>
+	  			<option>Melicom</option>
+	  		</select>
+	  	</div>
+	  </div>
+	  <div id="belepes" class="">
+	  	<div class="form-group">
+	  		<label for="#belepesIdo">Belépési idő</label>
+	  		<input type="text" id="belepesIdo" class="form-control">
+	  	</div>
+	  </div>
+	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+	        <button type="button" id="add_button" class="btn btn-primary">Hozzáadás</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<!-- FELUGRÓ ABLAK VÉGE -->
 		<script type="text/javascript">
+			$(document).ready(function(){
+				udpateHiddenStats()
+			});
 			$('.addMegjegyzes').click(function(){
 				var id = $(this).attr('id');
 				
@@ -411,7 +487,6 @@ if (!isset($_SESSION["u_id"])) {
 						menny: newMennyiseg
 					},
 					success: function(IgenyResult){
-						//alert(IgenyResult)
 						location.reload()
 					}
 				});
@@ -429,11 +504,6 @@ if (!isset($_SESSION["u_id"])) {
 			modal.find('#Modaltitle').text(nev + " kiléptetése")
 			modal.find('#dolgozo-nev').val(nev)
 			var d = new Date();
-			var month = d.getMonth()+1;
-			var day = d.getDate();
-			var output = d.getFullYear() + '/' +
-    		(month<10 ? '0' : '') + month + '/' +
-    		(day<10 ? '0' : '') + day;
 			modal.find('#k_datum').val(d.getFullYear()+'.'+(d.getMonth()+1)+'.'+d.getDate())
 			modal.find('#delete_button').attr('data-pozicio', pozicio_id)
 			modal.find('#delete_button').attr('data-terulet', terulet_id)
@@ -523,8 +593,108 @@ if (!isset($_SESSION["u_id"])) {
 			}
 
 		});
+		$('#addDolgozo').click(function(){
+			//alert('Működik')
+		});
+		$('#addModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget)
+			updatePozicio()
+			var modal = $(this)
+			
+		});
+		$('')
+		var udpateHiddenStats = function(){
+			$('#kolcsonzo').hide()
+			$('#belepes').hide()
+		}
+		$('#teruletSelect').change(function(){
+			updatePozicio()
+		});
+		var updatePozicio = function(){
+			var terulet_id = $("#teruletSelect option:selected").data('id')
+    		console.log(terulet_id)
+    		$.ajax({
+				url: "getPozicioForUserAdd.php",
+				type: "POST",
+				cache: false,
+				data:{
+					t_id: terulet_id
+				},
+				success: function(getPozicioResult){
+					console.log(getPozicioResult);
+					//alert("update success");
+					$('#pozicioSelect').html(getPozicioResult);
+				}
+			})
+		};
+		$('#allapotSelect').change(function(){
+			kolcsonzottCeg()
+		});
+		var kolcsonzottCeg = function(){
+			if ($('#allapotSelect option:selected').data('id') == '4') {
+				//alert('Kölcsönzött dolgozó')
+				$('#kolcsonzo').show()
+				$('#belepes').hide()
+			}else if ($('#allapotSelect option:selected').data('id') == "5") {
+				$('#kolcsonzo').hide()
+				$('#belepes').show()
+			}else if ($('#allapotSelect option:selected').data('id') == "6") {
+				$('#kolcsonzo').show()
+				$('#belepes').show()
+			}else{
+				$('#kolcsonzo').hide()
+				$('#belepes').hide()
+			}
+		};
+		$("#add_button").click(function(){
+  			var nev = $('#dolgozoNev').val()
+  			var terulet = $('#teruletSelect option:selected').data('id')
+  			var pozicio = $('#pozicioSelect option:selected').data('id')
+  			var allapot = $('#allapotSelect option:selected').data('id')
+  			var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
+  			var newNev = nev+' '+kolcsonzo.substring(0,1)
+  			var	datum = ''
+  			if ($('#belepesIdo').text().length > 0) {
+  				var d = new Date();
+    			datum = d.getFullYear()+'.'+d.getMonth()+1+'.'+d.getDate()
+  			}else{
+  				datum = $('#belepesIdo').val()
+  			}
+  			$.ajax({
+  				url: "addDolgozo.php",
+  				type: "POST",
+  				cache: false,
+  				data:{
+  					d_nev: newNev,
+  					t_id: terulet,
+  					p_id: pozicio,
+  					a_id: allapot,
+  					b_datum: datum
+  				},
+  				success: function(addDolgozoResult){
+  					if (addDolgozoResult == 'Sikeres') {
+  						//alert("Sikerült fellvinni az új dolgozót")
+  					}
+  					console.log(addDolgozoResult)
+  					location.reload()
+  				}
+  			});
+  		});
+
+
+
+
+
+
+
+
+
+
+
+
 
   		$('#editModal').on('show.bs.modal', function (event) {
+  			udpateHiddenStats()
 		  var button = $(event.relatedTarget) // Button that triggered the modal
 		  var d_nev = button.data('id')
 		  $(this).attr('data-id',d_nev)
