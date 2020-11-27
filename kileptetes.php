@@ -1,11 +1,11 @@
 <?php 
 	include("connect.php");
-	$id = $_POST["d_id"];
-	$nev = $_POST["nev"];
-	$p_id = $_POST["p_id"];
-	$t_id = $_POST["t_id"];
-	$a_id = $_POST["a_id"];
-	$datum = $_POST["datum"];
+	$id = $conn->real_escape_string($_POST["d_id"]);
+	$nev = $conn->real_escape_string($_POST["nev"]);
+	$p_id = $conn->real_escape_string($_POST["p_id"]);
+	$t_id = $conn->real_escape_string($_POST["t_id"]);
+	$a_id = $conn->real_escape_string($_POST["a_id"]);
+	$datum = $conn->real_escape_string($_POST["datum"]);
 
 	$sqlKilepInsert = "INSERT INTO `kilepett` (`k_id`, `d_nev`, `t_id`, `p_id`, `a_id`, `k_datum`) VALUES (NULL, '".$nev."', '".$t_id."', '".$p_id."', '".$a_id."', '".$datum."');";
 	$sqlKilepDeleteMegjegyzes = "DELETE FROM `megjegyzes` WHERE `megjegyzes`.`d_id` = '".$id."';";

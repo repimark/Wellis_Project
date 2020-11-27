@@ -14,6 +14,7 @@
           <a class="dropdown-item" href="users.php">Dolgozók szerkesztése</a>
           <a class="dropdown-item" href="addUser.php">Dogozók hozzáadása</a>
           <a class="dropdown-item" href="kilepett.php">Kiléptetett Dolgozók</a>
+          <a class="dropdown-item" href=""><span class="badge badge-danger">Ózd</span></a>
         </div>
       </li>
       

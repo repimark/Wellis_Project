@@ -3,8 +3,8 @@
 	if (!isset($_SESSION["a_id"])) {
 		header("location:../index.php");
 	}else{
-		$elnevezes = $_POST["elnev"];
 		include '../../connect.php';
+		$elnevezes = $conn->real_escape_string($_POST["elnev"]);
 		$sql = "INSERT INTO `terulet` (`t_id`, `t_elnevezes`) VALUES (NULL, '".$elnevezes."')";
 		if ($conn->query($sql)) {
 			echo 'Sikeres';

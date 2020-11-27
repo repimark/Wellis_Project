@@ -1,6 +1,6 @@
 <?php 
 include('connect.php');
-$id = $_POST["p_id"];
+$id = $conn->real_escape_string($_POST["p_id"]);
 $sql  = "SELECT pozicio.p_elnevezes as 'Pozicio', pozicio.p_id AS 'p_id', terulet.t_elnevezes AS 'Terulet', pozicio.t_id AS 't_id' FROM pozicio , terulet WHERE terulet.t_id = pozicio.t_id";
 $result = $conn->query($sql);
 	if ($result->num_rows > 0) {

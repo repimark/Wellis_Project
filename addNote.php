@@ -1,12 +1,12 @@
 <?php 
-	$id = $_POST["m_id"];
-	$szoveg = $_POST["m_text"];
 	include("connect.php");
+	$id = $conn->real_escape_string($_POST["m_id"]);
+	$szoveg = $conn->real_escape_string($_POST["m_text"]);
 	$sql = "UPDATE `megjegyzes` SET `m_szoveg` = '".$szoveg."' WHERE `megjegyzes`.`m_id` = ".$id."";
 	if ($conn->query($sql)) {
 		echo "Sikerült";
 	}else{
-		echo "Sikertelen";
+		echo $conn->error;
 	}
 	mysqli_close($conn);
 ?>

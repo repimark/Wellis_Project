@@ -53,7 +53,7 @@ $result = $conn->query($sql);
 				<div class="container">
 					<div class="row ">
 						<div class="col" >
-							<div id="t-<?php echo $row['id']; ?>" data-adat1="<?php echo $dolgozoMenny ?>" data-adat2="<?php echo $kolcsonzottMenny ?>" data-adat3="<?php echo $belepoMenny ?>" data-adat4="<?php echo $igenyMenny ?>"></div>
+							<div align="center" id="t-<?php echo $row['id']; ?>" data-adat1="<?php echo $dolgozoMenny ?>" data-adat2="<?php echo $kolcsonzottMenny ?>" data-adat3="<?php echo $belepoMenny ?>" data-adat4="<?php echo $igenyMenny ?>"></div>
 							  <script type="text/javascript">
 								// Load Charts and the corechart package.
 								      google.charts.load('current', {'packages':['corechart']});
@@ -83,28 +83,21 @@ $result = $conn->query($sql);
 
 								        // Set options for Sarah's pie chart.
 								        var options = {
-								                       width:250,
-								                       height:150,
-								                   		is3D: true};
+								        				
+								                       	width:150,
+								                       	height:150,
+								                       	legend: 'none',
+								                       	backgroundColor: '#F5F5F5',
+								                        chartArea:{left:0,top:5,width:'100%',height:'90%'},
+								                   		
+								                   		colors: ['#33CC00','#F44336','#FFB300','#0000FF']
+								                   		};
 
 								        // Instantiate and draw the chart for Sarah's pizza.
 								        var chart = new google.visualization.PieChart(document.getElementById('t-<?php echo $row['id'];?>'));
 								        chart.draw(data, options);
 								      }
-
 							</script>
-
-							<!-- <div class="progress mx-auto" data-value='<?php echo ($dolgozoMenny/$osszes)*100; ?>'>
-          						<span class="progress-left" data-toggle="tooltip" data-placement="top" title="Igény Mennyiség: <?php echo $igenyMenny; ?>">
-                        			<span class="progress-bar" style="border-color:#2c3e50"></span>
-          						</span>
-          						<span class="progress-right" data-toggle="tooltip" data-placement="top" title="Dolgozó Mennyiség: <?php echo $dolgozoMenny; ?>">
-                        			<span class="progress-bar" style="border-color:#2c3e50"></span>
-          						</span>
-          					<div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-            					<div class="h5 font-weight-bold"><?php echo $osszes."/".$dolgozoMenny." fő"; ?></div>
-          					</div>
-        					</div> -->
     					</div>
     				</div>
     				<div class="p-2 row"></div>

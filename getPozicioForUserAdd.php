@@ -1,7 +1,7 @@
 <?php 
 	include('connect.php');
-	$terulet = $_POST["t_id"];
-	$pozicio = $_POST["p_id"];
+	$terulet = $conn->real_escape_string($_POST["t_id"]);
+	$pozicio = $conn->real_escape_string($_POST["p_id"]);
 	$sql = "SELECT pozicio.p_id AS 'p_id', pozicio.p_elnevezes AS 'pozicio' FROM pozicio WHERE pozicio.t_id = ".$terulet."";
 	$result = $conn->query($sql);
    		while($row = $result->fetch_assoc()) {

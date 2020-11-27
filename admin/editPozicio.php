@@ -14,16 +14,18 @@ if (!isset($_SESSION["a_id"])) {
 	<?php include '../contents/adminNavbar.php'; ?>
 	<div class="container">
 		<h2 class="p-3 text-center">Poziciók</h2>					
-		<div class="form-group w-50 p-1">
+		<div class="form-group p-1" style="width:58%">
 			<form>
 				<label for="#terulet">Terület:</label>
 				<select class="form-control" id="terulet"></select>
 				<label for="#pozicio">Pozicíó:</label>
 				<select class="form-control" id="pozicio"></select>
 			</form>
-			<button class="btn btn-primary" id="deletePozicio" data-toggle="modal" data-target="#deleteModal">Pozicíó Törlése</button>
+			<br>
+			<button class="btn btn-danger" id="deletePozicio" data-toggle="modal" data-target="#deleteModal">Pozicíó Törlése</button>
 				<button class="btn btn-success" id="addPozicio" data-toggle="modal" data-target="#addModal">Pozicíó létrehozása</button>
-				<button class="btn btn-warning" id="movePozicio" data-toggle="modal" data-target="#moveModal">Pozició Áthelyezése <span class="badge badge-danger">Beta</span></button>
+				<button class="btn btn-info" id="movePozicio" data-toggle="modal" data-target="#moveModal">Pozició Áthelyezése</button>
+				<button class="btn btn-warning" id="editPozicio" data-toggle="modal" data-target="#editModal">Pozició Módosítása</button>
 		</div>
 		<!-- HOZZÁADÁS -->
 		<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,6 +92,30 @@ if (!isset($_SESSION["a_id"])) {
 		  </div>
 		</div>
 
+		<!-- MÓDOSÍTÁS -->
+		<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Pozició módosítása</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="form-group">
+		      		<label for="#poziInput" id="editPozicioLabel">A pozíció új neve</label>
+		      		<input class="form-control" id="poziInput"></input>
+		      	</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégsem</button>
+		        <button type="button" class="btn btn-primary editPozicio" id="editBtn">Módosítás</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 	</div>
 	<script type="text/javascript">
 		$('#terulet').on('change', function(){
@@ -147,7 +173,34 @@ if (!isset($_SESSION["a_id"])) {
 		  
 		  modal.find('#moveBtn').data('pozicio', pozi)
 		});
-
+		$('#editModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget) // Button that triggered the modal
+		  var pozi =  $('#pozicio :selected').data('pozicio')
+		  var modal = $(this)
+		  modal.find('#editBtn').data('pozicio', pozi)
+		});
+		$('#editBtn').click(function(event){
+			var newPozi = $('#poziInput').val()
+			//var button = $(event.relatedTarget)
+			var pozi = $('#editBtn').data('pozicio')
+			//alert(pozi+'új neve'+newPozi)
+			$.ajax({
+				url: 'php/editPozicio.php',
+				type: 'POST',
+				cache: false,
+				data: {
+					p_id: pozi,
+					p_elnevezes: newPozi
+				},
+				success: function(Result){
+					if (Result == 'Sikeres') {
+						location.reload()
+					}else{
+						alert('Sikertelen')
+					}
+				}	
+			});
+		});
 		$('#addBtn').click(function(event){
 			var ter = $(this).data('terulet')
 			var pozi = $('#newPozi').val()
