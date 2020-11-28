@@ -4,7 +4,7 @@
 		header("location:../index.php");
 	}else{
 	include('../../connect.php');
-	$sql = "SELECT u_name, u_id FROM users";
+	$sql = "SELECT a_name, a_id FROM admin";
 	$result = $conn->query($sql);
 	while($r = mysqli_fetch_assoc($result)) {
     	$rows[] = $r;

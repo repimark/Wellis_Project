@@ -2,7 +2,7 @@
 	session_start();
 	$username = $_POST["uname"];
 	$password = $_POST["pword"];
-	$sql = "SELECT a_id FROM admin WHERE `a_name` = '".$username."' AND `a_pass` = '".$password."'";
+	$sql = "SELECT a_id FROM admin WHERE `a_name` = '".$username."' AND `a_pass` = MD5('".$password."')";
 	include '../../connect.php';
 	$result = $conn->query($sql);
 	if (mysqli_num_rows($result) > 0) {

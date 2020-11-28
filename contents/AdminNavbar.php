@@ -13,13 +13,13 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="../Admin/editTerulet.php">Területek kezelése</a>
           <a class="dropdown-item" href="../Admin/editPozicio.php">Poziciók kezelése</a>
-          <a class="dropdown-item" href="../Admin/editUsers.php"><span class="badge badge-dannger">VIP</span></a>
+          <a class="dropdown-item" href="../Admin/editUsers.php"><span class="badge badge-dannger">Felhasználók kezelése</span></a>
         </div>
       </li> 
     </ul>
     <span class="badge badge-info w-25">
       <p class="navbar-text p-2 text-white"><?php echo $_SESSION["a_id"];?></p>
-      <span class="navbar-text p-1"><a class="navbar-text" href="#"><img src="../Admin/media/admin.png" height="25"></a></span>
+      <span class="navbar-text p-1"><a class="navbar-text" href="../Admin/EditUser.php"><img src="../Admin/media/admin.png" height="25"></a></span>
       <span class="navbar-text p-1"><a class="navbar-text" href="../Admin/php/logout.php"><img src="../Admin/media/exit.png" height="25"></a></span>
     </span>
 
