@@ -28,6 +28,6 @@
         </div> --> 
       
     </ul>
-    <span class="navbar-text p-1"><?php echo $_SESSION["u_id"]; ?>  <a href="php/logout.php">Kijelentkezés</a></span>
+    <span class="navbar-text p-1"><?php echo $_SESSION["u_name"]; ?>  <a href="php/logout.php">Kijelentkezés</a></span>
   </div>
 </nav>

@@ -18,7 +18,7 @@
       </li> 
     </ul>
     <span class="badge badge-info w-25">
-      <p class="navbar-text p-2 text-white"><?php echo $_SESSION["a_id"];?></p>
+      <p class="navbar-text p-2 text-white"><?php echo $_SESSION["a_name"];?></p>
       <span class="navbar-text p-1"><a class="navbar-text" href="../Admin/EditUser.php"><img src="../Admin/media/admin.png" height="25"></a></span>
       <span class="navbar-text p-1"><a class="navbar-text" href="../Admin/php/logout.php"><img src="../Admin/media/exit.png" height="25"></a></span>
     </span>

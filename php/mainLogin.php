@@ -3,11 +3,13 @@
 	include '../connect.php';
 	$username = $conn->real_escape_string($_POST["uname"]);
 	$password = $conn->real_escape_string($_POST["pword"]);
-	$sql = "SELECT u_id FROM users WHERE `u_name` = '".$username."' AND `u_pass` = MD5('".$password."')";
+	$sql = "SELECT u_id, u_name FROM users WHERE `u_name` = '".$username."' AND `u_pass` = MD5('".$password."')";
 	$result = $conn->query($sql);
 	if (mysqli_num_rows($result) > 0) {
 		//echo "Sikeres";
-		$_SESSION["u_id"] = $username;
+		$user = mysqli_fetch_row($result);
+		$_SESSION["u_name"] = $user[1];
+		$_SESSION["u_id"] = $user[0];
 		//$_SESSION["u_name"] = $username;
 		header("location:../index.php");
 	}else{

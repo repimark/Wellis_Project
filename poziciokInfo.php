@@ -85,7 +85,7 @@ if (!isset($_SESSION["u_id"])) {
 							<td colspan="4" class="bg-dark"><p><?php echo ($rowPozicio["p_elnevezes"]); ?></p></td>
 					<?php
 						while ($rowIgeny = $igenyResult->fetch_assoc()) { 
-							if ($rowIgeny["i_sajat"] == 0) { 
+							if ($rowIgeny["i_sajat"] == '0') { 
 								$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '".$rowPozicio["p_id"]."' AND a_id = 1 OR p_id = '".$rowPozicio["p_id"]."' AND a_id = 3 OR p_id = '".$rowPozicio["p_id"]."' AND a_id = 4";
 								$sajatDolgozo = $conn->query($darabSQL);
 								while ($rowDB = $sajatDolgozo->fetch_assoc()) {
