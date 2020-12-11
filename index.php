@@ -40,6 +40,9 @@ if (!isset($_SESSION["u_id"])) {
       .card-header h5 a:hover{
          color:  rgba(255,255,255,.75);
       }
+      .card-body{
+        background-color: #F5F5F5!important;
+      }
 
   	</style>
     <link rel="stylesheet" type="text/css" href="style.css">

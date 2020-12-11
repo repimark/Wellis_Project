@@ -68,12 +68,24 @@ if (!isset($_SESSION["u_id"])) {
 
 	?>
 	<div class="container p-5">
+		<?php $t_id = $conn->escape_string($_GET["id"]); ?>
+		<h5><button class="btn btn-success" id="export" data-terulet="<?php echo $t_id; ?>"><img src="excel.png" height="20"> Exportálás Excelbe</button></h5>
 		<div class="row bg-dark text-white text-middle rounded w-50 m-1">
+			
 			<h4 class="p-1 text-center" id="addDolgozo" data-toggle="modal" data-target="#addModal"><span class="badge-success badge">+</span> Új dolgozó hozzáadása</h4>
 		</div>
+		<?php 
+			if($t_id == "7"){
+		?>
+			<table class="table table-borderless table-sm text-center round">
+				
+			</table>
+		<?php
+		}else{
+		?>
 		<table class="table table-borderless table-sm text-center rounded">
 			<?php
-				$t_id = $_GET["id"];
+				
 				$pozicioSQL = "SELECT pozicio.p_elnevezes AS 'p_elnevezes', pozicio.p_id AS 'p_id' FROM pozicio WHERE pozicio.t_id = '$t_id'";
 				$pozicioResult = $conn->query($pozicioSQL);
 
@@ -315,7 +327,7 @@ if (!isset($_SESSION["u_id"])) {
 				
 			</tbody> -->
 		</table>
-
+			<?php } ?>
 		<!-- SZEEKESZTÉS -->
 	<div class="modal" tabindex="-1" id="editModal">
 	  <div class="modal-dialog">
@@ -457,7 +469,8 @@ if (!isset($_SESSION["u_id"])) {
 	  </div>
 	</div>
 	<!-- FELUGRÓ ABLAK VÉGE -->
-		<script type="text/javascript">
+	</div>
+	<script type="text/javascript">
 			$(document).ready(function(){
 				udpateHiddenStats()
 			});
@@ -831,8 +844,12 @@ if (!isset($_SESSION["u_id"])) {
 				}
 			});
 		});
+		$('#export').click(function(){
+			//alert('Pressed')
+			var t_id = $('#export').data('terulet');
+			window.open("excel/excel_export_2.php?id="+t_id, "_blank")
+		});
 		</script>
-	</div>
 </body>
 </html>
 <?php } ?>
