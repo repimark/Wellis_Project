@@ -696,9 +696,9 @@ if (!isset($_SESSION["u_id"])) {
   			var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
   			var newNev = nev+' '+kolcsonzo.substring(0,1)
   			var	datum = ''
-  			if ($('#belepesIdo').text().length > 0) {
+  			if ($('#belepesIdo').text().length < 1 ) {
   				var d = new Date();
-    			datum = d.getFullYear()+'.'+d.getMonth()+1+'.'+d.getDate()
+    			datum = d.getFullYear()+'.'+(d.getMonth()+1)+'.'+d.getDate()
   			}else{
   				datum = $('#belepesIdo').val()
   			}
