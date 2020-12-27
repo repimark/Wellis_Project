@@ -54,7 +54,11 @@ if (!isset($_SESSION["u_id"])) {
 
 <?php
 //Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
-require('contents/navbar.php');
+if($_SESSION["jog"] == "1"){
+  require('contents/navbar.php');
+}else if($_SESSION["jog"] == "2"){
+  require('contents/userNavbar.php');  
+}
 require('connect.php');
 ?>
 <div class="container" style="width: 90%">

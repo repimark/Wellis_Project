@@ -13,7 +13,7 @@ if (!isset($_SESSION["a_id"])) {
 <body>
 	<?php include '../contents/adminNavbar.php'; ?>
 	<div class="container">
-		<h1 class="text-center">Felhasználói fiókom kezelése</h1>
+		<h1 class="text-center">Felhasználók kezelése</h1>
 	</div>
 	<script type="text/javascript">
 		$('.container').ready(function(){
