@@ -13,7 +13,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="../Admin/editTerulet.php">Területek kezelése</a>
           <a class="dropdown-item" href="../Admin/editPozicio.php">Poziciók kezelése</a>
-          <a class="dropdown-item" href="../Admin/editUsers.php"><span class="badge badge-dannger">Felhasználók kezelése</span></a>
+          <a class="dropdown-item" href="../Admin/editUsers.php">Felhasználók kezelése</a>
         </div>
       </li> 
     </ul>

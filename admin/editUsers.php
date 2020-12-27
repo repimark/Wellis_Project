@@ -45,6 +45,11 @@ if (!isset($_SESSION["a_id"])) {
 		        	<input type="password" class="form-control" id="passInput" placeholder="Jelszó"></input>
 		        	<label class="form-group" for="#passInput2">Jelszó Megerősítése</label>
 		        	<input type="password" class="form-control" id="passInput2" placeholder="Jelszó Megerősítése"></input>
+					<label class="form-group" for="#jogosultsag">Jogosultsági szint</label>
+					<select id="jogosultsag" class="form-control">
+						<option value="2">Vezető</option>
+						<option value="1">HR</option>
+					</select>
 		        </form>
 		      </div>
 		      <div class="modal-footer">
@@ -96,7 +101,7 @@ if (!isset($_SESSION["a_id"])) {
 		        	<input type="password" class="form-control" id="aPassInput" placeholder="Jelszó"></input>
 		        	<label class="form-group" for="#aPassInput2">Jelszó Megerősítése</label>
 		        	<input type="password" class="form-control" id="aPassInput2" placeholder="Jelszó Megerősítése"></input>
-		        </form>
+				</form>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégsem</button>
@@ -144,7 +149,7 @@ if (!isset($_SESSION["a_id"])) {
 					var lines = '<li class="list-group-item add"><button onclick="" data-toggle="modal" data-target="#addModal" class="btn addNew"><span class="text-success">+</span>Új Felhasználó hozzáadása</button></li>';
 					//alert(objJSON)
   					for (var i = objJSON.length - 1; i >= 0; i--) {
-  						lines += '<li class="list-group-item">'+objJSON[i].u_name+' <button data-user="'+objJSON[i].u_id+'" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
+  						lines += '<li class="list-group-item">'+objJSON[i].u_name+', <span class="badge badge-warning">Jogosultsági szint : '+objJSON[i].u_jog+'</span> <button data-user="'+objJSON[i].u_id+'" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
   					}
   					$('#users').html(lines)
 				}
@@ -172,6 +177,7 @@ if (!isset($_SESSION["a_id"])) {
 			var uName = $('#unameInput').val()
 			var uPass = $('#passInput').val()
 			var uPass2 = $('#passInput2').val()
+			var jog = $('#jogosultsag :selected').val()
 			if (uPass == uPass2) {
 				$.ajax({
 					url: 'php/addUser.php',
@@ -179,13 +185,15 @@ if (!isset($_SESSION["a_id"])) {
 					cache: false, 
 					data: {
 						uName: uName,
-						uPass: uPass
+						uPass: uPass,
+						jogosultsag: jog
 					},
 					success: function(Result){
+						alert(Result)
 						if (Result == 'Sikeres') {
 							location.reload()
 						}else{
-							alert('Sikertelen')
+							alert('Sikertelen, a probléma a kovetkező: '+Result)
 						}
 					}
 				});
