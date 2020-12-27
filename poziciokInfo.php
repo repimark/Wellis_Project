@@ -493,6 +493,32 @@ if (!isset($_SESSION["u_id"])) {
 					}
 				});
 			});
+			var igenyLog = function(pozi, muvelet){
+				var pozicio = pozi
+				var muv = muvelet
+				var d = new Date()
+				var datum = d.getFullYear()+'.'+(d.getMonth()+1)+'.'+d.getDate()
+				var user = '<?php echo $_SESSION["u_name"]; ?>'
+				//console.log('pozicio id = '+pozicio+' művelet : '+muv+' dátum : '+datum+' és az aki az egészet csinálta az egy csíra '+user)
+				$.ajax({
+					url: 'php/igenyLog.php',
+					type: 'POST',
+					cache: false,
+					data: {
+						muv: muv,
+						u_name: user,
+						datum: datum,
+						pid: pozicio
+					},
+					success: function(res){
+						if(res == "Sikerült"){
+							location.reload()
+						}else{
+							alert(res)
+						}
+					}
+				});
+			};
 			$('.igenyPlus').click(function(){
 				var mennyiseg = parseInt($(this).attr('data-menny'))
 				var newMennyiseg = mennyiseg  + 1
@@ -509,7 +535,8 @@ if (!isset($_SESSION["u_id"])) {
 					},
 					success: function(IgenyResult){
 						//alert(IgenyResult)
-						location.reload()
+						igenyLog(id,'+')
+						//location.reload()
 					}
 				});
 			});
@@ -529,7 +556,8 @@ if (!isset($_SESSION["u_id"])) {
 						menny: newMennyiseg
 					},
 					success: function(IgenyResult){
-						location.reload()
+						//location.reload()
+						igenyLog(id,'-')
 					}
 				});
 			});
