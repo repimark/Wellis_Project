@@ -15,7 +15,7 @@ if (!isset($_SESSION["u_id"])) {
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="style.css">
-	<meta http-equiv="refresh" content="10">
+	<!-- <meta http-equiv="refresh" content="10"> -->
   	<style type="text/css">
   		.igenyPlus{
 		  width: 2rem;
@@ -95,10 +95,9 @@ if (!isset($_SESSION["u_id"])) {
 		</div>
 		<?php 
 			if($t_id == "7"){
+				include 'php/getSorok.php';
 		?>
-			<table class="table table-borderless table-sm text-center round">
-				
-			</table>
+		
 		<?php
 		}else{
 		?>
@@ -711,7 +710,36 @@ if (!isset($_SESSION["u_id"])) {
 		});
 		var updatePozicio = function(){
 			var terulet_id = $("#teruletSelect option:selected").data('id')
-    		console.log(terulet_id)
+    		//console.log(terulet_id)
+			if(terulet_id == 7) {
+				console.log('belépett ebbe a szaros szarba')
+				$.ajax({
+				url: "admin/php/getSorok.php",
+				type: "POST",
+				cache: false,
+				data:{
+					t_id: terulet_id
+				},
+				success: function(getPozicioResult){
+					//console.log(getPozicioResult)
+					var obj = JSON.parse(getPozicioResult);
+					var lines = [];
+					if (obj.length > 0) {
+						console.log('nagyobb a cucli')
+						for (var i = obj.length - 1; i >= 0; i--) {
+							lines += '<option class="" data-id="'+obj[i].p_id+'">'+obj[i].p_elnevezes+' | '+ obj[i].s_elnevezes+'</option>'
+						}
+					}else{
+						lines+= 'Nincs még hozzárendelve pozicíó ehhez a területhez'
+					}
+					console.log(lines)
+					$('#pozicioSelect').html(lines)
+					
+					
+
+				}
+			});
+			}else{
     		$.ajax({
 				url: "getPozicioForUserAdd.php",
 				type: "POST",
@@ -724,7 +752,8 @@ if (!isset($_SESSION["u_id"])) {
 					//alert("update success");
 					$('#pozicioSelect').html(getPozicioResult);
 				}
-			})
+			});
+			}
 		};
 		$('#allapotSelect').change(function(){
 			kolcsonzottCeg()
@@ -828,6 +857,7 @@ if (!isset($_SESSION["u_id"])) {
 		  	}
 		  });
 		  //Pozicíó lekérdezése
+		  if(terulet_id == 7){
 		  $.ajax({
 		  	url: "getPozicioForUserAdd.php",
 		  	type: "POST",
@@ -841,6 +871,28 @@ if (!isset($_SESSION["u_id"])) {
 		  		$('#pozicio_select').html(dataResult_pozi);
 		  	}
 		  });
+		  }else{
+			$.ajax({
+				url: "admin/php/getSorok.php",
+				type: "POST",
+				cache: false,
+				data:{
+					t_id: t_id
+				},
+				success: function(getPozicioResult){
+					var obj = JSON.parse(getPozicioResult);
+					var lines = [];
+					if (obj.length > 0) {
+						for (var i = obj.length - 1; i >= 0; i--) {
+							lines += '<option class="" data-id="'+obj[i].p_id+'">'+obj[i].p_elnevezes+','+ obj[i].s_elnevezes+'</option>'
+						}
+					}else{
+						lines+= 'Nincs még hozzárendelve pozicíó ehhez a területhez'
+					}
+					$('#pozicio_select').html(lines)
+				}
+			});
+		  }
 		  //Állapot lekérdezése
 		  $.ajax({
 			url: "getAllapot.php",
@@ -886,20 +938,46 @@ if (!isset($_SESSION["u_id"])) {
 			var t_id =  $('#terulet_select option:selected').data('id')
 			var pozi_select = $('#pozicio_select')
 			//console.log(t_id)
-			$.ajax({
-				url: "getPozicioForUserAdd.php",
+			if (t_id == '7') {
+				$.ajax({
+				url: "admin/php/getSorok.php",
 				type: "POST",
 				cache: false,
 				data:{
 					t_id: t_id
 				},
 				success: function(getPozicioResult){
-					console.log(getPozicioResult);
-					//alert("update success");
-					$('#pozicio_select').html(getPozicioResult);
+					var obj = JSON.parse(getPozicioResult);
+					var lines = [];
+					if (obj.length > 0) {
+						for (var i = obj.length - 1; i >= 0; i--) {
+							lines += '<option class="" data-id="'+obj[i].p_id+'">'+obj[i].p_elnevezes+','+ obj[i].s_elnevezes+'</option>'
+						}
+					}else{
+						lines+= 'Nincs még hozzárendelve pozicíó ehhez a területhez'
+					}
+					$('#pozicio_select').html(lines)
+					
+					
 
 				}
-			});
+			});	
+			}else{
+				$.ajax({
+					url: "getPozicioForUserAdd.php",
+					type: "POST",
+					cache: false,
+					data:{
+						t_id: t_id
+					},
+					success: function(getPozicioResult){
+						console.log(getPozicioResult);
+						//alert("update success");
+						$('#pozicio_select').html(getPozicioResult);
+
+					}
+				});
+			}
 		});
 		$('#export').click(function(){
 			//alert('Pressed')

@@ -120,9 +120,36 @@ if (!isset($_SESSION["a_id"])) {
 	<script type="text/javascript">
 		$('#terulet').on('change', function(){
 			//alert('valtozott')
-			getPozicio('#pozicio')
+			if($('#terulet :selected').data('terulet') == '7'){
+				getSorokPozicio('#pozicio')
+			}else{
+				getPozicio('#pozicio')
+			}
 		});
-
+		var getSorokPozicio = function(pozicio){
+			var data = $('#terulet :selected').data('terulet')
+			//alert(data)
+			$.ajax({
+				url: 'php/getSorok.php',
+				type: 'POST',
+				cache: false,
+				data: {
+					t_id : data
+				},
+				success: function(Result){
+					var obj = JSON.parse(Result);
+					var lines = [];
+					if (obj.length > 0) {
+						for (var i = obj.length - 1; i >= 0; i--) {
+							lines += '<option class="" data-pozicio="'+obj[i].p_id+'">'+obj[i].p_elnevezes+','+ obj[i].s_elnevezes+'</option>'
+						}
+					}else{
+						lines+= 'Nincs még hozzárendelve pozicíó ehhez a területhez'
+					}
+					$(pozicio).html(lines)
+				}
+			});
+		};
 		var getPozicio = function(pozicio){
 			var data = $('#terulet :selected').data('terulet')
 			//alert(data)
