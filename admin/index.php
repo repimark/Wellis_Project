@@ -52,7 +52,7 @@ if (isset($_SESSION["a_id"])) {
 			border-bottom: 1px solid #fff;
 			}
 		.tb_button.hover {
-			borer:2px outset #def;
+			border:2px outset #def;
 			 background-color: #f8f8f8 !important;
 			 }
 		.ws_toolbar {

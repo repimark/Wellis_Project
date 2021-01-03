@@ -11,7 +11,7 @@ if (!isset($_SESSION["a_id"])) {
 	<?php include '../contents/links.php'; ?>
 </head>
 <body>
-	<?php include '../contents/adminNavbar.php'; ?>
+	<?php include '../contents/AdminNavbar.php'; ?>
 	<div class="container">
 		<h1 class="text-center">Felhasználók kezelése</h1>
 	</div>

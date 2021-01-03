@@ -1,0 +1,26 @@
+[
+  {
+    "terulet": "MEO",
+    "sajat_letszam": 100,
+    "kolcson_letszam": 20,
+    "sajat_bejovo": 10,
+    "kolcsonzott_bejovo": 30,
+    "igeny": 100
+  },
+  {
+    "terulet": "Gyártás Sorok",
+    "sajat_letszam": 100,
+    "kolcson_letszam": 20,
+    "sajat_bejovo": 10,
+    "kolcsonzott_bejovo": 30,
+    "igeny": 100
+  },
+  {
+    "terulet": "Technológia",
+    "sajat_letszam": 100,
+    "kolcson_letszam": 20,
+    "sajat_bejovo": 10,
+    "kolcsonzott_bejovo": 30,
+    "igeny": 100
+  }
+]

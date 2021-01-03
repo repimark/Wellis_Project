@@ -11,7 +11,7 @@ if (!isset($_SESSION["a_id"])) {
 	<?php include '../contents/links.php'; ?>
 </head>
 <body>
-	<?php include '../contents/adminNavbar.php'; ?>
+	<?php include '../contents/AdminNavbar.php'; ?>
 	<div class="container">
 		<h2 class="p-3 text-center">Poziciók</h2>					
 		<div class="form-group p-1" style="width:58%">
