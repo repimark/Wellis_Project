@@ -1,29 +1,83 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['u_id'])){
-        header('login.php');
-    }else{
-        include '../connect.php';
+session_start();
+if (!isset($_SESSION['u_id'])) {
+    header('login.php');
+} else {
+    include '../connect.php';
+    $output = array();
+    //array_push($output, "[");
+    //SELECT TERULET 
+    $teruletek = "SELECT t_elnevezes, t_id FROM terulet";
+    if ($teruletQry = $conn->query($teruletek)) {
+        while ($rowTerulet = $teruletQry->fetch_assoc()) {
+            //echo "<br/>" . $rowTerulet["t_elnevezes"];
+            $dolgozokDB;
+            $kolcsonzottDB;
+            $kolcsonBelepoDB;
+            $kolcsonEsDolgozoDB;
+            $belepoDB;
+            $mindenBelepoDB;
 
-        //SELECT TERULET 
-        
-        //SELECT Saját létszám where terulet = te
+           //array_push($output, "'{'nev':'".$rowTerulet["t_elnevezes"]."'");
+            //$output += '"terulet": {';
+            
 
-        //SELECT Kölcsönzött létszám where terulet = te
+            $dolgozok = "SELECT COUNT(d_id) AS dolgzok FROM dolgozok WHERE a_id = 1 AND t_id = " . $rowTerulet["t_id"];
+            if ($dolgozokQry = $conn->query($dolgozok)) {
+                $dolgozokDB = $dolgozokQry->fetch_row();
+                //echo " Dolgozók : " . $dolgozokDB[0] . " , ";
+                //array_push($output ,'dolgozok:'.$dolgozokDB[0]);
+            }
 
-        //SELECT ÖsszesLétszám where allapot = kolcsonzott és dolgozo WHERE terulet = te 
+            $kolcsonzott = "SELECT COUNT(d_id) AS dolgzok FROM dolgozok WHERE a_id = 4 AND t_id = " . $rowTerulet["t_id"];
+            if ($kolcsonzottQry = $conn->query($kolcsonzott)) {
+                $kolcsonzottDB = $kolcsonzottQry->fetch_row();
+                //echo " Kölcsönzött : " . $kolcsonzottDB[0] . " , ";
+                //array_push($output, 'kolcsonzott:'.$kolcsonzottDB[0]);
 
-        //SELECT Saját bejövő where allapot = bejövő AND terulet = te
+            }
 
-        //SELECT Kölcsönzött bejövő WHERE allapot = kölcsönzött bejövő AND terulet = te
+            $kolcsonEsDolgozo = "SELECT COUNT(d_id) AS dolgzok FROM dolgozok WHERE a_id = 4 AND t_id = " . $rowTerulet["t_id"] . " OR a_id = 1 AND t_id = " . $rowTerulet["t_id"];
+            if ($kolcsonEsDolgozoQry = $conn->query($kolcsonEsDolgozo)) {
+                $kolcsonEsDolgozoDB = $kolcsonEsDolgozoQry->fetch_row();
+                //echo " Összes létszám : " . $kolcsonEsDolgozoDB[0] . " , ";
+                //array_push($output, 'kolcsonzott-dolgozo:'.$kolcsonzottEsDolgozoDB[0]);
+            }
 
-        //SELECT SZUM bejövö WHERE allapot = bejövő AND allapot = kölcsönzött bejövő AND terulet = te 
+            $belepo = "SELECT COUNT(d_id) AS dolgzok FROM dolgozok WHERE a_id = 5 AND t_id = " . $rowTerulet["t_id"];
+            if ($belepoQry = $conn->query($belepo)) {
+                $belepoDB = $belepoQry->fetch_row();
+                //echo " Belépő létszám : " . $belepoDB[0] . " , ";
+                //array_push($output, 'belepo:'.$belepoDB[0].'');
+            }
 
-        //SELECT igeny WHERE terulet = ter 
+            $kolcsonBelepo = "SELECT COUNT(d_id) AS dolgzok FROM dolgozok WHERE a_id = 6 AND t_id = " . $rowTerulet["t_id"];
+            if ($kolcsonBelepoQry = $conn->query($kolcsonBelepo)) {
+                $kolcsonBelepoDB = $kolcsonBelepoQry->fetch_row();
+                //echo " Kölcsönzött belépő : " . $kolcsonBelepoDB[0] . " . ";
+                //array_push($output, 'kolcsonzott-belepo:'.$kolcsonBelepoDB[0]);
+            }
 
-        //SUM MINDENT 
+            $mindenBelepo = "SELECT COUNT(d_id) AS dolgzok FROM dolgozok WHERE a_id = 5 AND t_id = " . $rowTerulet["t_id"] . " OR a_id = 6 AND t_id = " . $rowTerulet["t_id"];
+            if ($mindenBelepoQry = $conn->query($mindenBelepo)) {
+                $mindenBelepoDB = $mindenBelepoQry->fetch_row();
+                //echo " Minden belépő : " . $mindenBelepoDB[0] . " . ";
+                //array_push($output, 'minden-belepo:'.$mindenBelepoDB[0]);
+            }
 
-
-        //TÁBLÁBA
-        
+            $igenyek = "SELECT SUM(i_db) FROM igeny WHERE t_id = " . $rowTerulet["t_id"];
+            if ($igenyekQry = $conn->query($igenyek)) {
+                $igenyekDB = $igenyekQry->fetch_row();
+                //echo " Igény : " . ((int)$igenyekDB[0] - (int)$kolcsonEsDolgozoDB[0]);
+                $igenyEredmeny = ((int)$igenyekDB[0] - (int)$kolcsonEsDolgozoDB[0]);
+                //array_push($output, 'igeny:'.$igenyEredmeny.'');
+            }
+            $output[] = array('nev' => $rowTerulet["t_elnevezes"] ,'dolgozo'=>$dolgozokDB[0], 'kolcsonzott' => $kolcsonzottDB[0], 'dolgozo_kolcson' => $kolcsonEsDolgozoDB[0], 'belepo' => $belepoDB[0], 'kolcson_belepo' => $kolcsonBelepoDB[0], 'minden_belepo' => $mindenBelepoDB[0], 'igeny' =>((int)$igenyekDB[0]-(int)$kolcsonEsDolgozoDB[0]));
+            
+        }
+        //array_push($output, ']');
     }
+    
+    echo json_encode($output);
+}
+?>

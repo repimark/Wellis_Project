@@ -541,6 +541,7 @@ if (!isset($_SESSION["u_id"])) {
 				console.log(terulet)
 				if (terulet == 7) {
 					$('#edit_sorSel').show()
+					$('#add_sorSel').show()
 					$.ajax({
 						url: 'php/getSor.php',
 						type: 'POST',
@@ -565,12 +566,7 @@ if (!isset($_SESSION["u_id"])) {
 					$('#edit_sorSel').hide()
 				}
 			}
-			var getPoziFromSor = function() {
-
-			}
-			$('#edit_sor_select').change(function() {
-				getPoziFromSor()
-			});
+			
 			$('.addMegjegyzes').click(function() {
 				var id = $(this).attr('id');
 
@@ -743,7 +739,6 @@ if (!isset($_SESSION["u_id"])) {
 
 			});
 			$('#addDolgozo').click(function() {
-				//alert('Működik')
 			});
 			$('#addModal').on('show.bs.modal', function(event) {
 				var button = $(event.relatedTarget)
@@ -751,13 +746,13 @@ if (!isset($_SESSION["u_id"])) {
 				var modal = $(this)
 				var t_id = $('#add_terulet_Select :selected').data('id')
 				if(t_id == 7){
-					$('#add_sorokSelect').show()
+					$('#add_sorSel').show()
 				}else{
-					$('#add_sorokSelect').hide()
+					$('#add_sorSel').hide()
 				}
 
 			});
-			$('')
+
 			var udpateHiddenStats = function() {
 				$('#kolcsonzo').hide()
 				$('#belepes').hide()
@@ -810,7 +805,7 @@ if (!isset($_SESSION["u_id"])) {
 				var sid = $('#add_sorSelect option:selected').data('id')
 				//console.log(terulet_id)
 				if (terulet_id == 7) {
-					$('add_sorSelect').show()
+					$('#add_sorSel').show()
 					sorokKezelese('#add_teruletSelect :selected', '#add_sorSelect')
 					$('#add_pozicioSelect').html('')
 					console.log('belépett ebbe a szaros szarba')
@@ -961,6 +956,7 @@ if (!isset($_SESSION["u_id"])) {
 				});
 				//Pozicíó lekérdezése
 				if (terulet_id != 7) {
+					$('#edit_sorSel').hide()
 					$.ajax({
 						url: "getPozicioForUserAdd.php",
 						type: "POST",
@@ -975,7 +971,7 @@ if (!isset($_SESSION["u_id"])) {
 						}
 					});
 				} else {
-					$('#edit_sorSel').hide()
+					$('#edit_sorSel').show()
 					$.ajax({
 						url: "php/getSorok_2.php",
 						type: "POST",
