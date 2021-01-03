@@ -12,4 +12,4 @@ $sql = " UPDATE dolgozok SET d_nev= '".$nev."', p_id = '".$pozi."', t_id = '".$t
 echo $sql;
 $conn->query($sql) or die ("Nem működik");
 mysqli_close($conn);
- ?>
+?>
