@@ -61,7 +61,7 @@ if (!isset($_SESSION["u_id"])) {
 									osszkBelepo += parseInt(obj[i].kolcson_belepo)
 									osszIgeny += parseInt(obj[i].igeny)
 								}
-								lines += '<tr><td>Összesen</td><td>' + osszDolgozo + '</td><td>' + osszKolcson + '</td><td>' + (osszKolcson + osszDolgozo) + '</td><td>' + osszBelepo + '</td><td>' + osszkBelepo + '</td><td>' + (osszBelepo + osszkBelepo) + '</td><td>' + osszIgeny + '</td></tr>'
+								lines += '<tr class="bg-dark text-light"><td>Összesen</td><td>' + osszDolgozo + '</td><td>' + osszKolcson + '</td><td>' + (osszKolcson + osszDolgozo) + '</td><td>' + osszBelepo + '</td><td>' + osszkBelepo + '</td><td>' + (osszBelepo + osszkBelepo) + '</td><td>' + osszIgeny + '</td></tr>'
 								lines += '</tbody></table>'
 							} else {
 								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'

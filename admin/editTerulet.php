@@ -18,7 +18,7 @@ if (!isset($_SESSION["a_id"])) {
 
 		}
 		.addNew{
-			font-color:white;
+			color:white;
 		}
 	</style>
 </head>
