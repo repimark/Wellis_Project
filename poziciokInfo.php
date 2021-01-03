@@ -810,6 +810,7 @@ if (!isset($_SESSION["u_id"])) {
 				var sid = $('#add_sorSelect option:selected').data('id')
 				//console.log(terulet_id)
 				if (terulet_id == 7) {
+					$('add_sorSelect').show()
 					sorokKezelese('#add_teruletSelect :selected', '#add_sorSelect')
 					$('#add_pozicioSelect').html('')
 					console.log('belépett ebbe a szaros szarba')
