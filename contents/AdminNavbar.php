@@ -14,6 +14,7 @@
           <a class="dropdown-item" href="../admin/editTerulet.php">Területek kezelése</a>
           <a class="dropdown-item" href="../admin/editPozicio.php">Poziciók kezelése</a>
           <a class="dropdown-item" href="../admin/editUsers.php">Felhasználók kezelése</a>
+          <a class="dropdown-item" href="../admin/editSorok.php">Sorok kezelése</a>
         </div>
       </li> 
     </ul>

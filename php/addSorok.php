@@ -1,7 +1,7 @@
 <?php 
     include '../connect.php';
     //Változók
-    $poziciok = ["Jetelés","Belső Jet"," Dúsítás","Csövezés","Keretezés","Motorozás","Elektromos Szerelés","Felrakó", "Csomagolás"];
+    $poziciok = ["Jetelés","Belső Jet"," Dúsítás","Csövezés","Keretezés","Motorozás","Elektromos Szerelés","Felrakó"];
     $Sor;
     $newPoziIDS = array();
     //Sorok létrehozása !!
@@ -25,7 +25,7 @@
             }
         }
         // Pozicio ID lekérdezése
-        $selectPoziSQL = "SELECT `p_id` FROM `pozicio` ORDER BY `p_id` DESC LIMIT 0,9";
+        $selectPoziSQL = "SELECT `p_id` FROM `pozicio` ORDER BY `p_id` DESC LIMIT 0,8";
         $selPoziQRY = $conn->query($selectPoziSQL);
         while ($row = mysqli_fetch_assoc($selPoziQRY)) {
             //echo $row["p_id"];
