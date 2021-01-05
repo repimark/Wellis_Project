@@ -81,11 +81,9 @@ if (!isset($_SESSION["u_id"])) {
 				var myChart = new Chart(ctx, {
 					type: 'bar',
 					data: {
-						labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-						legend: 'none',
-						backgroundColor: '#F5F5F5',
+						labels: ['Meo', 'Termelés - Sorok', 'Yellow', 'Green', 'Purple', 'Orange'],
 						datasets: [{
-								//label: '# of Votes',
+								label: '',
 								data: [1, 4, 7, 4, 1],
 								backgroundColor: [
 									'rgba(255, 99, 132, 0.2)',
@@ -120,7 +118,7 @@ if (!isset($_SESSION["u_id"])) {
 									'rgba(75, 192, 192, 1)',
 									'rgba(153, 102, 255, 1)'
 								],
-								borderWidth: 1
+								borderWidth: 0.5
 							},
 							{
 							// label: '# of Votes',
@@ -139,7 +137,7 @@ if (!isset($_SESSION["u_id"])) {
 								'rgba(75, 192, 192, 1)',
 								'rgba(153, 102, 255, 1)'
 							],
-							borderWidth: 1
+							borderWidth: 0.5
 						}
 						]
 					},
@@ -151,7 +149,10 @@ if (!isset($_SESSION["u_id"])) {
 								}
 							}]
 						},
-						backgroundColor: 'rgba(100,100,100,1.0)'
+						scaleLabel: {
+							display: false,
+							labelString: ''
+						}
 					}
 				});
 			}
