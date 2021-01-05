@@ -15,6 +15,7 @@ if (!isset($_SESSION["u_id"])) {
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css">
 
 	</head>
@@ -26,49 +27,133 @@ if (!isset($_SESSION["u_id"])) {
 		<div class="container">
 			<h1 class="text-center p-5">Összesítő oldal </h1>
 			<div id="osszesito"></div>
+			<div class="charts" style="background-color:white">
+				<canvas id="myChart" width="250" height="250"></canvas>
+			</div>
 		</div>
 		<script>
 			$('.container').ready(function() {
 				//alert('betöltött');
 				getOsszesito()
+				getCharts()
 			});
-			var getOsszesito = function(){
+			var getOsszesito = function() {
 				console.log("Belépett")
 				$.ajax({
-						url: 'php/getOsszesito.php',
-						type: 'POST',
-						cache: false,
-						success: function(SorResult) {
-							console.log(SorResult)
-							var osszDolgozo = 0;
-							var osszKolcson = 0;
-							var osszBelepo = 0;
-							var osszkBelepo = 0;
-							var osszIgeny = 0;
-							var obj = JSON.parse(SorResult);
-							var lines = [];
-							lines += '<table class="table table-light table-striped">'
-							lines += '<thead class="thead-dark"><tr>'
-							lines += '<th>Terület</th><th>Saját Létszám</th><th>Kölcsönzött Létszám</th><th class="text-danger">Összes Létszám</th><th>Belépő Létszám</th><th>Kölcsönzött belépő létszám</th><th class="text-danger">Összes Belépő</th><th>Igény</th></tr></thead>'
-							lines += '<tbody>'
-							if (obj.length > 0) {
-								console.log('nagyobb a cucli')
-								for (var i = 0; i <= obj.length - 1; i++) {
-									lines += '<tr><td>' + obj[i].nev + '</td><td>' + obj[i].dolgozo + '</td><td>' + obj[i].kolcsonzott + '</td><td class="text-danger">' + obj[i].dolgozo_kolcson + '</td><td>'+ obj[i].belepo + '</td><td>' + obj[i].kolcson_belepo + '</td><td class="text-danger">' + obj[i].minden_belepo + '</td><td>' + obj[i].igeny + '</td></tr>'
-									osszDolgozo += parseInt(obj[i].dolgozo)
-									osszKolcson += parseInt(obj[i].kolcsonzott)
-									osszBelepo += parseInt(obj[i].belepo)
-									osszkBelepo += parseInt(obj[i].kolcson_belepo)
-									osszIgeny += parseInt(obj[i].igeny)
-								}
-								lines += '<tr class="bg-dark text-light"><td>Összesen</td><td>' + osszDolgozo + '</td><td>' + osszKolcson + '</td><td>' + (osszKolcson + osszDolgozo) + '</td><td>' + osszBelepo + '</td><td>' + osszkBelepo + '</td><td>' + (osszBelepo + osszkBelepo) + '</td><td>' + osszIgeny + '</td></tr>'
-								lines += '</tbody></table>'
-							} else {
-								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
+					url: 'php/getOsszesito.php',
+					type: 'POST',
+					cache: false,
+					success: function(SorResult) {
+						console.log(SorResult)
+						var osszDolgozo = 0;
+						var osszKolcson = 0;
+						var osszBelepo = 0;
+						var osszkBelepo = 0;
+						var osszIgeny = 0;
+						var obj = JSON.parse(SorResult);
+						var lines = [];
+						lines += '<table class="table table-light table-striped">'
+						lines += '<thead class="thead-dark"><tr>'
+						lines += '<th>Terület</th><th>Saját Létszám</th><th>Kölcsönzött Létszám</th><th class="text-danger">Összes Létszám</th><th>Belépő Létszám</th><th>Kölcsönzött belépő létszám</th><th class="text-danger">Összes Belépő</th><th>Igény</th></tr></thead>'
+						lines += '<tbody>'
+						if (obj.length > 0) {
+							console.log('nagyobb a cucli')
+							for (var i = 0; i <= obj.length - 1; i++) {
+								lines += '<tr><td>' + obj[i].nev + '</td><td>' + obj[i].dolgozo + '</td><td>' + obj[i].kolcsonzott + '</td><td class="text-danger">' + obj[i].dolgozo_kolcson + '</td><td>' + obj[i].belepo + '</td><td>' + obj[i].kolcson_belepo + '</td><td class="text-danger">' + obj[i].minden_belepo + '</td><td>' + obj[i].igeny + '</td></tr>'
+								osszDolgozo += parseInt(obj[i].dolgozo)
+								osszKolcson += parseInt(obj[i].kolcsonzott)
+								osszBelepo += parseInt(obj[i].belepo)
+								osszkBelepo += parseInt(obj[i].kolcson_belepo)
+								osszIgeny += parseInt(obj[i].igeny)
 							}
-							$('#osszesito').html(lines)
+							lines += '<tr class="bg-dark text-light"><td>Összesen</td><td>' + osszDolgozo + '</td><td>' + osszKolcson + '</td><td>' + (osszKolcson + osszDolgozo) + '</td><td>' + osszBelepo + '</td><td>' + osszkBelepo + '</td><td>' + (osszBelepo + osszkBelepo) + '</td><td>' + osszIgeny + '</td></tr>'
+							lines += '</tbody></table>'
+						} else {
+							lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 						}
-					});
+						$('#osszesito').html(lines)
+					}
+				});
+			}
+			var getCharts = function() {
+				//var ctx = $('myChart');
+				var ctx = document.getElementById("myChart").getContext('2d');
+				var myChart = new Chart(ctx, {
+					type: 'bar',
+					data: {
+						labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+						legend: 'none',
+						backgroundColor: '#F5F5F5',
+						datasets: [{
+								//label: '# of Votes',
+								data: [1, 4, 7, 4, 1],
+								backgroundColor: [
+									'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(255, 206, 86, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)'
+								],
+								borderColor: [
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)'
+								],
+								borderWidth: 0.5
+							},
+							{
+								//label: '# of Votes',
+								data: [2, 5, 8, 5, 2],
+								backgroundColor: [
+									'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(255, 206, 86, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)'
+								],
+								borderColor: [
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)'
+								],
+								borderWidth: 1
+							},
+							{
+							// label: '# of Votes',
+							data: [3, 6, 9, 6, 3],
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)'
+							],
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)'
+							],
+							borderWidth: 1
+						}
+						]
+					},
+					options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero: true
+								}
+							}]
+						},
+						backgroundColor: 'rgba(100,100,100,1.0)'
+					}
+				});
 			}
 		</script>
 	</body>

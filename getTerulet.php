@@ -53,7 +53,7 @@ $result = $conn->query($sql);
 				<div class="container">
 					<div class="row ">
 						<div class="col" >
-							<div align="center" id="t-<?php echo $row['id']; ?>" data-adat1="<?php echo $dolgozoMenny ?>" data-adat2="<?php echo $kolcsonzottMenny ?>" data-adat3="<?php echo $belepoMenny ?>" data-adat4="<?php echo $igenyMenny ?>"></div>
+							<div id="t-<?php echo $row['id']; ?>" data-adat1="<?php echo $dolgozoMenny ?>" data-adat2="<?php echo $kolcsonzottMenny ?>" data-adat3="<?php echo $belepoMenny ?>" data-adat4="<?php echo $igenyMenny ?>"></div>
 							  <script type="text/javascript">
 								// Load Charts and the corechart package.
 								      google.charts.load('current', {'packages':['corechart']});

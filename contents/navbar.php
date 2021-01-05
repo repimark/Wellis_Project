@@ -18,15 +18,14 @@
           <a class="dropdown-item" href=""><span class="badge badge-danger">Ózd</span></a>
         </div>
       </li>
-
-      <!-- <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Igények kezelése
+          Adatok vizualizálva
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Igény változtatása</a>
+          <a class="dropdown-item" href="#">Kilépési adatok</a>
           <a class="dropdown-item" href="#">Igény hozzáadása</a>
-        </div> -->
+        </div>
 
     </ul>
     <span class="navbar-text p-1"><?php echo $_SESSION["u_name"]; ?> <a href="php/logout.php">Kijelentkezés</a></span>
