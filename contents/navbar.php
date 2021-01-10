@@ -23,9 +23,9 @@
           Adatok vizualizálva
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Kilépési adatok</a>
+          <a class="dropdown-item" href="kilepesiAdatok.php">Kilépési adatok</a>
           <a class="dropdown-item" href="#">Mikor jött / Mikor ment ?</a>
-          <a class="dropdown-item" href="#">Igény Változások</a>
+          <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
           <a class="dropdown-item" href="#"></a>
         </div>
 

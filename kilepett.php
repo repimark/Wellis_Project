@@ -28,7 +28,8 @@ if (!isset($_SESSION["u_id"])) {
 		<th>Név</th>
 		<th>Terület</th>
 		<th>Pozíció</th>
-		<th>Dátum</th>
+		<th>Kiléptetés dátum</th>
+		<th>Beléptetés dátum</th>
 	</thead>
 	<tbody class="table-dark">
 		<!-- DOLGOZÓK KILISTÁZÁSA -->
