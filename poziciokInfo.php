@@ -574,7 +574,7 @@ if (!isset($_SESSION["u_id"])) {
 				var id = $(this).attr('id');
 
 				var szoveg = $("#" + id).val()
-				//alert(id+' , '+szoveg)
+				alert(id+' , '+szoveg)
 				$.ajax({
 					url: 'addNote.php',
 					type: 'POST',
@@ -584,8 +584,8 @@ if (!isset($_SESSION["u_id"])) {
 						m_text: szoveg
 					},
 					success: function(NotesResult) {
-						//alert(NotesResult)
-						location.reload()
+						alert(NotesResult)
+						//location.reload()
 					},
 					error: function(error) {
 						console.log(error)
@@ -718,7 +718,7 @@ if (!isset($_SESSION["u_id"])) {
 
 						},
 						success: function(KileptetesResult) {
-							//console.log(KileptetesResult)
+							alert(KileptetesResult)
 							location.reload()
 						},
 						error: function(error) {

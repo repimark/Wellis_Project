@@ -25,4 +25,4 @@ if ($conn->query($sqlKilepInsert)) {
 } else {
 	echo "Minden Sikertelen";
 }
-mysqli_close($conn);
+$conn->close();
