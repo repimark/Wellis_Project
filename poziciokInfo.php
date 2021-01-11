@@ -560,6 +560,9 @@ if (!isset($_SESSION["u_id"])) {
 							console.log(lines)
 							console.log(sor)
 							$(sor).html(lines)
+						},
+						error: function(error){
+							console.log(error)
 						}
 					});
 				} else {
@@ -583,7 +586,10 @@ if (!isset($_SESSION["u_id"])) {
 					success: function(NotesResult) {
 						//alert(NotesResult)
 						location.reload()
-					}
+					},
+						error: function(error){
+							console.log(error)
+						}
 				});
 			});
 			var igenyLog = function(pozi, muvelet) {
@@ -609,7 +615,10 @@ if (!isset($_SESSION["u_id"])) {
 						} else {
 							alert(res)
 						}
-					}
+					},
+						error: function(error){
+							console.log(error)
+						}
 				});
 			};
 			$('.igenyPlus').click(function() {
@@ -630,6 +639,9 @@ if (!isset($_SESSION["u_id"])) {
 						//alert(IgenyResult)
 						igenyLog(id, '+')
 						//location.reload()
+					},
+					error: function(error){
+							console.log(error)
 					}
 				});
 			});
@@ -651,7 +663,10 @@ if (!isset($_SESSION["u_id"])) {
 					success: function(IgenyResult) {
 						//location.reload()
 						igenyLog(id, '-')
-					}
+					},
+					error: function(error){
+							console.log(error)
+						}
 				});
 			});
 
@@ -705,6 +720,9 @@ if (!isset($_SESSION["u_id"])) {
 						success: function(KileptetesResult) {
 							//console.log(KileptetesResult)
 							location.reload()
+						},
+						error: function(error){
+							console.log(error)
 						}
 					});
 				} else {
@@ -725,6 +743,9 @@ if (!isset($_SESSION["u_id"])) {
 						},
 						success: function(KileptetesResult) {
 							location.reload()
+						},
+						error: function(error){
+							console.log(error)
 						}
 					});
 					var kolcsonzott = 0
@@ -738,7 +759,7 @@ if (!isset($_SESSION["u_id"])) {
 						},
 						success: function(igenyRendezesResult) {
 							console.log(igenyRendezesResult)
-							location.reload()
+							//location.reload()
 
 						}
 					});
@@ -768,11 +789,7 @@ if (!isset($_SESSION["u_id"])) {
 				updatePozicio()
 				sorokKezelese('#add_teruletSelect :selected', '#add_sorSelect')
 			});
-			var updatePoziAfterSor = function(poziMezo){
-				$.ajax({
-					url: 'php/getSorok_2.php'
-				});
-			}
+			
 			$('#add_sorSelect').change(function (){
 				var sor = $('#add_sorSelect :selected').data('id')
 				getpoziciofromsor('#add_pozicioSelect', sor)
@@ -803,7 +820,10 @@ if (!isset($_SESSION["u_id"])) {
 							}
 							//console.log(lines)
 							$(pozi).html(lines)
-					}
+					},
+						error: function(error){
+							console.log(error)
+						}
 				});
 
 			}
@@ -841,7 +861,10 @@ if (!isset($_SESSION["u_id"])) {
 
 
 
-					 	}
+					 	},
+						error: function(error){
+							console.log(error)
+						}
 					 });
 				} else {
 					$('#add_sorSel').hide()
@@ -856,6 +879,9 @@ if (!isset($_SESSION["u_id"])) {
 							console.log(getPozicioResult);
 							//alert("update success");
 							$('#add_pozicioSelect').html(getPozicioResult);
+						},
+						error: function(error){
+							console.log(error)
 						}
 					});
 				}
@@ -914,7 +940,10 @@ if (!isset($_SESSION["u_id"])) {
 						}
 						console.log(addDolgozoResult)
 						location.reload()
-					}
+					},
+						error: function(error){
+							console.log(error)
+						}
 				});
 			});
 
@@ -963,7 +992,10 @@ if (!isset($_SESSION["u_id"])) {
 					},
 					success: function(dataResult_terulet) {
 						$('#edit_terulet_select').html(dataResult_terulet);
-					}
+					},
+						error: function(error){
+							console.log(error)
+						}
 				});
 				//Pozicíó lekérdezése
 				if (terulet_id != 7) {
@@ -979,6 +1011,9 @@ if (!isset($_SESSION["u_id"])) {
 						success: function(dataResult_pozi) {
 							console.log(dataResult_pozi)
 							$('#edit_pozicio_select').html(dataResult_pozi);
+						},
+						error: function(error){
+							console.log(error)
 						}
 					});
 				} else {
@@ -1001,6 +1036,9 @@ if (!isset($_SESSION["u_id"])) {
 								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 							}
 							$('#edit_pozicio_select').html(lines)
+						},
+						error: function(error){
+							console.log(error)
 						}
 					});
 				}
@@ -1014,7 +1052,10 @@ if (!isset($_SESSION["u_id"])) {
 					},
 					success: function(dataResult_allapot) {
 						$('#edit_allapot_select').html(dataResult_allapot);
-					}
+					},
+						error: function(error){
+							console.log(error)
+						}
 				});
 			})
 			$('#update_button').click(function() {
@@ -1040,7 +1081,10 @@ if (!isset($_SESSION["u_id"])) {
 						//alert("update success");
 						location.reload();
 
-					}
+					},
+						error: function(error){
+							console.log(error)
+						}
 				});
 
 			});
@@ -1078,6 +1122,9 @@ if (!isset($_SESSION["u_id"])) {
 
 
 
+						},
+						error: function(error){
+							console.log(error)
 						}
 					});
 				} else {
@@ -1094,6 +1141,9 @@ if (!isset($_SESSION["u_id"])) {
 							//alert("update success");
 							$('#edit_pozicio_select').html(getPozicioResult);
 
+						},
+						error: function(error){
+							console.log(error)
 						}
 					});
 				}
