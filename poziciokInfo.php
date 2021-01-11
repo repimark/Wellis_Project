@@ -204,7 +204,7 @@ if (!isset($_SESSION["u_id"])) {
 														<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
 													</svg>
 												</button>
-												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#deleteModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo '0'.$rowDolgozo['belepes'];?>">
+												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#deleteModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo '0' . $rowDolgozo['belepes']; ?>">
 													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-x-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 														<path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
 													</svg>
@@ -239,7 +239,7 @@ if (!isset($_SESSION["u_id"])) {
 														<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
 													</svg></button>
 												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#deleteModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
-												<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-x-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-x-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 														<path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
 													</svg></button>
 
@@ -271,7 +271,7 @@ if (!isset($_SESSION["u_id"])) {
 														<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
 													</svg></button>
 												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#deleteModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
-												<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-x-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-x-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 														<path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
 													</svg></button>
 											</td>
@@ -302,7 +302,7 @@ if (!isset($_SESSION["u_id"])) {
 													</svg>
 												</button>
 												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#deleteModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
-												<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-x-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-x-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 														<path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
 													</svg></button>
 											</td>
@@ -524,7 +524,7 @@ if (!isset($_SESSION["u_id"])) {
 			$(document).ready(function() {
 				udpateHiddenStats()
 				userKezeles()
-				
+
 			});
 			var userKezeles = function() {
 				var jogosultsag = '<?php echo $_SESSION["jog"]; ?>'
@@ -561,7 +561,7 @@ if (!isset($_SESSION["u_id"])) {
 							console.log(sor)
 							$(sor).html(lines)
 						},
-						error: function(error){
+						error: function(error) {
 							console.log(error)
 						}
 					});
@@ -569,7 +569,7 @@ if (!isset($_SESSION["u_id"])) {
 					$('#edit_sorSel').hide()
 				}
 			}
-			
+
 			$('.addMegjegyzes').click(function() {
 				var id = $(this).attr('id');
 
@@ -587,9 +587,9 @@ if (!isset($_SESSION["u_id"])) {
 						//alert(NotesResult)
 						location.reload()
 					},
-						error: function(error){
-							console.log(error)
-						}
+					error: function(error) {
+						console.log(error)
+					}
 				});
 			});
 			var igenyLog = function(pozi, muvelet) {
@@ -616,9 +616,9 @@ if (!isset($_SESSION["u_id"])) {
 							alert(res)
 						}
 					},
-						error: function(error){
-							console.log(error)
-						}
+					error: function(error) {
+						console.log(error)
+					}
 				});
 			};
 			$('.igenyPlus').click(function() {
@@ -640,8 +640,8 @@ if (!isset($_SESSION["u_id"])) {
 						igenyLog(id, '+')
 						//location.reload()
 					},
-					error: function(error){
-							console.log(error)
+					error: function(error) {
+						console.log(error)
 					}
 				});
 			});
@@ -664,9 +664,9 @@ if (!isset($_SESSION["u_id"])) {
 						//location.reload()
 						igenyLog(id, '-')
 					},
-					error: function(error){
-							console.log(error)
-						}
+					error: function(error) {
+						console.log(error)
+					}
 				});
 			});
 
@@ -721,7 +721,7 @@ if (!isset($_SESSION["u_id"])) {
 							//console.log(KileptetesResult)
 							location.reload()
 						},
-						error: function(error){
+						error: function(error) {
 							console.log(error)
 						}
 					});
@@ -744,7 +744,7 @@ if (!isset($_SESSION["u_id"])) {
 						success: function(KileptetesResult) {
 							location.reload()
 						},
-						error: function(error){
+						error: function(error) {
 							console.log(error)
 						}
 					});
@@ -766,16 +766,15 @@ if (!isset($_SESSION["u_id"])) {
 				}
 
 			});
-			$('#addDolgozo').click(function() {
-			});
+			$('#addDolgozo').click(function() {});
 			$('#addModal').on('show.bs.modal', function(event) {
 				var button = $(event.relatedTarget)
 				updatePozicio()
 				var modal = $(this)
 				var t_id = $('#add_terulet_Select :selected').data('id')
-				if(t_id == 7){
+				if (t_id == 7) {
 					$('#add_sorSel').show()
-				}else{
+				} else {
 					$('#add_sorSel').hide()
 				}
 
@@ -789,17 +788,17 @@ if (!isset($_SESSION["u_id"])) {
 				updatePozicio()
 				sorokKezelese('#add_teruletSelect :selected', '#add_sorSelect')
 			});
-			
-			$('#add_sorSelect').change(function (){
+
+			$('#add_sorSelect').change(function() {
 				var sor = $('#add_sorSelect :selected').data('id')
 				getpoziciofromsor('#add_pozicioSelect', sor)
 			});
-			$('#edit_sor_select').change(function (){
+			$('#edit_sor_select').change(function() {
 				var sor = $('#edit_sor_select :selected').data('id')
 				getpoziciofromsor('#edit_pozicio_select', sor)
 			});
-			var getpoziciofromsor = function(pozi, sor){
-				
+			var getpoziciofromsor = function(pozi, sor) {
+
 				$.ajax({
 					url: 'php/getPoziFromSor.php',
 					type: 'POST',
@@ -807,23 +806,23 @@ if (!isset($_SESSION["u_id"])) {
 					data: {
 						s_id: sor
 					},
-					success: function(RESULT){
+					success: function(RESULT) {
 						var obj = JSON.parse(RESULT);
-							var lines = [];
-							if (obj.length > 0) {
-								//console.log('nagyobb a cucli')
-								for (var i = obj.length - 1; i >= 0; i--) {
-									lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + '</option>'
-								}
-							} else {
-								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
+						var lines = [];
+						if (obj.length > 0) {
+							//console.log('nagyobb a cucli')
+							for (var i = obj.length - 1; i >= 0; i--) {
+								lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + '</option>'
 							}
-							//console.log(lines)
-							$(pozi).html(lines)
-					},
-						error: function(error){
-							console.log(error)
+						} else {
+							lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 						}
+						//console.log(lines)
+						$(pozi).html(lines)
+					},
+					error: function(error) {
+						console.log(error)
+					}
 				});
 
 			}
@@ -852,20 +851,20 @@ if (!isset($_SESSION["u_id"])) {
 								console.log('nagyobb a cucli')
 								for (var i = obj.length - 1; i >= 0; i--) {
 									lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + ' | ' + obj[i].s_elnevezes + '</option>'
-					 			}
-					 		} else {
-					 			lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
-					 		}
-					 		console.log(lines)
-					 		$('#add_pozicioSelect').html(lines)
+								}
+							} else {
+								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
+							}
+							console.log(lines)
+							$('#add_pozicioSelect').html(lines)
 
 
 
-					 	},
-						error: function(error){
+						},
+						error: function(error) {
 							console.log(error)
 						}
-					 });
+					});
 				} else {
 					$('#add_sorSel').hide()
 					$.ajax({
@@ -880,7 +879,7 @@ if (!isset($_SESSION["u_id"])) {
 							//alert("update success");
 							$('#add_pozicioSelect').html(getPozicioResult);
 						},
-						error: function(error){
+						error: function(error) {
 							console.log(error)
 						}
 					});
@@ -911,10 +910,10 @@ if (!isset($_SESSION["u_id"])) {
 				var pozicio = $('#add_pozicioSelect option:selected').data('id')
 				var allapot = $('#add_allapotSelect option:selected').data('id')
 				var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
-				if( kolcsonzo == 'Munkaland'){
-					var newNev = nev + ' ML' 
-				}else{
-				var newNev = nev + ' ' + kolcsonzo.substring(0, 1)
+				if (kolcsonzo == 'Munkaland') {
+					var newNev = nev + ' ML'
+				} else {
+					var newNev = nev + ' ' + kolcsonzo.substring(0, 1)
 				}
 				var datum = ''
 				if ($('#belepesIdo').val().length < 1) {
@@ -941,9 +940,9 @@ if (!isset($_SESSION["u_id"])) {
 						console.log(addDolgozoResult)
 						location.reload()
 					},
-						error: function(error){
-							console.log(error)
-						}
+					error: function(error) {
+						console.log(error)
+					}
 				});
 			});
 
@@ -993,9 +992,9 @@ if (!isset($_SESSION["u_id"])) {
 					success: function(dataResult_terulet) {
 						$('#edit_terulet_select').html(dataResult_terulet);
 					},
-						error: function(error){
-							console.log(error)
-						}
+					error: function(error) {
+						console.log(error)
+					}
 				});
 				//Pozicíó lekérdezése
 				if (terulet_id != 7) {
@@ -1012,7 +1011,7 @@ if (!isset($_SESSION["u_id"])) {
 							console.log(dataResult_pozi)
 							$('#edit_pozicio_select').html(dataResult_pozi);
 						},
-						error: function(error){
+						error: function(error) {
 							console.log(error)
 						}
 					});
@@ -1037,7 +1036,7 @@ if (!isset($_SESSION["u_id"])) {
 							}
 							$('#edit_pozicio_select').html(lines)
 						},
-						error: function(error){
+						error: function(error) {
 							console.log(error)
 						}
 					});
@@ -1053,9 +1052,9 @@ if (!isset($_SESSION["u_id"])) {
 					success: function(dataResult_allapot) {
 						$('#edit_allapot_select').html(dataResult_allapot);
 					},
-						error: function(error){
-							console.log(error)
-						}
+					error: function(error) {
+						console.log(error)
+					}
 				});
 			})
 			$('#update_button').click(function() {
@@ -1082,13 +1081,13 @@ if (!isset($_SESSION["u_id"])) {
 						location.reload();
 
 					},
-						error: function(error){
-							console.log(error)
-						}
+					error: function(error) {
+						console.log(error)
+					}
 				});
 
 			});
-			$('#edit_sor_select').change(function(){
+			$('#edit_sor_select').change(function() {
 				var sor = $('#edit_sor_select :selected').data('id')
 
 			})
@@ -1123,7 +1122,7 @@ if (!isset($_SESSION["u_id"])) {
 
 
 						},
-						error: function(error){
+						error: function(error) {
 							console.log(error)
 						}
 					});
@@ -1142,7 +1141,7 @@ if (!isset($_SESSION["u_id"])) {
 							$('#edit_pozicio_select').html(getPozicioResult);
 
 						},
-						error: function(error){
+						error: function(error) {
 							console.log(error)
 						}
 					});
