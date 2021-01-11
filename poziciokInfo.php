@@ -499,6 +499,7 @@ if (!isset($_SESSION["u_id"])) {
 											<option>Trenkwalder</option>
 											<option>Workforce</option>
 											<option>Melicom</option>
+											<option>Munkaland</option>
 										</select>
 									</div>
 								</div>
@@ -884,7 +885,11 @@ if (!isset($_SESSION["u_id"])) {
 				var pozicio = $('#add_pozicioSelect option:selected').data('id')
 				var allapot = $('#add_allapotSelect option:selected').data('id')
 				var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
+				if( kolcsonzo == 'Munkaland'){
+					var newNev = nev + ' ML' 
+				}else{
 				var newNev = nev + ' ' + kolcsonzo.substring(0, 1)
+				}
 				var datum = ''
 				if ($('#belepesIdo').val().length < 1) {
 					var d = new Date();
