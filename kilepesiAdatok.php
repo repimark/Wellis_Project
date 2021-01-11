@@ -31,9 +31,16 @@ if (!isset($_SESSION["u_id"])) {
                     <h3 class="text-center">Év kiválasztása</h3>
                     <hr />
                     <label for="#ev">Év: </label>
-                    <input type="text" id="ev" class="form-control" placeholder="2020" />
+                    <!-- <input type="text" id="ev" class="form-control" placeholder="2020" /> -->
+                    <select id="ev" class="form-control">
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
                     <br />
-                    <button class="btn btn-primary form-control" id="kilepettekBtn">Lekérdezés</button>
+                    <!-- <button class="btn btn-primary form-control" id="kilepettekBtn">Lekérdezés</button> -->
                 </div>
                 <div id="kilepesResult" class="bg-light m-2 p-2 rounded">
 
@@ -42,8 +49,9 @@ if (!isset($_SESSION["u_id"])) {
             </div>
         </div>
         <script>
-            $('#kilepettekBtn').click(function() {
-                var year = $('#ev').val()
+            $('#ev').change(function() {
+                var year = $('#ev :selected').val()
+                
                 load_monthwise_data(year, 'évi havi kilépők számának kimutatása')
                 getAtlag()
             });

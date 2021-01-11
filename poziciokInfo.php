@@ -764,7 +764,7 @@ if (!isset($_SESSION["u_id"])) {
 				$('#belepes').hide()
 			}
 			$('#add_teruletSelect').change(function() {
-				//updatePozicio()
+				updatePozicio()
 				sorokKezelese('#add_teruletSelect :selected', '#add_sorSelect')
 			});
 			var updatePoziAfterSor = function(poziMezo){
@@ -886,7 +886,7 @@ if (!isset($_SESSION["u_id"])) {
 				var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
 				var newNev = nev + ' ' + kolcsonzo.substring(0, 1)
 				var datum = ''
-				if ($('#belepesIdo').text().length < 1) {
+				if ($('#belepesIdo').val().length < 1) {
 					var d = new Date();
 					datum = d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate()
 				} else {

@@ -26,7 +26,7 @@
           <a class="dropdown-item" href="kilepesiAdatok.php">Kilépési adatok</a>
           <a class="dropdown-item" href="#">Mikor jött / Mikor ment ?</a>
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
-          <a class="dropdown-item" href="#"></a>
+          <a class="dropdown-item" href="haviDolgozok.php">A hónapban be és kilépett dolgozók</a>
         </div>
 
     </ul>
