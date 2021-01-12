@@ -27,81 +27,75 @@ if (!isset($_SESSION["u_id"])) {
         include("contents/navbar.php");
         ?>
         <div class="container">
-            <h2 class="text-center brand"> Igény változások </h2>
-            <canvas id="canv1" style="background-color: white;"></canvas>
-            <canvas id="canv2" style="background-color: white;"></canvas>
+            <h2 class="text-center brand"> Meddig maradtak az emberek </h2>
+            <div class="canvas-div w-75"><canvas id="canv1" width="50%"></canvas></div>
         </div>
         <script>
-            var minus = [];
-            var minusLabel = [];
-            var plus = [];
-            var plusLabel = [];
-            $(document).ready(function(){
-                var today = new Date()
-                var year = today.getFullYear();
-                var month = today.getMonth() + 1;
-                getValtozasAHonapban(year, month)
-                rajz(minusLabel, minus, 'canv1', '-')
-                rajz(plusLabel, plus, 'canv2', '+')
-            });
-            var getValtozasAHonapban = function(year,month){
+            var evAlatt = 0
+            var evFelett = 0
+            var labS = ["Kevesebb mint 1 év ", "Több mint 1 év"]
+            $('.container').ready(function(){
+                loadMaradt()
+                
+            })
+            var loadMaradt = function(){
                 $.ajax({
-                    url: 'adatok/getIgenyValtozas.php',
-                    type: 'GET',
-                    data: {
-                        year: year,
-                        month: month
-                    },
-                    success: function(Data){
-                        console.log(Data)
-                        var obj = JSON.parse(Data);
-                        for (i in obj){
-                            //console.log(obj[i].muvelet)
-                            
-                            if(obj[i].muvelet == "-" ){
-                                //console.log(obj[i].muv)
-                                minus.push(obj[i].db)
-                                minusLabel.push(obj[i].pozi)
+                    url: 'adatok/getMaradasiIdo.php',
+                    type: 'POST',
+                    data: {},
+                    success: function(Result){
+                        console.log(Result)
+                        var obj = JSON.parse(Result)
+                        var lines = [];
+                        for ( i in obj){
+                            if(obj[i].db > 365){
+                                var evOszto = parseInt(obj[i].db / 365)
+                                var newDb = parseInt(obj[i].db) - (evOszto * 365)
+                                //console.log(+evOszto + ' év '+ newDb + ' nap')
+                                evFelett ++;
+                                console.log(evFelett)
                             }else{
-                                console.log(obj[i].muvelet)
-                                plus.push(obj[i].db)
-                                plusLabel.push(obj[i].pozi)
+                            //console.log(obj[i].db + ' nap')
+                                evAlatt ++;
+                                console.log(evAlatt)
                             }
                         }
+                        rajz()
                     },
                     error: function(errorData){
                         console.log(errorData)
                     }
                 });
             }
-            var rajz = function(labels, datas, dest, muv){
+            var rajz = function(){
+                console.log(evAlatt)
+                console.log(evFelett)
                 var chartdata = {
-                            labels: labels,
+                            labels: labS,
                             datasets: [{
-                                data: datas,
-                                label: 'Igényváltozás ' + muv,
-                                backgroundColor: 'rgba(255, 118, 117,1.0)',
-                                borderColor: 'rgba(255, 118, 117,1.0)',
+                                data: [parseInt(evAlatt),parseInt(evFelett)],
+                                label: 'Ki meddig maradt',
+                                backgroundColor: ['rgba(255, 118, 117,1.0)','rgba(0, 184, 148,1.0)'],
+                                borderColor: ['rgba(255, 118, 117,1.0)','rgba(0,184,148,1.0)'],
                                 hoverBackgroundColor: 'rgba(200,200,200,1.0)',
                                 hoverBorderColor: 'rgba(200,200,200,1.0)',
                                 borderWidth: 1
                             }],
                             options: {
                                 responsive: true,
-                                maintainAspectRatio: true,
+                                maintainAspectRatio: false,
                                 legend: {
                                     display: false,
                                     position: 'top'
                                 }
                             }
                         };
-                        var ctx = document.getElementById(dest);//.getContext('2d');
+                        var ctx = document.getElementById('canv1').getContext('2d');
                         var barGraph = new Chart(ctx, {
                             type: 'bar',
                             data: chartdata
                         });
             }
-            
         </script>
     </body>
     </html>
