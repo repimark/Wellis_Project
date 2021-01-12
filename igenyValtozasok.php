@@ -28,8 +28,8 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <h1> Igeny valtozasok </h1>
-            <canvas id="canv1"></canvas>
-            <canvas id="canv2"></canvas>
+            <canvas id="canv1" style="background-color: white;"></canvas>
+            <canvas id="canv2" style="background-color: white;"></canvas>
         </div>
         <script>
             var minus = [];
