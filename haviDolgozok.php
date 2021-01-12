@@ -37,16 +37,20 @@ if (!isset($_SESSION["u_id"])) {
         </div>
         <script type="text/javascript">
             $('.container').ready(function() {
-                loadDolgozok()
-                loadKilepett()
+                var datum = new Date()
+                var y = datum.getFullYear()
+                var m = datum.getMonth() + 1
+                console.log(m)
+                loadDolgozok(y,m)
+                loadKilepett(y,m)
             });
-            var loadDolgozok = function() {
+            var loadDolgozok = function(year, month) {
                 $.ajax({
                     url: "adatok/getHaviDolgozok.php",
                     method: "POST",
                     data: {
-                        year: 2021,
-                        month: 1
+                        year: year,
+                        month: month
                     },
                     dataType: "JSON",
                     success: function(data) {
@@ -61,7 +65,7 @@ if (!isset($_SESSION["u_id"])) {
                         var chartdata = {
                             labels: terulet,
                             datasets: [{
-                                label: 'Terület',
+                                label: 'A hónapban belépett dolgozók',
                                 backgroundColor: 'rgba(200,200,200,0.75)',
                                 borderColor: 'rgba(200,200,200,0.75)',
                                 hoverBackgroundColor: 'rgba(200,200,200,1)',
@@ -93,13 +97,13 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 });
             }
-            var loadKilepett = function() {
+            var loadKilepett = function(year, month) {
                 $.ajax({
                     url: "adatok/getHaviKilepett.php",
                     method: "POST",
                     data: {
-                        year: 2021,
-                        month: 1
+                        year: year,
+                        month: month
                     },
                     dataType: "JSON",
                     success: function(data) {
@@ -115,7 +119,7 @@ if (!isset($_SESSION["u_id"])) {
                             labels: terulet,
                             datasets: [{
                                 data: adat,
-                                label: 'Terulet',
+                                label: 'A hónapban Kilépett dolgozók',
                                 backgroundColor: '#337ab7',
                                 borderColor: '#337ab7',
                                 hoverBackgroundColor: 'rgba(200,200,200,1.0)',
