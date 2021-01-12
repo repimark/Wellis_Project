@@ -8,7 +8,7 @@
         $year = $conn->real_escape_string($_GET["year"]);
         $month = $conn->real_escape_string($_GET["month"]);
         $sqlGetTerulet = "SELECT t_id, t_elnevezes FROM terulet";
-        $teruletQry = $conn->query($sqlGetTerulet);
+        $teruletQry = $conn->query($sqlGetTerulet); 
         while($row = $teruletQry->fetch_assoc()){
             $sql = "SELECT COUNT(k_id) AS db FROM `kilepett` WHERE t_id = '".$row["t_id"]."' AND YEAR(k_datum) = '$year' AND MONTH(k_datum) = '$month'";
             $qry = $conn->query($sql);

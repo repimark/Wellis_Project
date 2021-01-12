@@ -31,8 +31,8 @@ if (!isset($_SESSION["u_id"])) {
         <div class="container">
             <h2 class="text-center">Be- és Kilépett Dolgozók</h2>
             <div id="chart_cont">
-                <canvas id="canv1" width="500" height="300"></canvas>
-                <canvas id="canv2" width="500" height="300"></canvas>
+                <canvas id="canv1" width="500" height="300" style="background-color: white;"></canvas>
+                <canvas id="canv2" width="500" height="300" style="background-color: white;"></canvas>
             </div>
         </div>
         <script type="text/javascript">
@@ -42,7 +42,7 @@ if (!isset($_SESSION["u_id"])) {
                 var m = datum.getMonth() + 1
                 console.log(m)
                 loadDolgozok(y,m)
-                loadKilepett(y,m)
+                loadKilepett(2021,1)
             });
             var loadDolgozok = function(year, month) {
                 $.ajax({
@@ -107,7 +107,7 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     dataType: "JSON",
                     success: function(data) {
-                        //console.log(data)
+                        console.log(data)
                         var terulet = [];
                         var adat = [];
                         for (i in data) {
@@ -120,8 +120,8 @@ if (!isset($_SESSION["u_id"])) {
                             datasets: [{
                                 data: adat,
                                 label: 'A hónapban Kilépett dolgozók',
-                                backgroundColor: '#337ab7',
-                                borderColor: '#337ab7',
+                                backgroundColor: 'rgba(200,200,200,0.75)',
+                                borderColor: 'rgba(200,200,200,0.75)',
                                 hoverBackgroundColor: 'rgba(200,200,200,1.0)',
                                 hoverBorderColor: 'rgba(200,200,200,1.0)',
                                 borderWidth: 1
@@ -140,7 +140,6 @@ if (!isset($_SESSION["u_id"])) {
                             type: 'bar',
                             data: chartdata
                         })
-                        //barGraph.render()
                     },
                     error: function(error) {
                         console.log(error)
