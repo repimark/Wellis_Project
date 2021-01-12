@@ -33,16 +33,21 @@ if (!isset($_SESSION["u_id"])) {
             <div id="chart_cont">
                 <canvas id="canv1" width="500" height="300" style="background-color: white;"></canvas>
                 <canvas id="canv2" width="500" height="300" style="background-color: white;"></canvas>
+                <canvas id="canv3" width="500" height="300" style="background-color: white;"></canvas>
             </div>
         </div>
         <script type="text/javascript">
+        var teruletLabel = [];
+        var belepett = [];
+        var kilepett = [];
             $('.container').ready(function() {
                 var datum = new Date()
                 var y = datum.getFullYear()
                 var m = datum.getMonth() + 1
                 console.log(m)
                 loadDolgozok(y,m)
-                loadKilepett(2021,1)
+                loadKilepett(y,m)
+                rajz()
             });
             var loadDolgozok = function(year, month) {
                 $.ajax({
@@ -60,6 +65,8 @@ if (!isset($_SESSION["u_id"])) {
                         for (i in data) {
                             terulet.push(data[i].terulet)
                             adat.push(data[i].db)
+                            belepett.push(data[i].db)
+                            teruletLabel.push(data[i].terulet)
                             //console.log(adat[i])
                         }
                         var chartdata = {
@@ -72,7 +79,8 @@ if (!isset($_SESSION["u_id"])) {
                                 hoverBorderColor: 'rgba(200,200,200,1)',
                                 borderWidth: 1,
                                 data: adat
-                            }]
+                            },
+                            ]
                         };
                         var ctx = document.getElementById('canv1').getContext('2d');
                         var barGraph = new Chart(ctx, {
@@ -113,6 +121,7 @@ if (!isset($_SESSION["u_id"])) {
                         for (i in data) {
                             terulet.push(data[i].terulet)
                             adat.push(data[i].db)
+                            kilepett.push(data[i].db)
                             //console.log(adat[i])
                         }
                         var chartdata = {
@@ -145,6 +154,43 @@ if (!isset($_SESSION["u_id"])) {
                         console.log(error)
                     }
                 });
+            }
+            var rajz = function(){
+                
+                var chartdata = {
+                            labels: teruletLabel,
+                            datasets: [{
+                                data: kilepett,
+                                label: 'Kilépett Dolgozók',
+                                backgroundColor: 'rgba(255,20,20,0.75)',
+                                borderColor: 'rgba(200,200,200,0.75)',
+                                hoverBackgroundColor: 'rgba(200,200,200,1.0)',
+                                hoverBorderColor: 'rgba(200,200,200,1.0)',
+                                borderWidth: 1
+                            },
+                            {
+                                data: belepett,
+                                label: 'Belépett Dolgozók',
+                                backgroundColor: 'rgba(20,255,20,0.75)',
+                                borderColor: 'rgba(200,200,200,0.75)',
+                                hoverBackgroundColor: 'rgba(200,200,200,1.0)',
+                                hoverBorderColor: 'rgba(200,200,200,1.0)',
+                                borderWidth: 1
+                            }],
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                legend: {
+                                    display: false,
+                                    position: 'top'
+                                }
+                            }
+                        };
+                        var ctx = document.getElementById('canv3').getContext('2d');
+                        var barGraph = new Chart(ctx, {
+                            type: 'bar',
+                            data: chartdata
+                        })
             }
         </script>
     </body>
