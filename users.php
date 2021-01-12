@@ -247,6 +247,7 @@ if (!isset($_SESSION["u_id"])) {
 			});
 		});
 		$('#export').click(function() {
+			alert("pressed")
 				window.open("excel/all_user.php", "_blank")
 			});
   	</script>

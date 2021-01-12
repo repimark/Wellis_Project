@@ -69,7 +69,7 @@ if (!isset($_SESSION['u_id'])) {
             if ($igenyekQry = $conn->query($igenyek)) {
                 $igenyekDB = $igenyekQry->fetch_row();
                 //echo " Igény : " . ((int)$igenyekDB[0] - (int)$kolcsonEsDolgozoDB[0]);
-                $igenyEredmeny = ((int)$igenyekDB[0] - (int)$kolcsonEsDolgozoDB[0]);
+                $igenyEredmeny = ((int)$igenyekDB[0] - (int)$kolcsonEsDolgozoDB[0] - (int)$mindenBelepo[0]);
                 //array_push($output, 'igeny:'.$igenyEredmeny.'');
             }
             $output[] = array('nev' => $rowTerulet["t_elnevezes"] ,'dolgozo'=>$dolgozokDB[0], 'kolcsonzott' => $kolcsonzottDB[0], 'dolgozo_kolcson' => $kolcsonEsDolgozoDB[0], 'belepo' => $belepoDB[0], 'kolcson_belepo' => $kolcsonBelepoDB[0], 'minden_belepo' => $mindenBelepoDB[0], 'igeny' =>((int)$igenyekDB[0]-(int)$kolcsonEsDolgozoDB[0]));
