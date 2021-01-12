@@ -27,8 +27,8 @@ if (!isset($_SESSION["u_id"])) {
 		<div class="container">
 			<h1 class="text-center p-5">Összesítő oldal </h1>
 			<div id="osszesito"></div>
-			<div class="charts" style="background-color:white; width:500px; height:500px;">
-				<canvas id="myChart" width="250" height="250"></canvas>
+			<div class="charts w-75 bg-light" >
+				<canvas id="myChart" ></canvas>
 			</div>
 		</div>
 		<script>
