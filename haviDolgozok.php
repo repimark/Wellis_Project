@@ -18,6 +18,7 @@ if (!isset($_SESSION["u_id"])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
         <!-- <script src="https://www.gstatic.com/charts/loader.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
         <link rel="stylesheet" type="text/css" href="style.css">
 
     </head>
@@ -30,12 +31,12 @@ if (!isset($_SESSION["u_id"])) {
         <div class="container">
             <h2 class="text-center">Be- és Kilépett Dolgozók</h2>
             <div id="chart_cont">
-                <canvas id="canv1"></canvas>
-                <canvas id="canv2"></canvas>
+                <canvas id="canv1" width="500" height="300"></canvas>
+                <canvas id="canv2" width="500" height="300"></canvas>
             </div>
         </div>
         <script type="text/javascript">
-            $('#chart_div').ready(function() {
+            $('.container').ready(function() {
                 loadDolgozok()
                 loadKilepett()
             });
@@ -49,34 +50,46 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     dataType: "JSON",
                     success: function(data) {
-                        //console.log(data)
+                        console.log(data)
                         var terulet = []
                         var adat = []
                         for (i in data) {
                             terulet.push(data[i].terulet)
-                            adat.push(data[i].db + 6)
+                            adat.push(data[i].db)
                             //console.log(adat[i])
                         }
                         var chartdata = {
                             labels: terulet,
-                            dataset: [{
+                            datasets: [{
                                 label: 'Terület',
                                 backgroundColor: 'rgba(200,200,200,0.75)',
                                 borderColor: 'rgba(200,200,200,0.75)',
                                 hoverBackgroundColor: 'rgba(200,200,200,1)',
                                 hoverBorderColor: 'rgba(200,200,200,1)',
+                                borderWidth: 1,
                                 data: adat
                             }]
                         };
-                        var ctx = document.getElementById('canv1');
+                        var ctx = document.getElementById('canv1').getContext('2d');
                         var barGraph = new Chart(ctx, {
-                            type: 'line',
-                            data: chartdata
+                            type: 'bar',
+                            data: chartdata,
+                            options: {
+                                tooltips: {
+                                    mode: 'index',
+                                    intersect: false,
+                                },
+                                scales: {
+                                    y: {
+                                            beginAtZero: true
+                                        }
+                                }
+                            }
                         });
 
                     },
-                    error: function(data) {
-                        console.log(data)
+                    error: function(error) {
+                        console.log(error)
                     }
                 });
             }
@@ -91,35 +104,42 @@ if (!isset($_SESSION["u_id"])) {
                     dataType: "JSON",
                     success: function(data) {
                         //console.log(data)
-                        var terulet = []
-                        var adat = []
+                        var terulet = [];
+                        var adat = [];
                         for (i in data) {
                             terulet.push(data[i].terulet)
-                            adat.push(data[i].db + 8)
-                            console.log(adat[i])
+                            adat.push(data[i].db)
+                            //console.log(adat[i])
                         }
                         var chartdata = {
                             labels: terulet,
-                            dataset: [{
+                            datasets: [{
                                 data: adat,
-                                label: 'Terület',
-                                backgroundColor: 'rgba(200,200,200,0.75)',
-                                borderColor: 'rgba(200,200,200,0.75)',
+                                label: 'Terulet',
+                                backgroundColor: '#337ab7',
+                                borderColor: '#337ab7',
                                 hoverBackgroundColor: 'rgba(200,200,200,1.0)',
                                 hoverBorderColor: 'rgba(200,200,200,1.0)',
                                 borderWidth: 1
-                                
-                            }]
+                            }],
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                legend: {
+                                    display: false,
+                                    position: 'top'
+                                }
+                            }
                         };
                         var ctx = document.getElementById('canv2').getContext('2d');
                         var barGraph = new Chart(ctx, {
-                            type: 'line',
+                            type: 'bar',
                             data: chartdata
                         })
-
+                        //barGraph.render()
                     },
-                    error: function(data) {
-                        console.log(data)
+                    error: function(error) {
+                        console.log(error)
                     }
                 });
             }
