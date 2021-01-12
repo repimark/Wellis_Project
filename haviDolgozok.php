@@ -31,8 +31,8 @@ if (!isset($_SESSION["u_id"])) {
         <div class="container">
             <h2 class="text-center">Be- és Kilépett Dolgozók</h2>
             <div id="chart_cont">
-                <canvas id="canv1" width="500" height="300" style="background-color: white;"></canvas>
-                <canvas id="canv2" width="500" height="300" style="background-color: white;"></canvas>
+                <!-- <canvas id="canv1" width="500" height="300" style="background-color: white;"></canvas>
+                <canvas id="canv2" width="500" height="300" style="background-color: white;"></canvas> -->
                 <canvas id="canv3" width="500" height="300" style="background-color: white;"></canvas>
             </div>
         </div>
@@ -44,7 +44,6 @@ if (!isset($_SESSION["u_id"])) {
                 var datum = new Date()
                 var y = datum.getFullYear()
                 var m = datum.getMonth() + 1
-                console.log(m)
                 loadDolgozok(y,m)
                 loadKilepett(y,m)
                 rajz()
@@ -82,22 +81,22 @@ if (!isset($_SESSION["u_id"])) {
                             },
                             ]
                         };
-                        var ctx = document.getElementById('canv1').getContext('2d');
-                        var barGraph = new Chart(ctx, {
-                            type: 'bar',
-                            data: chartdata,
-                            options: {
-                                tooltips: {
-                                    mode: 'index',
-                                    intersect: false,
-                                },
-                                scales: {
-                                    y: {
-                                            beginAtZero: true
-                                        }
-                                }
-                            }
-                        });
+                        // var ctx = document.getElementById('canv1').getContext('2d');
+                        // var barGraph = new Chart(ctx, {
+                        //     type: 'bar',
+                        //     data: chartdata,
+                        //     options: {
+                        //         tooltips: {
+                        //             mode: 'index',
+                        //             intersect: false,
+                        //         },
+                        //         scales: {
+                        //             y: {
+                        //                     beginAtZero: true
+                        //                 }
+                        //         }
+                        //     }
+                        // });
 
                     },
                     error: function(error) {
@@ -144,11 +143,11 @@ if (!isset($_SESSION["u_id"])) {
                                 }
                             }
                         };
-                        var ctx = document.getElementById('canv2').getContext('2d');
-                        var barGraph = new Chart(ctx, {
-                            type: 'bar',
-                            data: chartdata
-                        })
+                        // var ctx = document.getElementById('canv2').getContext('2d');
+                        // var barGraph = new Chart(ctx, {
+                        //     type: 'bar',
+                        //     data: chartdata
+                        // })
                     },
                     error: function(error) {
                         console.log(error)
@@ -162,8 +161,8 @@ if (!isset($_SESSION["u_id"])) {
                             datasets: [{
                                 data: kilepett,
                                 label: 'Kilépett Dolgozók',
-                                backgroundColor: 'rgba(255,20,20,0.75)',
-                                borderColor: 'rgba(200,200,200,0.75)',
+                                backgroundColor: 'rgba(255, 118, 117,1.0)',
+                                borderColor: 'rgba(255, 118, 117,1.0)',
                                 hoverBackgroundColor: 'rgba(200,200,200,1.0)',
                                 hoverBorderColor: 'rgba(200,200,200,1.0)',
                                 borderWidth: 1
@@ -171,10 +170,10 @@ if (!isset($_SESSION["u_id"])) {
                             {
                                 data: belepett,
                                 label: 'Belépett Dolgozók',
-                                backgroundColor: 'rgba(20,255,20,0.75)',
-                                borderColor: 'rgba(200,200,200,0.75)',
-                                hoverBackgroundColor: 'rgba(200,200,200,1.0)',
-                                hoverBorderColor: 'rgba(200,200,200,1.0)',
+                                backgroundColor: 'rgba(0, 184, 148,1.0)',
+                                borderColor: 'rgba(0,184,148,1.0)',
+                                hoverBackgroundColor: 'rgba(0,184,148,1.0)',
+                                hoverBorderColor: 'rgba(0,184,148,1.0)',
                                 borderWidth: 1
                             }],
                             options: {
@@ -190,7 +189,7 @@ if (!isset($_SESSION["u_id"])) {
                         var barGraph = new Chart(ctx, {
                             type: 'bar',
                             data: chartdata
-                        })
+                        });
             }
         </script>
     </body>
