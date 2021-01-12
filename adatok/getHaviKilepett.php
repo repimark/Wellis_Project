@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION["u_id"])){
-        //header("location:../login.php");
+        header("location:../login.php");
     }else{
         include '../connect.php';
         $RES = array();

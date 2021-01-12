@@ -20,8 +20,10 @@ if (!isset($_SESSION["u_id"])) {
 	include("contents/navbar.php");
 	include 'connect.php';
  ?>
+	
 	<h1 class="text-center">Dolgozók</h1>
 	<div class="container-sm">
+	<button class="btn btn-success" id="export">Excel export</button>
 	<table border=1 class='table table-striped'>
 	<thead class="thead-dark">	
 		<th>Név</th>
@@ -244,6 +246,9 @@ if (!isset($_SESSION["u_id"])) {
 				}
 			});
 		});
+		$('#export').click(function() {
+				window.open("excel/all_user.php", "_blank")
+			});
   	</script>
 </body>
 </html>
