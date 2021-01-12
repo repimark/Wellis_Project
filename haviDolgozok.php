@@ -44,8 +44,8 @@ if (!isset($_SESSION["u_id"])) {
                     url: "adatok/getHaviDolgozok.php",
                     method: "POST",
                     data: {
-                        year: 2020,
-                        month: 12
+                        year: 2021,
+                        month: 1
                     },
                     dataType: "JSON",
                     success: function(data) {
@@ -65,7 +65,7 @@ if (!isset($_SESSION["u_id"])) {
                                 borderColor: 'rgba(200,200,200,0.75)',
                                 hoverBackgroundColor: 'rgba(200,200,200,1)',
                                 hoverBorderColor: 'rgba(200,200,200,1)',
-                                data: [10,10,10,101,01,1322,3123,12,3,2,3,21,3]
+                                data: adat
                             }]
                         };
                         var ctx = document.getElementById('canv1');
@@ -85,8 +85,8 @@ if (!isset($_SESSION["u_id"])) {
                     url: "adatok/getHaviKilepett.php",
                     method: "POST",
                     data: {
-                        year: 2020,
-                        month: 11
+                        year: 2021,
+                        month: 1
                     },
                     dataType: "JSON",
                     success: function(data) {
