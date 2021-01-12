@@ -139,7 +139,7 @@ if (!isset($_SESSION["u_id"])) {
 								<?php
 								while ($rowIgeny = $igenyResult->fetch_assoc()) {
 									if ($rowIgeny["i_sajat"] == '0') {
-										$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 1 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 3 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 4";
+										$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 1 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 3 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 4 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 5 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 6 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 7 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 8";
 										$sajatDolgozo = $conn->query($darabSQL);
 										while ($rowDB = $sajatDolgozo->fetch_assoc()) {
 											$veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"];
