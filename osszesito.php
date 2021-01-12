@@ -76,67 +76,89 @@ if (!isset($_SESSION["u_id"])) {
 				});
 			}
 			var getCharts = function() {
-				//var ctx = $('myChart');
-				var ctx = document.getElementById("myChart").getContext('2d');
-				var myChart = new Chart(ctx, {
-					type: 'bar',
-					data: {
-						labels: ['Meo', 'Termelés - Sorok', 'Yellow', 'Green', 'Purple'],
-						datasets: [{
-								label: '',
-								data: [1, 4, 7, 4, 1],
-								backgroundColor: [
-									'rgba(255, 99, 132, 0.2)'
-								
-								],
-								borderColor: [
-									'rgba(255, 99, 132, 1)'
-									
-								],
-								borderWidth: 0.5
-							},
-							{
-								//label: '# of Votes',
-								data: [2, 5, 8, 5, 2],
-								backgroundColor: [
-									
-									'rgba(153, 102, 255, 0.2)'
-								],
-								borderColor: [
-									
-									'rgba(153, 102, 255, 1)'
-								],
-								borderWidth: 0.5
-							},
-							{
-							// label: '# of Votes',
-							data: [3, 6, 9, 6, 3],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)'
-							],
-							borderWidth: 0.5
+				$.ajax({
+					url: 'adatok/getOsszesitoAdatok.php',
+					type: 'POST',
+					success: function(Result) {
+						var obj = JSON.parse(Result);
+						terulet = [];
+						dolgozok = [];
+						kolcsonzott = [];
+						belepo = [];
+						igeny = [];
+						for (i in obj) {
+							terulet.push(obj[i].terulet)
+							console.log(obj[i].terulet)
+							dolgozok.push(parseInt(obj[i].sajat))
+							kolcsonzott.push(parseInt(obj[i].kolcson))
+							belepo.push(parseInt(obj[i].belepo))
+							igeny.push(parseInt(obj[i].igeny))
 						}
-						]
-					},
-					options: {
-						scales: {
-							yAxes: [{
-								ticks: {
-									beginAtZero: true
+
+						var ctx = document.getElementById("myChart").getContext('2d');
+						var myChart = new Chart(ctx, {
+							type: 'bar',
+							data: {
+								labels: terulet,
+								datasets: [{
+										label: 'Dolgozo',
+										data: dolgozok,
+										backgroundColor: [
+											'rgba(255, 99, 132, 0.2)'
+										],
+										borderColor: [
+											'rgba(255, 99, 132, 1)'
+										],
+										borderWidth: 0.5
+									},
+									{
+										label: 'Kölcsönzött',
+										data: kolcsonzott,
+										backgroundColor: [
+											'rgba(255, 99, 132, 0.2)'
+										],
+										borderColor: [
+											'rgba(255, 99, 132, 1)'
+										],
+										borderWidth: 0.5
+									},
+									{
+										label: 'Belépő',
+										data: belepo,
+										backgroundColor: [
+											'rgba(255, 99, 132, 0.2)'
+										],
+										borderColor: [
+											'rgba(255, 99, 132, 1)'
+										],
+										borderWidth: 0.5
+									},
+									{
+										label: 'Igény',
+										data: igeny,
+										backgroundColor: [
+											'rgba(255, 99, 132, 0.2)'
+										],
+										borderColor: [
+											'rgba(255, 99, 132, 1)'
+										],
+										borderWidth: 0.5
+									},
+								]
+							},
+							options: {
+								scales: {
+									yAxes: [{
+										ticks: {
+											beginAtZero: true
+										}
+									}]
 								}
-							}]
-						}
+							}
+						});
+					},
+					error: function(errorData) {
+						console.log(errorData)
 					}
 				});
 			}

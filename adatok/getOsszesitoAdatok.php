@@ -13,7 +13,7 @@
             $qry1 = $conn->query($allapotsql);
             $result1 = $qry1->fetch_row();
             // allapot 2
-            $allapotsql2 = "SELECT COUNT(d_id) as db FROM dolgozok WHERE a_id = 4 AND t_id = ".$ter["t_id"]." OR t_id = ".$ter["t_id"];
+            $allapotsql2 = "SELECT COUNT(d_id) as db FROM dolgozok WHERE a_id = 4 AND t_id = ".$ter["t_id"]."";
             $qry2 = $conn->query($allapotsql2);
             $result2 = $qry2->fetch_row();
 
@@ -27,8 +27,10 @@
             $igeny = "SELECT SUM(i_db) FROM igeny WHERE t_id = ".$ter["t_id"];
             $qry4 = $conn->query($igeny);
             $result4 = $qry4->fetch_row();
+
+            $newIgeny = (int)$result4[0] - (int)$result3[0] - (int)$result2[0] - (int)$result1[0];
             //res kiiras
-            $RES[] = array('terulet' => $ter["t_elnevezes"], 'sajat' => (int)$result1[0], 'kolcson' => (int)$result2[0], 'belepo' => $result3[0], 'igeny' => $result4[0]);
+            $RES[] = array('terulet' => $ter["t_elnevezes"], 'sajat' => (int)$result1[0], 'kolcson' => (int)$result2[0], 'belepo' => $result3[0], 'igeny' => $newIgeny);
         }
         echo json_encode($RES);
         $conn->close();
