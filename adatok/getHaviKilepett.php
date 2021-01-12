@@ -5,8 +5,8 @@
     }else{
         include '../connect.php';
         $RES = array();
-        $year = $conn->real_escape_string($_GET["year"]);
-        $month = $conn->real_escape_string($_GET["month"]);
+        $year = $conn->real_escape_string($_POST["year"]);
+        $month = $conn->real_escape_string($_POST["month"]);
         $sqlGetTerulet = "SELECT t_id, t_elnevezes FROM terulet";
         $teruletQry = $conn->query($sqlGetTerulet); 
         while($row = $teruletQry->fetch_assoc()){

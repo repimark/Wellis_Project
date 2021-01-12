@@ -108,8 +108,8 @@ if (!isset($_SESSION["u_id"])) {
                     dataType: "JSON",
                     success: function(data) {
                         console.log(data)
-                        var terulet = [];
-                        var adat = [];
+                        var terulet = []
+                        var adat = []
                         for (i in data) {
                             terulet.push(data[i].terulet)
                             adat.push(data[i].db)
