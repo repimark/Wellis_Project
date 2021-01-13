@@ -138,11 +138,10 @@ if (!isset($_SESSION["u_id"])) {
 								</td>
 								<?php
 								while ($rowIgeny = $igenyResult->fetch_assoc()) {
-									if ($rowIgeny["i_sajat"] == '0') {
 										$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 1 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 3 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 4 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 5 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 6 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 7 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 8";
 										$sajatDolgozo = $conn->query($darabSQL);
 										while ($rowDB = $sajatDolgozo->fetch_assoc()) {
-											$veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"];
+											$veglegesSajat = ((int)$rowIgeny["i_db"] - (int)$rowDB["db"]);
 										}
 
 								?>
@@ -154,21 +153,7 @@ if (!isset($_SESSION["u_id"])) {
 										</td>
 
 									<?php
-									} else {
-										$darabSQL_2 = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE a_id = 4 AND p_id = " . $rowPozicio["p_id"];
-										$kolcsonzottDolgozo = $conn->query($darabSQL_2);
-										while ($rowDB_2 = $kolcsonzottDolgozo->fetch_assoc()) {
-											$veglegesKolcson = (int)$rowIgeny["i_db"] - (int)$rowDB_2["db"];
-										}
-									?>
-										<td colspan="2" class="bg-dark">
-											<p style="margin:0">Kölcsönzött igény: <?php echo $veglegesKolcson;
-																					?></p>
-											<button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
-											<button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">-</button>
-										</td>
-								<?php
-									}
+									
 								}
 								?>
 
@@ -190,14 +175,14 @@ if (!isset($_SESSION["u_id"])) {
 							$dolgozoResult = $conn->query($dolgozoSQL);
 							if ($dolgozoResult->num_rows > 0) {
 								while ($rowDolgozo = $dolgozoResult->fetch_assoc()) {
-									if ($rowDolgozo["a_id"] == 1) {
+									if ($rowDolgozo["a_id"] == 1 || $rowDolgozo["a_id"] == 7 || $rowDolgozo["a_id"] == 8) {
 							?>
 										<tr class="" style="">
 											<td class="colorScheme" style="background-color:#33CC00!important;width: 1px!important;border:1px solid #343a40;"></td>
 											<td class="" style=""><?php echo $rowDolgozo["nev"];  ?></td>
 											<td class="dolgozo"><?php echo $rowDolgozo["allapot"]; ?></td>
 											<td colspan="" class=" text-right">
-												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>">
+												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
 													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
 														<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -232,7 +217,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td class="belepo"><?php echo $rowDolgozo["allapot"]; ?></td>
 
 											<td class="text-right">
-												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>">
+												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
 													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
 														<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -265,7 +250,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td class="tartosbeteg"><?php echo $rowDolgozo["allapot"]; ?></td>
 
 											<td class="text-right">
-												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>">
+												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
 													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 														<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 														<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -295,7 +280,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td><?php echo $rowDolgozo["nev"];  ?></td>
 											<td class="kolcsonzott"><?php echo $rowDolgozo["allapot"]; ?></td>
 											<td class="text-right">
-												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>">
+												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
 													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 														<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 														<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -326,7 +311,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td><?php echo $rowDolgozo["nev"];  ?><br>(<?php echo $rowDolgozo["belepes"]; ?>)</td>
 											<td class="belepo"><?php echo $rowDolgozo["allapot"]; ?></td>
 											<td class="text-right">
-												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>">
+												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>"> 
 													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 														<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 														<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -400,6 +385,10 @@ if (!isset($_SESSION["u_id"])) {
 								<div class="form-group">
 									<label for="#edit_allapot_select" class="col-form-label">Állapot</label><br>
 									<select id="edit_allapot_select" class="form-control"></select>
+								</div>
+								<div class="form-group">
+									<label for="#edit_belepes" class="col-form-label">Belépési dátum</label><br>
+									<input id="edit_belepes" class="form-control"/>
 								</div>
 							</form>
 						</div>
@@ -977,9 +966,11 @@ if (!isset($_SESSION["u_id"])) {
 				console.log(allapot_id)
 				var dolgozo_id = button.data('id')
 				console.log(dolgozo_id)
+				var belepes = button.data('belepes')
 				var modal = $(this)
 				modal.find('#Modaltitle').text(nev + " szerkesztése")
 				modal.find('#edit_dolgozo-nev').val(nev)
+				modal.find('#edit_belepes').val(belepes)
 
 				//Terület lekérdezése
 				$.ajax({
@@ -1063,6 +1054,7 @@ if (!isset($_SESSION["u_id"])) {
 				var pozicio_id = $("#edit_pozicio_select option:selected").data('id')
 				var allapot_id = $("#edit_allapot_select option:selected").data('id')
 				var dolgozo_nev = $("#edit_dolgozo-nev").val()
+				var belepes_ido = $('#edit_belepes').val()
 				console.log(dolgozo_nev)
 				$.ajax({
 					url: "updateUser.php",
@@ -1073,7 +1065,8 @@ if (!isset($_SESSION["u_id"])) {
 						p_id: pozicio_id,
 						t_id: terulet_id,
 						a_id: allapot_id,
-						d_nev: dolgozo_nev
+						d_nev: dolgozo_nev,
+						belepes: belepes_ido
 					},
 					success: function(updateDataResult) {
 						console.log(updateDataResult);

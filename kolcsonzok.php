@@ -28,37 +28,30 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <h2 class="text-center brand"> Meddig maradtak az emberek </h2>
-            <div class="canvas-div w-75"><canvas id="canv1" width="50%" class="bg-light center"></canvas></div>
+            <div class="canvas-div "><canvas id="canv1" width="50%" class="bg-light center"></canvas></div>
         </div>
         <script>
-            var piAlatt = 0
-            var piFelett = 0
-            var evFelett = 0
-            var labS = ["Próbaidő alatt", "Próbaidő után", "Több mint 1 év után"]
+            var adat = [];
+            var cim = ["Munkaland","Melicom", "Trankwalder", "Workforce", "ismeretlen"];
             $('.container').ready(function(){
-                loadMaradt()
+                loadKolcsonzok()
+                
             })
-            var loadMaradt = function(){
+            var loadKolcsonzok = function(){
                 $.ajax({
-                    url: 'adatok/getMaradasiIdo.php',
+                    url: 'adatok/getKolcsonzottek.php',
                     type: 'POST',
                     data: {},
                     success: function(Result){
                         console.log(Result)
                         var obj = JSON.parse(Result)
                         var lines = [];
-                        for ( i in obj){
-                            if(obj[i].db > 365){
-                                evFelett ++;
-                                //console.log(evFelett)
-                            }else if(obj[i].db > 90){
-                            //console.log(obj[i].db + ' nap')
-                                piFelett ++;
-                                //console.log(evAlatt)
-                            }else{
-                                piAlatt ++;
-                            }
-                        }
+                        adat.push(obj[0].ml)
+                        adat.push(obj[0].meli)
+                        adat.push(obj[0].trank)
+                        adat.push(obj[0].workf)
+                        adat.push(obj[0].ism)
+
                         rajz()
                     },
                     error: function(errorData){
@@ -67,17 +60,16 @@ if (!isset($_SESSION["u_id"])) {
                 });
             }
             var rajz = function(){
-                console.log(piAlatt)
-                console.log(evFelett)
+                console.log(adat)
                 var chartdata = {
-                            labels: labS,
+                            labels: cim,
                             datasets: [{
-                                data: [parseInt(piAlatt),parseInt(piFelett), parseInt(evFelett)],
-                                label: 'Ki meddig maradt',
-                                backgroundColor: ['rgba(255, 118, 117,1.0)','rgba(0, 184, 148,1.0)'],
-                                borderColor: ['rgba(255, 118, 117,1.0)','rgba(0,184,148,1.0)'],
-                                hoverBackgroundColor: 'rgba(200,200,200,1.0)',
-                                hoverBorderColor: 'rgba(200,200,200,1.0)',
+                                data: adat,
+                                label: 'Kölcsönző cégek megoszlása',
+                                backgroundColor: ['rgba(192, 57, 43,1.0)','rgba(155, 89, 182,1.0)', 'rgba(26, 188, 156,1.0)', 'rgba(230, 126, 34,1.0)', 'rgba(127, 140, 141,1.0)'],
+                                borderColor: ['rgba(192, 57, 43,1.0)','rgba(155, 89, 182,1.0)', 'rgba(26, 188, 156,1.0)', 'rgba(230, 126, 34,1.0)', 'rgba(127, 140, 141,1.0)'],
+                                hoverBackgroundColor: 'rgba(52, 73, 94,1.0)',
+                                hoverBorderColor: 'rgba(236, 240, 241,1.0)',
                                 borderWidth: 1
                             }],
                             options: {
@@ -91,7 +83,7 @@ if (!isset($_SESSION["u_id"])) {
                         };
                         var ctx = document.getElementById('canv1').getContext('2d');
                         var barGraph = new Chart(ctx, {
-                            type: 'bar',
+                            type: 'doughnut',
                             data: chartdata
                         });
             }

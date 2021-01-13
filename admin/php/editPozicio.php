@@ -6,6 +6,7 @@
 		$pid = $_POST["p_id"];
 		$elnevezes = $_POST["p_elnevezes"];
 		include '../../connect.php';
+		
 		$movePozicio = "UPDATE `pozicio` SET `p_elnevezes` = '".$elnevezes."' WHERE `pozicio`.`p_id` = '".$pid."'";
 		if ($conn->query($movePozicio)) {
 			echo 'Sikeres';

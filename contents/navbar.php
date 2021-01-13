@@ -27,9 +27,42 @@
           <a class="dropdown-item" href="meddigMaradt.php">Mikor jött / Mikor ment ?</a>
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
           <a class="dropdown-item" href="haviDolgozok.php">A hónapban be és kilépett dolgozók</a>
+          <a class="dropdown-item" href="kolcsonzok.php">Kölcsönzőcégek megoszlása</a>
         </div>
-
+      </li>
     </ul>
+    <input id="search" class="rounded mr-sm-2" width="100" aria-label="Keresés" type="search" placeholder="Keresés"/>
     <span class="navbar-text p-1"><?php echo $_SESSION["u_name"]; ?> <a href="php/logout.php">Kijelentkezés</a></span>
   </div>
 </nav>
+<div class="alert alert-dark" id="alert" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div id="valasz"></div>
+</div>
+<script>
+  $(document).ready(function(){
+    $('#alert').hide()
+  });
+  $('#search').change(function(){
+    var nev = $('#search').val()
+    $.ajax({
+      url: '../php/search.php',
+      type: 'POST',
+      data: {
+        nev: nev
+      },
+      success: function(Result){
+        //alert(Result)
+        $('#valasz').html(Result)
+        $('#alert').show()
+        
+        
+      },
+      error: function(errorData){
+        alert(errorData)
+      }
+    });
+  });
+</script>
