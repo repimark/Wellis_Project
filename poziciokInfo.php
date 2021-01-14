@@ -522,6 +522,7 @@ if (!isset($_SESSION["u_id"])) {
 					$('.btn').attr('disabled', true)
 					$('#addDolgozo').attr('disabled', true)
 					$('#export').attr('disabled', false)
+					$('.addMegjegyzes').attr('disabled', false)
 				}
 			}
 			var sorokKezelese = function(ter, sor) {
