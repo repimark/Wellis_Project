@@ -15,6 +15,7 @@ if (!isset($_SESSION['u_id'])) {
             $kolcsonzottDB;
             $kolcsonBelepoDB;
             $kolcsonEsDolgozoDB;
+            $osszesDolgozoDB;
             $belepoDB;
             $mindenBelepoDB;
             $igenyekDB;
@@ -44,6 +45,7 @@ if (!isset($_SESSION['u_id'])) {
                 $kolcsonEsDolgozoDB = $kolcsonEsDolgozoQry->fetch_row();
                 //echo " Összes létszám : " . $kolcsonEsDolgozoDB[0] . " , ";
                 //array_push($output, 'kolcsonzott-dolgozo:'.$kolcsonzottEsDolgozoDB[0]);
+                $osszesDolgozoDB = (int)$kolcsonzottDB[0] + (int)$dolgozokDB[0];
             }
             //$kolcsonEsDolgozoDB = (int)$dolgozokDB[0] + (int)$kolcsonzott[0];
 
@@ -81,7 +83,7 @@ if (!isset($_SESSION['u_id'])) {
                 $igenyEredmeny = ((int)$igenyekDB[0] - (int)$mindenkiDB[0]);
             }
             
-            $output[] = array('nev' => $rowTerulet["t_elnevezes"] ,'dolgozo'=>$dolgozokDB[0], 'kolcsonzott' => $kolcsonzottDB[0], 'dolgozo_kolcson' => $kolcsonEsDolgozoDB[0], 'belepo' => $belepoDB[0], 'kolcson_belepo' => $kolcsonBelepoDB[0], 'minden_belepo' => $mindenBelepoDB[0], 'igeny' => ((int)$igenyekDB[0] - (int)$mindenkiDB[0]));
+            $output[] = array('nev' => $rowTerulet["t_elnevezes"] ,'dolgozo'=>$dolgozokDB[0], 'kolcsonzott' => $kolcsonzottDB[0], 'dolgozo_kolcson' => $osszesDolgozoDB, 'belepo' => $belepoDB[0], 'kolcson_belepo' => $kolcsonBelepoDB[0], 'minden_belepo' => $mindenBelepoDB[0], 'igeny' => ((int)$igenyekDB[0] - (int)$mindenkiDB[0]));
             
         }
         //array_push($output, ']');
