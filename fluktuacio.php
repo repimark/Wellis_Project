@@ -41,19 +41,22 @@ if (!isset($_SESSION["u_id"])) {
             var terulet = []
             var adatok = []
             var getDolgozok = function(obj) {
+                var date = new Date()
+                var year = date.getFullYear()
+                var month = date.getMonth() + 1
                 $.ajax({
                     url: 'php/getFluktuacio.php',
                     type: 'GET',
                     cache: false,
                     data: {
-                        ev: 2020,
-                        honap: 12
+                        ev: year,
+                        honap: month
                     },
                     success: function(res) {
                         var objJSON = JSON.parse(res);
                         for (i in objJSON) {
                             terulet.push(objJSON[i].terulet)
-                            adatok.push(parseInt(objJSON[i].fluktu))
+                            adatok.push(parseFloat(objJSON[i].fluktu))
                         }
                         rajz()
                     }
