@@ -24,7 +24,13 @@ if (!isset($_SESSION["u_id"])) {
 
     <body>
         <?php
-        include("contents/navbar.php");
+        //Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
+        if ($_SESSION["jog"] == "1") {
+            require('contents/navbar.php');
+        } else if ($_SESSION["jog"] == "2") {
+            require('contents/userNavbar.php');
+        }
+        require('connect.php');
         ?>
         <div class="container">
             <h2 class="text-center brand"> Meddig maradtak az emberek </h2>
@@ -32,17 +38,17 @@ if (!isset($_SESSION["u_id"])) {
         </div>
         <script>
             var adat = [];
-            var cim = ["Munkaland","Melicom", "Trankwalder", "Workforce", "ismeretlen"];
-            $('.container').ready(function(){
+            var cim = ["Munkaland", "Melicom", "Trankwalder", "Workforce", "ismeretlen"];
+            $('.container').ready(function() {
                 loadKolcsonzok()
-                
+
             })
-            var loadKolcsonzok = function(){
+            var loadKolcsonzok = function() {
                 $.ajax({
                     url: 'adatok/getKolcsonzottek.php',
                     type: 'POST',
                     data: {},
-                    success: function(Result){
+                    success: function(Result) {
                         console.log(Result)
                         var obj = JSON.parse(Result)
                         var lines = [];
@@ -54,40 +60,41 @@ if (!isset($_SESSION["u_id"])) {
 
                         rajz()
                     },
-                    error: function(errorData){
+                    error: function(errorData) {
                         console.log(errorData)
                     }
                 });
             }
-            var rajz = function(){
+            var rajz = function() {
                 console.log(adat)
                 var chartdata = {
-                            labels: cim,
-                            datasets: [{
-                                data: adat,
-                                label: 'Kölcsönző cégek megoszlása',
-                                backgroundColor: ['rgba(192, 57, 43,1.0)','rgba(155, 89, 182,1.0)', 'rgba(26, 188, 156,1.0)', 'rgba(230, 126, 34,1.0)', 'rgba(127, 140, 141,1.0)'],
-                                borderColor: ['rgba(192, 57, 43,1.0)','rgba(155, 89, 182,1.0)', 'rgba(26, 188, 156,1.0)', 'rgba(230, 126, 34,1.0)', 'rgba(127, 140, 141,1.0)'],
-                                hoverBackgroundColor: 'rgba(52, 73, 94,1.0)',
-                                hoverBorderColor: 'rgba(236, 240, 241,1.0)',
-                                borderWidth: 1
-                            }],
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                legend: {
-                                    display: false,
-                                    position: 'top'
-                                }
-                            }
-                        };
-                        var ctx = document.getElementById('canv1').getContext('2d');
-                        var barGraph = new Chart(ctx, {
-                            type: 'doughnut',
-                            data: chartdata
-                        });
+                    labels: cim,
+                    datasets: [{
+                        data: adat,
+                        label: 'Kölcsönző cégek megoszlása',
+                        backgroundColor: ['rgba(192, 57, 43,1.0)', 'rgba(155, 89, 182,1.0)', 'rgba(26, 188, 156,1.0)', 'rgba(230, 126, 34,1.0)', 'rgba(127, 140, 141,1.0)'],
+                        borderColor: ['rgba(192, 57, 43,1.0)', 'rgba(155, 89, 182,1.0)', 'rgba(26, 188, 156,1.0)', 'rgba(230, 126, 34,1.0)', 'rgba(127, 140, 141,1.0)'],
+                        hoverBackgroundColor: 'rgba(52, 73, 94,1.0)',
+                        hoverBorderColor: 'rgba(236, 240, 241,1.0)',
+                        borderWidth: 1
+                    }],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: false,
+                            position: 'top'
+                        }
+                    }
+                };
+                var ctx = document.getElementById('canv1').getContext('2d');
+                var barGraph = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: chartdata
+                });
             }
         </script>
     </body>
+
     </html>
 <?php } ?>

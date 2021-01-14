@@ -23,7 +23,13 @@ if (!isset($_SESSION["u_id"])) {
 
     <body>
         <?php
-        include("contents/navbar.php");
+        //Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
+        if ($_SESSION["jog"] == "1") {
+            require('contents/navbar.php');
+        } else if ($_SESSION["jog"] == "2") {
+            require('contents/userNavbar.php');
+        }
+        require('connect.php');
         ?>
         <div class="container">
             <div id="kilepesiadatok">
@@ -51,7 +57,7 @@ if (!isset($_SESSION["u_id"])) {
         <script>
             $('#ev').change(function() {
                 var year = $('#ev :selected').val()
-                
+
                 load_monthwise_data(year, 'évi havi kilépők számának kimutatása')
                 getAtlag()
             });
@@ -105,18 +111,20 @@ if (!isset($_SESSION["u_id"])) {
                 var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
             }
-            var getAtlag = function(){
+            var getAtlag = function() {
                 var evIn = $('#ev').val()
                 $.ajax({
                     url: 'adatok/getAtlagosanKilepett.php',
                     type: 'POST',
-                    data: {year: evIn},
-                    success: function(Result){
+                    data: {
+                        year: evIn
+                    },
+                    success: function(Result) {
                         console.log(Result)
                         var obj = JSON.parse(Result)
                         var lines = [];
                         var osszKilepett = parseInt(0)
-                        for ( var i = 0; i <= obj.length - 1 ; i++){
+                        for (var i = 0; i <= obj.length - 1; i++) {
                             osszKilepett += parseInt(obj[i].adat)
                         }
                         var atlag = osszKilepett / 12
@@ -125,7 +133,6 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 });
             }
-
         </script>
     </body>
 

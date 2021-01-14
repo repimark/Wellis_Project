@@ -26,7 +26,13 @@ if (!isset($_SESSION["u_id"])) {
     <body>
 
         <?php
-        include 'contents/navbar.php';
+        //Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
+        if ($_SESSION["jog"] == "1") {
+            require('contents/navbar.php');
+        } else if ($_SESSION["jog"] == "2") {
+            require('contents/userNavbar.php');
+        }
+        require('connect.php');
         ?>
         <div class="container">
             <h2 class="text-center">Be- és Kilépett Dolgozók</h2>
@@ -37,15 +43,15 @@ if (!isset($_SESSION["u_id"])) {
             </div>
         </div>
         <script type="text/javascript">
-        var teruletLabel = [];
-        var belepett = [];
-        var kilepett = [];
+            var teruletLabel = [];
+            var belepett = [];
+            var kilepett = [];
             $('.container').ready(function() {
                 var datum = new Date()
                 var y = datum.getFullYear()
                 var m = datum.getMonth() + 1
-                loadDolgozok(y,m)
-                loadKilepett(y,m)
+                loadDolgozok(y, m)
+                loadKilepett(y, m)
                 rajz()
             });
             var loadDolgozok = function(year, month) {
@@ -78,8 +84,7 @@ if (!isset($_SESSION["u_id"])) {
                                 hoverBorderColor: 'rgba(200,200,200,1)',
                                 borderWidth: 1,
                                 data: adat
-                            },
-                            ]
+                            }, ]
                         };
                         // var ctx = document.getElementById('canv1').getContext('2d');
                         // var barGraph = new Chart(ctx, {
@@ -154,42 +159,43 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 });
             }
-            var rajz = function(){
-                
+            var rajz = function() {
+
                 var chartdata = {
-                            labels: teruletLabel,
-                            datasets: [{
-                                data: kilepett,
-                                label: 'Kilépett Dolgozók',
-                                backgroundColor: 'rgba(255, 118, 117,1.0)',
-                                borderColor: 'rgba(255, 118, 117,1.0)',
-                                hoverBackgroundColor: 'rgba(200,200,200,1.0)',
-                                hoverBorderColor: 'rgba(200,200,200,1.0)',
-                                borderWidth: 1
-                            },
-                            {
-                                data: belepett,
-                                label: 'Belépett Dolgozók',
-                                backgroundColor: 'rgba(0, 184, 148,1.0)',
-                                borderColor: 'rgba(0,184,148,1.0)',
-                                hoverBackgroundColor: 'rgba(0,184,148,1.0)',
-                                hoverBorderColor: 'rgba(0,184,148,1.0)',
-                                borderWidth: 1
-                            }],
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                legend: {
-                                    display: false,
-                                    position: 'top'
-                                }
-                            }
-                        };
-                        var ctx = document.getElementById('canv3').getContext('2d');
-                        var barGraph = new Chart(ctx, {
-                            type: 'bar',
-                            data: chartdata
-                        });
+                    labels: teruletLabel,
+                    datasets: [{
+                            data: kilepett,
+                            label: 'Kilépett Dolgozók',
+                            backgroundColor: 'rgba(255, 118, 117,1.0)',
+                            borderColor: 'rgba(255, 118, 117,1.0)',
+                            hoverBackgroundColor: 'rgba(200,200,200,1.0)',
+                            hoverBorderColor: 'rgba(200,200,200,1.0)',
+                            borderWidth: 1
+                        },
+                        {
+                            data: belepett,
+                            label: 'Belépett Dolgozók',
+                            backgroundColor: 'rgba(0, 184, 148,1.0)',
+                            borderColor: 'rgba(0,184,148,1.0)',
+                            hoverBackgroundColor: 'rgba(0,184,148,1.0)',
+                            hoverBorderColor: 'rgba(0,184,148,1.0)',
+                            borderWidth: 1
+                        }
+                    ],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: false,
+                            position: 'top'
+                        }
+                    }
+                };
+                var ctx = document.getElementById('canv3').getContext('2d');
+                var barGraph = new Chart(ctx, {
+                    type: 'bar',
+                    data: chartdata
+                });
             }
         </script>
     </body>

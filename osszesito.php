@@ -22,13 +22,19 @@ if (!isset($_SESSION["u_id"])) {
 
 	<body>
 		<?php
-		include("contents/navbar.php");
+		//Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
+		if ($_SESSION["jog"] == "1") {
+			require('contents/navbar.php');
+		} else if ($_SESSION["jog"] == "2") {
+			require('contents/userNavbar.php');
+		}
+		require('connect.php');
 		?>
 		<div class="container">
 			<h1 class="text-center p-5">Összesítő oldal </h1>
 			<div id="osszesito"></div>
 			<div class="charts w-75 bg-light">
-				<canvas id="myChart" ></canvas>
+				<canvas id="myChart"></canvas>
 			</div>
 		</div>
 		<script>

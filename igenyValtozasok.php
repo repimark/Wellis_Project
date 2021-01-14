@@ -24,7 +24,13 @@ if (!isset($_SESSION["u_id"])) {
 
     <body>
         <?php
-        include("contents/navbar.php");
+        //Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
+        if ($_SESSION["jog"] == "1") {
+            require('contents/navbar.php');
+        } else if ($_SESSION["jog"] == "2") {
+            require('contents/userNavbar.php');
+        }
+        require('connect.php');
         ?>
         <div class="container">
             <h2 class="text-center brand"> Igény változások </h2>
@@ -36,7 +42,7 @@ if (!isset($_SESSION["u_id"])) {
             var minusLabel = [];
             var plus = [];
             var plusLabel = [];
-            $(document).ready(function(){
+            $(document).ready(function() {
                 var today = new Date()
                 var year = today.getFullYear();
                 var month = today.getMonth() + 1;
@@ -44,7 +50,7 @@ if (!isset($_SESSION["u_id"])) {
                 rajz(minusLabel, minus, 'canv1', '-')
                 rajz(plusLabel, plus, 'canv2', '+')
             });
-            var getValtozasAHonapban = function(year,month){
+            var getValtozasAHonapban = function(year, month) {
                 $.ajax({
                     url: 'adatok/getIgenyValtozas.php',
                     type: 'GET',
@@ -52,57 +58,57 @@ if (!isset($_SESSION["u_id"])) {
                         year: year,
                         month: month
                     },
-                    success: function(Data){
+                    success: function(Data) {
                         console.log(Data)
                         var obj = JSON.parse(Data);
-                        for (i in obj){
+                        for (i in obj) {
                             //console.log(obj[i].muvelet)
-                            
-                            if(obj[i].muvelet == "-" ){
+
+                            if (obj[i].muvelet == "-") {
                                 //console.log(obj[i].muv)
                                 minus.push(obj[i].db)
                                 minusLabel.push(obj[i].pozi)
-                            }else{
+                            } else {
                                 console.log(obj[i].muvelet)
                                 plus.push(obj[i].db)
                                 plusLabel.push(obj[i].pozi)
                             }
                         }
                     },
-                    error: function(errorData){
+                    error: function(errorData) {
                         console.log(errorData)
                     }
                 });
             }
-            var rajz = function(labels, datas, dest, muv){
+            var rajz = function(labels, datas, dest, muv) {
                 var chartdata = {
-                            labels: labels,
-                            datasets: [{
-                                data: datas,
-                                label: 'Igényváltozás ' + muv,
-                                backgroundColor: 'rgba(255, 118, 117,1.0)',
-                                borderColor: 'rgba(255, 118, 117,1.0)',
-                                hoverBackgroundColor: 'rgba(200,200,200,1.0)',
-                                hoverBorderColor: 'rgba(200,200,200,1.0)',
-                                borderWidth: 1
-                            }],
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: true,
-                                legend: {
-                                    display: false,
-                                    position: 'top'
-                                }
-                            }
-                        };
-                        var ctx = document.getElementById(dest);//.getContext('2d');
-                        var barGraph = new Chart(ctx, {
-                            type: 'bar',
-                            data: chartdata
-                        });
+                    labels: labels,
+                    datasets: [{
+                        data: datas,
+                        label: 'Igényváltozás ' + muv,
+                        backgroundColor: 'rgba(255, 118, 117,1.0)',
+                        borderColor: 'rgba(255, 118, 117,1.0)',
+                        hoverBackgroundColor: 'rgba(200,200,200,1.0)',
+                        hoverBorderColor: 'rgba(200,200,200,1.0)',
+                        borderWidth: 1
+                    }],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        legend: {
+                            display: false,
+                            position: 'top'
+                        }
+                    }
+                };
+                var ctx = document.getElementById(dest); //.getContext('2d');
+                var barGraph = new Chart(ctx, {
+                    type: 'bar',
+                    data: chartdata
+                });
             }
-            
         </script>
     </body>
+
     </html>
 <?php } ?>

@@ -103,9 +103,13 @@ if (!isset($_SESSION["u_id"])) {
 
 	<body>
 		<?php
-		include 'contents/navbar.php';
-		include 'connect.php';
-
+		//Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
+		if ($_SESSION["jog"] == "1") {
+			require('contents/navbar.php');
+		} else if ($_SESSION["jog"] == "2") {
+			require('contents/userNavbar.php');
+		}
+		require('connect.php');
 		?>
 		<div class="container p-5">
 			<?php $t_id = $conn->escape_string($_GET["id"]); ?>
@@ -138,22 +142,22 @@ if (!isset($_SESSION["u_id"])) {
 								</td>
 								<?php
 								while ($rowIgeny = $igenyResult->fetch_assoc()) {
-										 $darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 1 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 3 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 4 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 5 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 6 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 7 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 8";
-										$sajatDolgozo = $conn->query($darabSQL);
-										while ($rowDB = $sajatDolgozo->fetch_assoc()) {
-											$veglegesSajat = ((int)$rowIgeny["i_db"] - (int)$rowDB["db"]);
-										}
+									$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 1 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 3 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 4 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 5 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 6 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 7 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 8";
+									$sajatDolgozo = $conn->query($darabSQL);
+									while ($rowDB = $sajatDolgozo->fetch_assoc()) {
+										$veglegesSajat = ((int)$rowIgeny["i_db"] - (int)$rowDB["db"]);
+									}
 
 								?>
 
-										<td colspan="1" class="bg-dark">
-											<p style="margin:0">Saját igény: <?php echo $veglegesSajat; ?></p>
-											<button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
-											<button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">-</button>
-										</td>
+									<td colspan="1" class="bg-dark">
+										<p style="margin:0">Saját igény: <?php echo $veglegesSajat; ?></p>
+										<button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
+										<button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">-</button>
+									</td>
 
-									<?php
-									
+								<?php
+
 								}
 								?>
 
@@ -311,7 +315,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td><?php echo $rowDolgozo["nev"];  ?><br>(<?php echo $rowDolgozo["belepes"]; ?>)</td>
 											<td class="belepo"><?php echo $rowDolgozo["allapot"]; ?></td>
 											<td class="text-right">
-												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>"> 
+												<button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
 													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 														<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 														<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -388,7 +392,7 @@ if (!isset($_SESSION["u_id"])) {
 								</div>
 								<div class="form-group">
 									<label for="#edit_belepes" class="col-form-label">Belépési dátum</label><br>
-									<input id="edit_belepes" class="form-control"/>
+									<input id="edit_belepes" class="form-control" />
 								</div>
 							</form>
 						</div>
@@ -564,14 +568,14 @@ if (!isset($_SESSION["u_id"])) {
 
 			$('.addMegjegyzes').click(function() {
 				var id = $(this).attr('id');
-				var userName = '<?php echo $_SESSION["u_name"];?>';
-				var fName = userName.slice(0,1).toUpperCase()
-  				var secName = userName.split('.');
-  				var secsec = secName[1];
-  				var secName = secsec.slice(0,1).toUpperCase();
+				var userName = '<?php echo $_SESSION["u_name"]; ?>';
+				var fName = userName.slice(0, 1).toUpperCase()
+				var secName = userName.split('.');
+				var secsec = secName[1];
+				var secName = secsec.slice(0, 1).toUpperCase();
 				userName = fName + '' + secName
 				var szoveg = $("#" + id).val()
-				szoveg = szoveg + ' -'+userName
+				szoveg = szoveg + ' -' + userName
 				//alert(id+' , '+szoveg)
 				$.ajax({
 					url: 'addNote.php',

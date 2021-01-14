@@ -18,9 +18,15 @@ if (!isset($_SESSION["u_id"])) {
   	
 </head>
 <body>
-<?php 
-	include("contents/navbar.php");
- ?>
+<?php
+    //Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
+    if ($_SESSION["jog"] == "1") {
+      require('contents/navbar.php');
+    } else if ($_SESSION["jog"] == "2") {
+      require('contents/userNavbar.php');
+    }
+    require('connect.php');
+    ?>
  <div class="container">
  	<h1 class="text-center">Kilépett dolgozók</h1>
  	<table border=1 class='table table-striped'>
