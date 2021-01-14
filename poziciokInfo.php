@@ -575,7 +575,11 @@ if (!isset($_SESSION["u_id"])) {
 				var secName = secsec.slice(0, 1).toUpperCase();
 				userName = fName + '' + secName
 				var szoveg = $("#" + id).val()
-				szoveg = szoveg + ' -' + userName
+				if(szoveg == '' || szoveg == '-'){
+					
+				}else{
+					szoveg = szoveg + ' -' + userName
+				}
 				//alert(id+' , '+szoveg)
 				$.ajax({
 					url: 'addNote.php',
