@@ -24,7 +24,7 @@ if (!isset($_SESSION['u_id'])) {
             //$output += '"terulet": {';
             
 
-            $dolgozok = "SELECT COUNT(d_id) AS dolgzok FROM dolgozok WHERE a_id = 1 AND t_id = " . $rowTerulet["t_id"] . " OR  a_id = 7 AND t_id = " . $rowTerulet["t_id"] . " OR a_id = 8 AND t_id = " . $rowTerulet["t_id"];
+            $dolgozok = "SELECT COUNT(d_id) AS dolgzok FROM dolgozok WHERE a_id = 1 AND t_id = " . $rowTerulet["t_id"] . " OR a_id = 3 AND t_id = ".$rowTerulet["t_id"]." OR a_id = 7 AND t_id = " . $rowTerulet["t_id"] . "OR a_id = 8 AND t_id = " . $rowTerulet["t_id"];
             if ($dolgozokQry = $conn->query($dolgozok)) {
                 $dolgozokDB = $dolgozokQry->fetch_row();
                 //echo " Dolgozók : " . $dolgozokDB[0] . " , ";
