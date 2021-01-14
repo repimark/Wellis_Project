@@ -564,9 +564,15 @@ if (!isset($_SESSION["u_id"])) {
 
 			$('.addMegjegyzes').click(function() {
 				var id = $(this).attr('id');
-
+				var userName = '<?php echo $_SESSION["u_name"];?>';
+				var fName = userName.slice(0,1).toUpperCase()
+  				var secName = userName.split('.');
+  				var secsec = secName[1];
+  				var secName = secsec.slice(0,1).toUpperCase();
+				userName = fName + '' + secName
 				var szoveg = $("#" + id).val()
-				alert(id+' , '+szoveg)
+				szoveg = szoveg + ' -'+userName
+				//alert(id+' , '+szoveg)
 				$.ajax({
 					url: 'addNote.php',
 					type: 'POST',
@@ -576,8 +582,8 @@ if (!isset($_SESSION["u_id"])) {
 						m_text: szoveg
 					},
 					success: function(NotesResult) {
-						alert(NotesResult)
-						//location.reload()
+						//alert(NotesResult)
+						location.reload()
 					},
 					error: function(error) {
 						console.log(error)
