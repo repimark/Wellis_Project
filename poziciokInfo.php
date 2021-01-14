@@ -520,9 +520,11 @@ if (!isset($_SESSION["u_id"])) {
 				//alert(jogosultsag)
 				if (jogosultsag == '2') {
 					$('.btn').attr('disabled', true)
+					$('.btn-block').attr('disabled', false)
 					$('#addDolgozo').attr('disabled', true)
 					$('#export').attr('disabled', false)
 					$('.addMegjegyzes').attr('disabled', false)
+					//$('.accordion').collapse('toggle')
 				}
 			}
 			var sorokKezelese = function(ter, sor) {
