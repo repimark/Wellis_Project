@@ -28,6 +28,7 @@
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
           <a class="dropdown-item" href="haviDolgozok.php">A hónapban be és kilépett dolgozók</a>
           <a class="dropdown-item" href="kolcsonzok.php">Kölcsönzőcégek megoszlása</a>
+          <a class="dropdown-item" href="fluktuacio.php">Havi Fluktuáció</a>
         </div>
       </li>
     </ul>
