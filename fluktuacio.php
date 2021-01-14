@@ -68,6 +68,7 @@ if (!isset($_SESSION["u_id"])) {
             var rajz = function() {
 
                 var chartdata = {
+                    
                     labels: terulet,
                     datasets: [{
                             data: belepesi,
@@ -89,6 +90,9 @@ if (!isset($_SESSION["u_id"])) {
                         }
                     ],
                     options: {
+                        tooltips: {
+
+                        },
                         responsive: true,
                         maintainAspectRatio: false,
                         legend: {
@@ -100,7 +104,13 @@ if (!isset($_SESSION["u_id"])) {
                 var ctx = document.getElementById('canv').getContext('2d');
                 var barGraph = new Chart(ctx, {
                     type: 'bar',
-                    data: chartdata
+                    data: chartdata,
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Be és Kilépési adatok %-ban'
+                        }
+                    }
                 });
             }
         </script>
