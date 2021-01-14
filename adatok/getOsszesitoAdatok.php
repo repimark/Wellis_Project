@@ -28,7 +28,12 @@
             $qry4 = $conn->query($igeny);
             $result4 = $qry4->fetch_row();
 
-            $newIgeny = (int)$result4[0] - (int)$result3[0] - (int)$result2[0] - (int)$result1[0];
+            //mindenki
+            $mindenki = "SELECT COUNT(d_id) as db FROM dolgozok WHERE t_id = ".$ter["t_id"];
+            $qryMin = $conn->query($mindenki);
+            $resMin = $qryMin->fetch_row();
+
+            $newIgeny = (int)$result4[0] - (int)$resMin[0];
             //res kiiras
             $RES[] = array('terulet' => $ter["t_elnevezes"], 'sajat' => (int)$result1[0], 'kolcson' => (int)$result2[0], 'belepo' => $result3[0], 'igeny' => $newIgeny);
         }
