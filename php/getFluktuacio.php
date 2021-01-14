@@ -21,9 +21,9 @@ if (!isset($_SESSION['u_id'])) {
         $row_2 = $qryBelepo->fetch_row();
         // SZÁMOLÁS 
         $atlagosLetszam = 400;
-        $beEsKi = (float)$row_1[0] + (float)$row_2[0];
-        $szamolas = (float)((int)$beEsKi / (float)$atlagosLetszam) * 100;
-        $dataArray[] = array('terulet' => $row_3["t_elnevezes"], 'fluktu' => (float)$szamolas);
+        $kilepesi = ((float)$row_1[0] / $atlagosLetszam) * 100;
+        $belepesi = (float)((int)$row_2[0] / (float)$atlagosLetszam) * 100;
+        $dataArray[] = array('terulet' => $row_3["t_elnevezes"], 'be' => (float)$belepesi, 'ki' => $kilepesi);
     }
     echo json_encode($dataArray);
 }
