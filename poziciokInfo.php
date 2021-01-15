@@ -576,9 +576,9 @@ if (!isset($_SESSION["u_id"])) {
 				var secName = secsec.slice(0, 1).toUpperCase();
 				userName = fName + '' + secName
 				var szoveg = $("#" + id).val()
-				if(szoveg == '' || szoveg == '-'){
-					
-				}else{
+				if (szoveg == '' || szoveg == '-') {
+
+				} else {
 					szoveg = szoveg + ' -' + userName
 				}
 				//alert(id+' , '+szoveg)
@@ -698,6 +698,7 @@ if (!isset($_SESSION["u_id"])) {
 				modal.find('#delete_button').attr('data-nev', nev)
 				modal.find('#delete_button').attr('data-belepes', b_datum)
 				modal.find('#remove_button').attr('data-id', dolgozo_id)
+				modal.find('#remove_button').attr('data-pozicio', pozicio_id)
 			});
 			$('#delete_button').click(function() {
 				var button = $(this)
@@ -774,23 +775,57 @@ if (!isset($_SESSION["u_id"])) {
 				}
 
 			});
-			$('#remove_button').click(function(){
+			$('#remove_button').click(function() {
 				var button = $(this)
 				var dolgozo_id = button.data('id')
-				$.ajax({
-					url: 'php/belepesVisszavonas.php',
-					type: 'POST',
-					data: {
-						d_id: dolgozo_id
-					},
-					success: function(res){
-						console.log(res)
-						location.reload()
-					},
-					error: function(errorRes){
-						console.log(errorRes)
-					}
-				});
+				var pozicio_id = button.data('pozicio')
+				if ($('#kilepo').is(':checked')) {
+
+					$.ajax({
+						url: 'php/belepesVisszavonas.php',
+						type: 'POST',
+						data: {
+							d_id: dolgozo_id
+						},
+						success: function(res) {
+							console.log(res)
+							location.reload()
+						},
+						error: function(errorRes) {
+							console.log(errorRes)
+						}
+					});
+					$.ajax({
+						url: 'igenyRendezes.php',
+						type: 'POST',
+						cache: false,
+						data: {
+							i_sajat: 0,
+							p_id: pozicio_id
+						},
+						success: function(res) {
+						
+						},
+						error: function(errorRes){
+
+						}
+					});
+				} else {
+					$.ajax({
+						url: 'php/belepesVisszavonas.php',
+						type: 'POST',
+						data: {
+							d_id: dolgozo_id
+						},
+						success: function(res) {
+							console.log(res)
+							location.reload()
+						},
+						error: function(errorRes) {
+							console.log(errorRes)
+						}
+					});
+				}
 			});
 			$('#addDolgozo').click(function() {});
 			$('#addModal').on('show.bs.modal', function(event) {
