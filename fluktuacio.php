@@ -106,7 +106,7 @@ if (!isset($_SESSION["u_id"])) {
                     type: 'bar',
                     data: chartdata,
                     options: {
-                        title: {
+                        title: { 
                             display: true,
                             text: 'Be és Kilépési adatok %-ban'
                         }
