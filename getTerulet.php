@@ -90,7 +90,7 @@ $result = $conn->query($sql);
 								                       	backgroundColor: '#F5F5F5',
 								                        chartArea:{left:0,top:5,width:'100%',height:'90%'},
 								                   		
-								                   		colors: ['#9bdf46','#ad62aa','#FFB300','#d6d2c4']
+								                   		colors: ['#33CC00','#ad62aa','#FFB300','#d6d2c4']
 								                   		};
 
 								        // Instantiate and draw the chart for Sarah's pizza.
