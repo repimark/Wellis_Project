@@ -54,12 +54,12 @@ if (!isset($_SESSION["u_id"])) {
 			}
 
 			.dolgozo {
-				color: #33CC00 !important;
+				color: #9bdf46 !important;
 				/*color:#3aaf85!important;*/
 			}
 
 			.kolcsonzott {
-				color: #CC0000 !important;
+				color: #ad62aa !important;
 				/*color:#b57170!important;*/
 			}
 
@@ -69,7 +69,7 @@ if (!isset($_SESSION["u_id"])) {
 			}
 
 			.tartosbeteg {
-				color: #5F9EA0 !important;
+				color: #66bfbf !important;
 			}
 
 			.btn-secondary {
