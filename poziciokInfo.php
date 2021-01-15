@@ -182,7 +182,7 @@ if (!isset($_SESSION["u_id"])) {
 									if ($rowDolgozo["a_id"] == 1 || $rowDolgozo["a_id"] == 7 || $rowDolgozo["a_id"] == 8) {
 							?>
 										<tr class="" style="">
-											<td class="colorScheme" style="background-color:#33CC00!important;width: 1px!important;border:1px solid #343a40;"></td>
+											<td class="colorScheme" style="background-color:#9bdf46!important;width: 1px!important;border:1px solid #343a40;"></td>
 											<td class="" style=""><?php echo $rowDolgozo["nev"];  ?></td>
 											<td class="dolgozo"><?php echo $rowDolgozo["allapot"]; ?></td>
 											<td colspan="" class=" text-right">
@@ -249,7 +249,7 @@ if (!isset($_SESSION["u_id"])) {
 										</tr>
 									<?php	} elseif ($rowDolgozo["a_id"] == 3) { ?>
 										<tr class="">
-											<td class="colorScheme" style="background-color:#CC0000!important;width: 1px!important;border:1px solid #343a40;"></td>
+											<td class="colorScheme" style="background-color:#66bfbf!important;width: 1px!important;border:1px solid #343a40;"></td>
 											<td><?php echo $rowDolgozo["nev"];  ?></td>
 											<td class="tartosbeteg"><?php echo $rowDolgozo["allapot"]; ?></td>
 
@@ -280,7 +280,7 @@ if (!isset($_SESSION["u_id"])) {
 										</tr>
 									<?php } elseif ($rowDolgozo["a_id"] == 4) { ?>
 										<tr class="">
-											<td class="colorScheme" style="background-color:#CC0000!important;width: 1px!important;border:1px solid #343a40;"></td>
+											<td class="colorScheme" style="background-color:#ad62aa!important;width: 1px!important;border:1px solid #343a40;"></td>
 											<td><?php echo $rowDolgozo["nev"];  ?></td>
 											<td class="kolcsonzott"><?php echo $rowDolgozo["allapot"]; ?></td>
 											<td class="text-right">
@@ -570,10 +570,10 @@ if (!isset($_SESSION["u_id"])) {
 			$('.addMegjegyzes').click(function() {
 				var id = $(this).attr('id');
 				var userName = '<?php echo $_SESSION["u_name"]; ?>';
-				var fName = userName.slice(0, 1).toUpperCase()
+				var fName = userName.slice(0, 1).toUpperCase();
 				var secName = userName.split('.');
 				var secsec = secName[1];
-				var secName = secsec.slice(0, 1).toUpperCase()
+				var secName = secsec.slice(0, 1).toUpperCase();
 				userName = fName + '' + secName
 				var szoveg = $("#" + id).val()
 				if (szoveg == '' || szoveg == '-') {
