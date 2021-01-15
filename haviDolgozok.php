@@ -38,6 +38,7 @@ if (!isset($_SESSION["u_id"])) {
             <h2 class="text-center">Be- és Kilépett Dolgozók</h2>
             <div id="chart_cont">
                 <canvas id="canv3" class="bg-light"></canvas>
+                <br/>
                 <canvas id="canv4" class="bg-light"></canvas>
             </div>
         </div>
