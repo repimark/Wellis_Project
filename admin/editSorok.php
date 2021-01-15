@@ -118,7 +118,7 @@ if (!isset($_SESSION["a_id"])) {
                         s_id: sorId
                     },
                     success: function(Result) {
-                        console.log(Result)
+                        //console.log(Result)
                         location.reload()
                     }
                 });
@@ -138,7 +138,7 @@ if (!isset($_SESSION["a_id"])) {
                         sElnev: elnev
                     },
                     success: function(res) {
-                        //console.log(res)
+                        ////console.log(res)
                         //$('#sorok-table').text(res)
                         location.reload()
                     }

@@ -17,7 +17,7 @@ if (!isset($_SESSION["a_id"])) {
 	</div>
 	<script type="text/javascript">
 		$('.container').ready(function(){
-			console.log('Betöltött');
+			//console.log('Betöltött');
 		});
 		
 	</script>

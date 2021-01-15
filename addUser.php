@@ -95,7 +95,7 @@ if (!isset($_SESSION["u_id"])) {
 		}
 		var updatePozicio = function(){
 			var terulet_id = $("#teruletSelect option:selected").data('id')
-    		console.log(terulet_id)
+    		//console.log(terulet_id)
     		$.ajax({
 				url: "getPozicioForUserAdd.php",
 				type: "POST",
@@ -104,7 +104,7 @@ if (!isset($_SESSION["u_id"])) {
 					t_id: terulet_id
 				},
 				success: function(getPozicioResult){
-					console.log(getPozicioResult);
+					//console.log(getPozicioResult);
 					//alert("update success");
 					$('#pozicioSelect').html(getPozicioResult);
 			}
@@ -162,7 +162,7 @@ if (!isset($_SESSION["u_id"])) {
   					if (addDolgozoResult == 'Sikeres') {
   						alert("Sikerült fellvinni az új dolgozót")
   					}
-  					console.log(addDolgozoResult)
+  					//console.log(addDolgozoResult)
   					location.reload()
   				}
   			});

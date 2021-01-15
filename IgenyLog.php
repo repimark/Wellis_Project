@@ -95,7 +95,7 @@ if (!isset($_SESSION["u_id"])) {
         var datum = $('#date').val()
         var ev = datum.substr(0,4)
         var honap = datum.substr(5,7)
-        console.log(datum+' , '+ev+' , '+honap)
+        //console.log(datum+' , '+ev+' , '+honap)
 
         getLog($('.table'), honap, ev)
     });
@@ -109,16 +109,16 @@ if (!isset($_SESSION["u_id"])) {
                 honap: honap
             },
             success: function(res){
-                //console.log(res)
+                ////console.log(res)
                 var objJSON = JSON.parse(res);
-                console.log(objJSON)
+                //console.log(objJSON)
                     var lines = [];
                     lines += '<thead class="thead-dark"><tr><th>Mennyiség</th><th>Művelet</th><th>Felhasználó</th><th>Hónap</th></tr></thead>'
 					lines += '<tbody class="bg-light">'
   					for (var i = 0; i <= objJSON.length-1; i++) {
                           
                           lines += '<tr><td>'+(objJSON[i].mennyiseg)+'</td><td>'+(objJSON[i].iv_muvelet)+'</td><td>'+(objJSON[i].u_name)+'</td><td>'+(objJSON[i].iv_datum)+'</td></tr>'
-                          console.log(objJSON[i].mennyiseg)
+                          //console.log(objJSON[i].mennyiseg)
                       }
                       lines += '</tbody>'
   					$(obj).html(lines)

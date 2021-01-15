@@ -49,7 +49,7 @@ if (!isset($_SESSION["u_id"])) {
                     type: 'POST',
                     data: {},
                     success: function(Result) {
-                        console.log(Result)
+                        //console.log(Result)
                         var obj = JSON.parse(Result)
                         var lines = [];
                         adat.push(obj[0].ml)
@@ -61,12 +61,12 @@ if (!isset($_SESSION["u_id"])) {
                         rajz()
                     },
                     error: function(errorData) {
-                        console.log(errorData)
+                        //console.log(errorData)
                     }
                 });
             }
             var rajz = function() {
-                console.log(adat)
+                //console.log(adat)
                 var chartdata = {
                     labels: cim,
                     datasets: [{

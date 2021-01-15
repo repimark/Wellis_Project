@@ -149,15 +149,15 @@ if (!isset($_SESSION["u_id"])) {
 		  // var d_pozicio = button.data('pozicio')//$('#d_pozi').text()
 		  var nev = button.data('whatever') // Extract info from data-* attributes
 		  // var allapot_id = button.data('id')
-		  console.log(nev)
+		  //console.log(nev)
 		  var pozicio_id = button.data('pozicio')
-		  console.log(pozicio_id)
+		  //console.log(pozicio_id)
 		  var terulet_id = button.data('terulet')
-		  console.log(terulet_id)
+		  //console.log(terulet_id)
 		  var allapot_id = button.data('allapot')
-		  console.log(allapot_id)
+		  //console.log(allapot_id)
 		  var dolgozo_id = $('#exampleModal').data('id')
-		  console.log(dolgozo_id)
+		  //console.log(dolgozo_id)
 		  var modal = $(this)
 		  modal.find('#Modaltitle').text(nev + " szerkesztése")
 		  modal.find('#dolgozo-nev').val(nev)
@@ -205,7 +205,7 @@ if (!isset($_SESSION["u_id"])) {
 			var pozicio_id = $("#pozicio_select option:selected").data('id')
 			var allapot_id = $("#allapot_select option:selected").data('id')
 			var dolgozo_nev = $("#dolgozo-nev").val()
-			console.log(dolgozo_nev)
+			//console.log(dolgozo_nev)
 			$.ajax({
 				url: "updateUser.php",
 				type: "POST",
@@ -218,7 +218,7 @@ if (!isset($_SESSION["u_id"])) {
 					d_nev: dolgozo_nev
 				},
 				success: function(updateDataResult){
-					console.log(updateDataResult);
+					//console.log(updateDataResult);
 					//alert("update success");
 					location.reload();
 
@@ -230,7 +230,7 @@ if (!isset($_SESSION["u_id"])) {
 			//alert('változott')
 			var t_id =  $('#terulet_select option:selected').data('id')
 			var pozi_select = $('#pozicio_select')
-			//console.log(t_id)
+			////console.log(t_id)
 			$.ajax({
 				url: "getPozicioForUserAdd.php",
 				type: "POST",
@@ -239,7 +239,7 @@ if (!isset($_SESSION["u_id"])) {
 					t_id: t_id
 				},
 				success: function(getPozicioResult){
-					console.log(getPozicioResult);
+					//console.log(getPozicioResult);
 					//alert("update success");
 					$('#pozicio_select').html(getPozicioResult);
 

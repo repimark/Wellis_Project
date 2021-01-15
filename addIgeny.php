@@ -66,7 +66,7 @@
 		// 			t_id: 1
 		// 		},
 		// 		success: function(data){
-		// 			//console.log(data)
+		// 			////console.log(data)
 		// 			$('#teruletSelect').html(data)
 		// 		} 
 		// 	});
@@ -74,7 +74,7 @@
 		$("#teruletSelect").change(function(){
     		//alert('változott')
     		var terulet_id = $("#teruletSelect option:selected").data('id')
-    		console.log(terulet_id)
+    		//console.log(terulet_id)
     		$.ajax({
 				url: "getPozicioForUserAdd.php",
 				type: "POST",
@@ -83,7 +83,7 @@
 					t_id: terulet_id
 				},
 				success: function(getPozicioResult){
-					console.log(getPozicioResult);
+					//console.log(getPozicioResult);
 					//alert("update success");
 					$('#pozicioSelect').html(getPozicioResult);
 
@@ -94,7 +94,7 @@
   			var terulet = $('#teruletSelect option:selected').data('id')
   			var pozicio = $('#pozicioSelect option:selected').data('id')
   			var mennyiseg = $('#igenyDB').val()
-  			console.log(''+terulet+' , '+pozicio+' , '+mennyiseg)
+  			//console.log(''+terulet+' , '+pozicio+' , '+mennyiseg)
   			$.ajax({
   				url: 'igenyHozzaadasa.php',
   				type: "POST",
@@ -106,7 +106,7 @@
   				},
   				success: function(DataResult){
   					//alert('Sikeres')
-  					//console.log(DataResult)
+  					////console.log(DataResult)
   					location.reload()
   				}
   			});

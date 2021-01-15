@@ -48,7 +48,7 @@ if (!isset($_SESSION["u_id"])) {
                 sElnev: elnev
             },
             success: function(res){
-                console.log(res)
+                //console.log(res)
                 $('#dolgozok-table').text(res)
             }
         });

@@ -64,7 +64,7 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     dataType: "JSON",
                     success: function(data) {
-                        console.log(data)
+                        //console.log(data)
                         var terulet = []
                         var adat = []
                         for (i in data) {
@@ -72,7 +72,7 @@ if (!isset($_SESSION["u_id"])) {
                             adat.push(data[i].db)
                             belepett.push(data[i].db)
                             teruletLabel.push(data[i].terulet)
-                            //console.log(adat[i])
+                            ////console.log(adat[i])
                         }
                         var chartdata = {
                             labels: terulet,
@@ -105,7 +105,7 @@ if (!isset($_SESSION["u_id"])) {
 
                     },
                     error: function(error) {
-                        console.log(error)
+                        //console.log(error)
                     }
                 });
             }
@@ -119,14 +119,14 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     dataType: "JSON",
                     success: function(data) {
-                        console.log(data)
+                        //console.log(data)
                         var terulet = []
                         var adat = []
                         for (i in data) {
                             terulet.push(data[i].terulet)
                             adat.push(data[i].db)
                             kilepett.push(data[i].db)
-                            //console.log(adat[i])
+                            ////console.log(adat[i])
                         }
                         var chartdata = {
                             labels: terulet,
@@ -155,7 +155,7 @@ if (!isset($_SESSION["u_id"])) {
                         // })
                     },
                     error: function(error) {
-                        console.log(error)
+                        //console.log(error)
                     }
                 });
             }

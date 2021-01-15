@@ -532,9 +532,9 @@ if (!isset($_SESSION["u_id"])) {
 				}
 			}
 			var sorokKezelese = function(ter, sor) {
-				console.log(ter)
+				//console.log(ter)
 				var terulet = $(ter).data('id')
-				console.log(terulet)
+				//console.log(terulet)
 				if (terulet == 7) {
 					$('#edit_sorSel').show()
 					$('#add_sorSel').show()
@@ -546,19 +546,19 @@ if (!isset($_SESSION["u_id"])) {
 							var obj = JSON.parse(SorResult);
 							var lines = [];
 							if (obj.length > 0) {
-								//console.log('nagyobb a cucli')
+								////console.log('nagyobb a cucli')
 								for (var i = obj.length - 1; i >= 0; i--) {
 									lines += '<option class="" data-id="' + obj[i].id + '">' + obj[i].elnev + '</option>'
 								}
 							} else {
 								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 							}
-							console.log(lines)
-							console.log(sor)
+							//console.log(lines)
+							//console.log(sor)
 							$(sor).html(lines)
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 				} else {
@@ -594,7 +594,7 @@ if (!isset($_SESSION["u_id"])) {
 						location.reload()
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 			});
@@ -604,7 +604,7 @@ if (!isset($_SESSION["u_id"])) {
 				var d = new Date()
 				var datum = d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate()
 				var user = '<?php echo $_SESSION["u_name"]; ?>'
-				//console.log('pozicio id = '+pozicio+' művelet : '+muv+' dátum : '+datum+' és az aki az egészet csinálta az egy csíra '+user)
+				////console.log('pozicio id = '+pozicio+' művelet : '+muv+' dátum : '+datum+' és az aki az egészet csinálta az egy csíra '+user)
 				$.ajax({
 					url: 'php/igenyLog.php',
 					type: 'POST',
@@ -623,7 +623,7 @@ if (!isset($_SESSION["u_id"])) {
 						}
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 			};
@@ -631,7 +631,7 @@ if (!isset($_SESSION["u_id"])) {
 				var mennyiseg = parseInt($(this).attr('data-menny'))
 				var newMennyiseg = mennyiseg + 1
 				var id = $(this).attr('data-id')
-				console.log(id + ' , ' + newMennyiseg)
+				//console.log(id + ' , ' + newMennyiseg)
 				//alert(id+' igényben '+(mennyiseg+1)+' darab lesz')
 				$.ajax({
 					url: 'updateIgeny.php',
@@ -647,7 +647,7 @@ if (!isset($_SESSION["u_id"])) {
 						//location.reload()
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 			});
@@ -656,7 +656,7 @@ if (!isset($_SESSION["u_id"])) {
 				var newMennyiseg = 0
 				var newMennyiseg = mennyiseg - 1
 				var id = $(this).attr('data-id')
-				console.log(id + ' , ' + newMennyiseg)
+				//console.log(id + ' , ' + newMennyiseg)
 				//alert(id+' igényben '+(mennyiseg+1)+' darab lesz')
 				$.ajax({
 					url: 'updateIgeny.php',
@@ -671,7 +671,7 @@ if (!isset($_SESSION["u_id"])) {
 						igenyLog(id, '-')
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 			});
@@ -728,7 +728,7 @@ if (!isset($_SESSION["u_id"])) {
 							location.reload()
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 				} else {
@@ -751,7 +751,7 @@ if (!isset($_SESSION["u_id"])) {
 							location.reload()
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 					var kolcsonzott = 0
@@ -764,7 +764,7 @@ if (!isset($_SESSION["u_id"])) {
 							p_id: pozicio_id
 						},
 						success: function(igenyRendezesResult) {
-							console.log(igenyRendezesResult)
+							//console.log(igenyRendezesResult)
 							//location.reload()
 
 						}
@@ -816,18 +816,18 @@ if (!isset($_SESSION["u_id"])) {
 						var obj = JSON.parse(RESULT);
 						var lines = [];
 						if (obj.length > 0) {
-							//console.log('nagyobb a cucli')
+							////console.log('nagyobb a cucli')
 							for (var i = obj.length - 1; i >= 0; i--) {
 								lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + '</option>'
 							}
 						} else {
 							lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 						}
-						//console.log(lines)
+						////console.log(lines)
 						$(pozi).html(lines)
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 
@@ -835,12 +835,12 @@ if (!isset($_SESSION["u_id"])) {
 			var updatePozicio = function() {
 				var terulet_id = $("#add_teruletSelect option:selected").data('id')
 				var sid = $('#add_sorSelect option:selected').data('id')
-				//console.log(terulet_id)
+				////console.log(terulet_id)
 				if (terulet_id == 7) {
 					$('#add_sorSel').show()
 					sorokKezelese('#add_teruletSelect :selected', '#add_sorSelect')
 					$('#add_pozicioSelect').html('')
-					console.log('belépett ebbe a szaros szarba')
+					//console.log('belépett ebbe a szaros szarba')
 					$.ajax({
 						url: "php/getSorok_2.php",
 						type: "POST",
@@ -850,25 +850,25 @@ if (!isset($_SESSION["u_id"])) {
 							sor: sid
 						},
 						success: function(getPozicioResult) {
-							//console.log(getPozicioResult)
+							////console.log(getPozicioResult)
 							var obj = JSON.parse(getPozicioResult);
 							var lines = [];
 							if (obj.length > 0) {
-								console.log('nagyobb a cucli')
+								//console.log('nagyobb a cucli')
 								for (var i = obj.length - 1; i >= 0; i--) {
 									lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + ' | ' + obj[i].s_elnevezes + '</option>'
 								}
 							} else {
 								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 							}
-							console.log(lines)
+							//console.log(lines)
 							$('#add_pozicioSelect').html(lines)
 
 
 
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 				} else {
@@ -881,12 +881,12 @@ if (!isset($_SESSION["u_id"])) {
 							t_id: terulet_id
 						},
 						success: function(getPozicioResult) {
-							console.log(getPozicioResult);
+							//console.log(getPozicioResult);
 							//alert("update success");
 							$('#add_pozicioSelect').html(getPozicioResult);
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 				}
@@ -943,11 +943,11 @@ if (!isset($_SESSION["u_id"])) {
 						if (addDolgozoResult == 'Sikeres') {
 							//alert("Sikerült fellvinni az új dolgozót")
 						}
-						console.log(addDolgozoResult)
+						//console.log(addDolgozoResult)
 						location.reload()
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 			});
@@ -974,15 +974,15 @@ if (!isset($_SESSION["u_id"])) {
 				// var d_pozicio = button.data('pozicio')//$('#d_pozi').text()
 				var nev = button.data('whatever') // Extract info from data-* attributes
 				// var allapot_id = button.data('id')
-				console.log(nev)
+				//console.log(nev)
 				var pozicio_id = button.data('pozicio')
-				console.log(pozicio_id)
+				//console.log(pozicio_id)
 				var terulet_id = button.data('terulet')
-				console.log(terulet_id)
+				//console.log(terulet_id)
 				var allapot_id = button.data('allapot')
-				console.log(allapot_id)
+				//console.log(allapot_id)
 				var dolgozo_id = button.data('id')
-				console.log(dolgozo_id)
+				//console.log(dolgozo_id)
 				var belepes = button.data('belepes')
 				var modal = $(this)
 				modal.find('#Modaltitle').text(nev + " szerkesztése")
@@ -1001,7 +1001,7 @@ if (!isset($_SESSION["u_id"])) {
 						$('#edit_terulet_select').html(dataResult_terulet);
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 				//Pozicíó lekérdezése
@@ -1016,11 +1016,11 @@ if (!isset($_SESSION["u_id"])) {
 							p_id: pozicio_id
 						},
 						success: function(dataResult_pozi) {
-							console.log(dataResult_pozi)
+							//console.log(dataResult_pozi)
 							$('#edit_pozicio_select').html(dataResult_pozi);
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 				} else {
@@ -1045,7 +1045,7 @@ if (!isset($_SESSION["u_id"])) {
 							$('#edit_pozicio_select').html(lines)
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 				}
@@ -1061,7 +1061,7 @@ if (!isset($_SESSION["u_id"])) {
 						$('#edit_allapot_select').html(dataResult_allapot);
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 			})
@@ -1072,7 +1072,7 @@ if (!isset($_SESSION["u_id"])) {
 				var allapot_id = $("#edit_allapot_select option:selected").data('id')
 				var dolgozo_nev = $("#edit_dolgozo-nev").val()
 				var belepes_ido = $('#edit_belepes').val()
-				console.log(dolgozo_nev)
+				//console.log(dolgozo_nev)
 				$.ajax({
 					url: "updateUser.php",
 					type: "POST",
@@ -1086,13 +1086,13 @@ if (!isset($_SESSION["u_id"])) {
 						belepes: belepes_ido
 					},
 					success: function(updateDataResult) {
-						console.log(updateDataResult);
+						//console.log(updateDataResult);
 						//alert("update success");
 						location.reload();
 
 					},
 					error: function(error) {
-						console.log(error)
+						//console.log(error)
 					}
 				});
 
@@ -1106,7 +1106,7 @@ if (!isset($_SESSION["u_id"])) {
 				var t_id = $('#edit_terulet_select option:selected').data('id')
 				var s_id = $('#edit_sor_select option:selected').data('id')
 				var pozi_select = $('#edit_pozicio_select')
-				//console.log(t_id)
+				////console.log(t_id)
 				if (t_id == '7') {
 					sorokKezelese('#edit_terulet_select :selected', '#edit_sor_select')
 					$.ajax({
@@ -1133,7 +1133,7 @@ if (!isset($_SESSION["u_id"])) {
 
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 				} else {
@@ -1146,13 +1146,13 @@ if (!isset($_SESSION["u_id"])) {
 							t_id: t_id
 						},
 						success: function(getPozicioResult) {
-							console.log(getPozicioResult);
+							//console.log(getPozicioResult);
 							//alert("update success");
 							$('#edit_pozicio_select').html(getPozicioResult);
 
 						},
 						error: function(error) {
-							console.log(error)
+							//console.log(error)
 						}
 					});
 				}

@@ -258,7 +258,7 @@ if (!isset($_SESSION["a_id"])) {
 					p_id: pozi
 				},
 				success: function(Result){
-					console.log(Result)
+					//console.log(Result)
 					if (Result == 'Sikeres') {
 						location.reload()
 					}
@@ -278,7 +278,7 @@ if (!isset($_SESSION["a_id"])) {
 					t_id: terulet
 				},
 				success: function(Result){
-					console.log(Result)
+					//console.log(Result)
 					if (Result == 'Sikeres') {
 						location.reload()
 					}

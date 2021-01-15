@@ -120,7 +120,7 @@ if (!isset($_SESSION["u_id"])) {
                         year: evIn
                     },
                     success: function(Result) {
-                        console.log(Result)
+                        //console.log(Result)
                         var obj = JSON.parse(Result)
                         var lines = [];
                         var osszKilepett = parseInt(0)

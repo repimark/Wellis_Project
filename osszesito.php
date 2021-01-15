@@ -44,13 +44,13 @@ if (!isset($_SESSION["u_id"])) {
 				getCharts()
 			});
 			var getOsszesito = function() {
-				console.log("Belépett")
+				//console.log("Belépett")
 				$.ajax({
 					url: 'php/getOsszesito.php',
 					type: 'POST',
 					cache: false,
 					success: function(SorResult) {
-						console.log(SorResult)
+						//console.log(SorResult)
 						var osszDolgozo = 0;
 						var osszKolcson = 0;
 						var osszBelepo = 0;
@@ -63,7 +63,7 @@ if (!isset($_SESSION["u_id"])) {
 						lines += '<th>Terület</th><th>Saját Létszám</th><th>Kölcsönzött Létszám</th><th class="text-danger">Összes Létszám</th><th>Belépő Létszám</th><th>Kölcsönzött belépő létszám</th><th class="text-danger">Összes Belépő</th><th>Igény</th></tr></thead>'
 						lines += '<tbody>'
 						if (obj.length > 0) {
-							console.log('nagyobb a cucli')
+							//console.log('nagyobb a cucli')
 							for (var i = 0; i <= obj.length - 1; i++) {
 								lines += '<tr><td>' + obj[i].nev + '</td><td>' + obj[i].dolgozo + '</td><td>' + obj[i].kolcsonzott + '</td><td class="text-danger">' + obj[i].dolgozo_kolcson + '</td><td>' + obj[i].belepo + '</td><td>' + obj[i].kolcson_belepo + '</td><td class="text-danger">' + obj[i].minden_belepo + '</td><td>' + obj[i].igeny + '</td></tr>'
 								osszDolgozo += parseInt(obj[i].dolgozo)
@@ -94,7 +94,7 @@ if (!isset($_SESSION["u_id"])) {
 						igeny = [];
 						for (i in obj) {
 							terulet.push(obj[i].terulet)
-							console.log(obj[i].terulet)
+							//console.log(obj[i].terulet)
 							dolgozok.push(parseInt(obj[i].sajat))
 							kolcsonzott.push(parseInt(obj[i].kolcson))
 							belepo.push(parseInt(obj[i].belepo))
@@ -164,7 +164,7 @@ if (!isset($_SESSION["u_id"])) {
 						});
 					},
 					error: function(errorData) {
-						console.log(errorData)
+						//console.log(errorData)
 					}
 				});
 			}

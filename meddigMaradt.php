@@ -50,17 +50,17 @@ if (!isset($_SESSION["u_id"])) {
                     type: 'POST',
                     data: {},
                     success: function(Result) {
-                        console.log(Result)
+                        //console.log(Result)
                         var obj = JSON.parse(Result)
                         var lines = [];
                         for (i in obj) {
                             if (obj[i].db > 365) {
                                 evFelett++;
-                                //console.log(evFelett)
+                                ////console.log(evFelett)
                             } else if (obj[i].db > 90) {
-                                //console.log(obj[i].db + ' nap')
+                                ////console.log(obj[i].db + ' nap')
                                 piFelett++;
-                                //console.log(evAlatt)
+                                ////console.log(evAlatt)
                             } else {
                                 piAlatt++;
                             }
@@ -68,13 +68,13 @@ if (!isset($_SESSION["u_id"])) {
                         rajz()
                     },
                     error: function(errorData) {
-                        console.log(errorData)
+                        //console.log(errorData)
                     }
                 });
             }
             var rajz = function() {
-                console.log(piAlatt)
-                console.log(evFelett)
+                //console.log(piAlatt)
+                //console.log(evFelett)
                 var chartdata = {
                     labels: labS,
                     datasets: [{
