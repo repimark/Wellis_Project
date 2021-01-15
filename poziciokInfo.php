@@ -223,7 +223,7 @@ if (!isset($_SESSION["u_id"])) {
 									<?php 	} elseif ($rowDolgozo["a_id"] == 7) { ?>
 										<tr class="">
 											<td class="colorScheme" style="background-color:#F85959!important;width: 1px!important;border:1px solid #343a40;"></td>
-											<td class=""><?php echo $rowDolgozo["nev"];  ?><br>(<?php echo $rowDolgozo["belepes"]; ?>)</td>
+											<td class=""><?php echo $rowDolgozo["nev"];  ?></td>
 											<td class="elkuldes"><?php echo $rowDolgozo["allapot"]; ?></td>
 
 											<td class="text-right">
@@ -289,7 +289,7 @@ if (!isset($_SESSION["u_id"])) {
 										<?php 	} elseif ($rowDolgozo["a_id"] == 8) { ?>
 										<tr class="">
 											<td class="colorScheme" style="background-color:#FF0000!important;width: 1px!important;border:1px solid #343a40;"></td>
-											<td class=""><?php echo $rowDolgozo["nev"];  ?><br>(<?php echo $rowDolgozo["belepes"]; ?>)</td>
+											<td class=""><?php echo $rowDolgozo["nev"];  ?></td>
 											<td class="problemas"><?php echo $rowDolgozo["allapot"]; ?></td>
 
 											<td class="text-right">
