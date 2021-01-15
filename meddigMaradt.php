@@ -98,7 +98,13 @@ if (!isset($_SESSION["u_id"])) {
                 var ctx = document.getElementById('canv1').getContext('2d');
                 var barGraph = new Chart(ctx, {
                     type: 'bar',
-                    data: chartdata
+                    data: chartdata,
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'A dolgozók felmondásáig eltelt idő "fő"'
+                        }
+                    }
                 });
             }
         </script>

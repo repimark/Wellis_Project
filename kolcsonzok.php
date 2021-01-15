@@ -90,7 +90,13 @@ if (!isset($_SESSION["u_id"])) {
                 var ctx = document.getElementById('canv1').getContext('2d');
                 var barGraph = new Chart(ctx, {
                     type: 'doughnut',
-                    data: chartdata
+                    data: chartdata,
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Kölcsönző cégek eloszlása fő/cég-ben'
+                        }
+                    }
                 });
             }
         </script>
