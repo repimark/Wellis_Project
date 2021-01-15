@@ -29,7 +29,7 @@ if (!isset($_SESSION["u_id"])) {
         <div class="container">
             <h1 class="text-center p-5">Fluktuációs adatok</h1>
             <div class="charts bg-light">
-                <canvas id="canv"></canvas>
+                <canvas id="canv" class="bg-light rounded shadow mb-5"></canvas>
             </div>
 
         </div>

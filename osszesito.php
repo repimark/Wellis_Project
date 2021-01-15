@@ -34,7 +34,7 @@ if (!isset($_SESSION["u_id"])) {
 			<h1 class="text-center p-5">Összesítő oldal </h1>
 			<div id="osszesito"></div>
 			<div class="charts w-75 bg-light">
-				<canvas id="myChart"></canvas>
+				<canvas id="myChart" class="bg-light rounded shadow mb-5"></canvas>
 			</div>
 		</div>
 		<script>

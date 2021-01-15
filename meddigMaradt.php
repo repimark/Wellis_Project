@@ -34,7 +34,7 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <h2 class="text-center brand"> Meddig maradtak az emberek </h2>
-            <div class="canvas-div w-75"><canvas id="canv1" width="50%" class="bg-light center"></canvas></div>
+            <div class="canvas-div w-75"><canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas></div>
         </div>
         <script>
             var piAlatt = 0

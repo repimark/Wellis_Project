@@ -37,9 +37,11 @@ if (!isset($_SESSION["u_id"])) {
         <div class="container">
             <h2 class="text-center">Be- és Kilépett Dolgozók</h2>
             <div id="chart_cont">
-                <canvas id="canv3" class="bg-light"></canvas>
                 <br/>
-                <canvas id="canv4" class="bg-light"></canvas>
+                <canvas id="canv3" class="bg-light rounded shadow mb-5"></canvas>
+                <br/>
+                <canvas id="canv4" class="bg-light rounded shadow mb-5"></canvas>
+                <br/>
             </div>
         </div>
         <script type="text/javascript">
@@ -77,7 +79,7 @@ if (!isset($_SESSION["u_id"])) {
                             kilepett.push(parseInt(obj[i].kilep))
                             
                         }
-                        hetiRajz(teruletLabel, kilepett, belepett, 'canv3', 'bar', 'Havi Kilépett Dolgozók', 'Havi Belépett Dolgozók')
+                        hetiRajz(teruletLabel, kilepett, belepett, 'canv3', 'bar', 'Havi Kilépett Dolgozók', 'Havi Belépett Dolgozók', 'Havi Munkaerő változások (fő)')
                     },
                     error: function(error) {
                         //console.log(error)
@@ -98,7 +100,7 @@ if (!isset($_SESSION["u_id"])) {
                             hetiKilepett.push(obj[i].kilep)
                             hetiTerulet.push(obj[i].terulet)
                         }
-                        hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók')
+                        hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók', 'Heti Munkaerő változások (fő)')
                     },
                     error: function(errorData){
                         console.log(errorData)
@@ -106,7 +108,7 @@ if (!isset($_SESSION["u_id"])) {
                 });
             }
             
-            var hetiRajz = function(label, kilep, belep, canv ,typ, cim1, cim2){
+            var hetiRajz = function(label, kilep, belep, canv ,typ, cim1, cim2 ,foCim){
                 var chartdata = {
                     labels: label,
                     datasets: [{
@@ -140,7 +142,13 @@ if (!isset($_SESSION["u_id"])) {
                 var ctx = document.getElementById(canv).getContext('2d');
                 var barGraph = new Chart(ctx, {
                     type: typ,
-                    data: chartdata
+                    data: chartdata,
+                    options: {
+                        title: {
+                            display: true,
+                            text: foCim
+                        }
+                    }
                 });
             }
         </script>
