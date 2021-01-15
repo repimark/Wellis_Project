@@ -98,10 +98,10 @@ if (!isset($_SESSION["u_id"])) {
 			.btn:hover {
 				border: 1px solid white;
 			}
-			.problemas {
+			.elkuldes {
 				color: #F85959 !important;
 			}
-			.elkuldes {
+			.problemas {
 				color: #FF0000 !important;
 			}
 		</style>
@@ -222,7 +222,7 @@ if (!isset($_SESSION["u_id"])) {
 
 									<?php 	} elseif ($rowDolgozo["a_id"] == 7) { ?>
 										<tr class="">
-											<td class="colorScheme" style="background-color:#FF0000!important;width: 1px!important;border:1px solid #343a40;"></td>
+											<td class="colorScheme" style="background-color:#F85959!important;width: 1px!important;border:1px solid #343a40;"></td>
 											<td class=""><?php echo $rowDolgozo["nev"];  ?><br>(<?php echo $rowDolgozo["belepes"]; ?>)</td>
 											<td class="elkuldes"><?php echo $rowDolgozo["allapot"]; ?></td>
 
@@ -288,7 +288,7 @@ if (!isset($_SESSION["u_id"])) {
 										</tr>
 										<?php 	} elseif ($rowDolgozo["a_id"] == 8) { ?>
 										<tr class="">
-											<td class="colorScheme" style="background-color:#F85959!important;width: 1px!important;border:1px solid #343a40;"></td>
+											<td class="colorScheme" style="background-color:#FF0000!important;width: 1px!important;border:1px solid #343a40;"></td>
 											<td class=""><?php echo $rowDolgozo["nev"];  ?><br>(<?php echo $rowDolgozo["belepes"]; ?>)</td>
 											<td class="problemas"><?php echo $rowDolgozo["allapot"]; ?></td>
 
