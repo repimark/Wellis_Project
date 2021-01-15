@@ -37,7 +37,8 @@ if (!isset($_SESSION["u_id"])) {
         <div class="container">
             <h2 class="text-center">Heti igények</h2>
             <div id="hetiIgenyTabla">
-                <table id="hetiIgeny" class="table table-light">
+            <h4><span class="badge badge-dark">Aktuális hét</span></h4>
+                <table id="hetiIgeny" class="rounded table table-light">
                     <thead class="thead-dark thead">
                         <tr>
                             <th>Hét száma</th>
@@ -50,7 +51,8 @@ if (!isset($_SESSION["u_id"])) {
                 </table>
             </div>
             <div id="mindenHetiIgeny">
-            <table id="mindenHetiIgeny" class="table bg-light table-striped">
+                <h4><span class="badge badge-dark">Egész éves</span></h4>
+            <table id="mindenHetiIgeny" class=" rounded table bg-light table-striped">
                     <thead class="thead-dark thead">
                         <tr>
                             <th>Hét száma</th>
