@@ -57,7 +57,7 @@ if (!isset($_SESSION["u_id"])) {
                             if (obj[i].db > 365) {
                                 evFelett++;
                                 ////console.log(evFelett)
-                            } else if (obj[i].db > 90) {
+                            } else if (obj[i].db > 90 && obj[i].db < 365) {
                                 ////console.log(obj[i].db + ' nap')
                                 piFelett++;
                                 ////console.log(evAlatt)
