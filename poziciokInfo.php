@@ -573,7 +573,7 @@ if (!isset($_SESSION["u_id"])) {
 				var fName = userName.slice(0, 1).toUpperCase()
 				var secName = userName.split('.');
 				var secsec = secName[1];
-				var secName = secsec.slice(0, 1).toUpperCase();
+				var secName = secsec.slice(0, 1).toUpperCase()
 				userName = fName + '' + secName
 				var szoveg = $("#" + id).val()
 				if (szoveg == '' || szoveg == '-') {
