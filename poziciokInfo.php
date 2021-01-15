@@ -642,10 +642,10 @@ if (!isset($_SESSION["u_id"])) {
 			$('.addMegjegyzes').click(function() {
 				var id = $(this).attr('id');
 				var userName = '<?php echo $_SESSION["u_name"]; ?>';
-				var fName = userName.slice(0, 1).toUpperCase();
-				var secName = userName.split('.');
-				var secsec = secName[1];
-				var secName = secsec.slice(0, 1).toUpperCase();
+				var fName = userName.slice(0, 1).toUpperCase()
+				var secName = userName.split('.')
+				var secsec = secName[1]
+				var secName = secsec.slice(0, 1).toUpperCase()
 				userName = fName + '' + secName
 				var szoveg = $("#" + id).val()
 				if (szoveg == '' || szoveg == '-') {
