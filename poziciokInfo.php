@@ -430,6 +430,7 @@ if (!isset($_SESSION["u_id"])) {
 							</form>
 						</div>
 						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" id="remove_button">X</button>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
 							<button type="button" id="delete_button" class="btn btn-primary">Kiléptetés</button>
 						</div>
@@ -696,6 +697,7 @@ if (!isset($_SESSION["u_id"])) {
 				modal.find('#delete_button').attr('data-id', dolgozo_id)
 				modal.find('#delete_button').attr('data-nev', nev)
 				modal.find('#delete_button').attr('data-belepes', b_datum)
+				modal.find('#remove_button').attr('data-id', dolgozo_id)
 			});
 			$('#delete_button').click(function() {
 				var button = $(this)
@@ -771,6 +773,24 @@ if (!isset($_SESSION["u_id"])) {
 					});
 				}
 
+			});
+			$('#remove_button').click(function(){
+				var button = $(this)
+				var dolgozo_id = button.data('id')
+				$.ajax({
+					url: 'php/belepesVisszavonas.php',
+					type: 'POST',
+					data: {
+						d_id: dolgozo_id
+					},
+					success: function(res){
+						console.log(res)
+						location.reload()
+					},
+					error: function(errorRes){
+						console.log(errorRes)
+					}
+				});
 			});
 			$('#addDolgozo').click(function() {});
 			$('#addModal').on('show.bs.modal', function(event) {
