@@ -66,7 +66,7 @@ if (!isset($_SESSION["u_id"])) {
         <script type="text/javascript">
             $(document).ready(function(){
                 var d = new Date()
-                var n = d.getDate()
+                var n = d.getFullYear()+'.'+(d.getMonth()+1)+'.'+d.getDate();
                 getAdat(n)
                 getEvesAdat(n)
             })
