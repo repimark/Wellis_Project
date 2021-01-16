@@ -207,7 +207,7 @@ if (!isset($_SESSION["u_id"])) {
 											</td>
 											<td colspan="2" class="">
 												<form class="form-inline">
-													<input type="text" class="form-control" width="" id="<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
+													<input type="text" class="form-control" width="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
 													<button type="button" class="btn btn-secondary addMegjegyzes gomb" id="<?php echo $rowDolgozo['m_id']; ?>" style="margin:2px">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
@@ -241,7 +241,7 @@ if (!isset($_SESSION["u_id"])) {
 											</td>
 											<td colspan="2">
 												<form class="form-inline">
-													<input type="text" class="form-control" width="" name="" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
+													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
 													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
@@ -274,7 +274,7 @@ if (!isset($_SESSION["u_id"])) {
 											</td>
 											<td colspan="2">
 												<form class="form-inline">
-													<input type="text" class="form-control" width="" name="" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
+													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
 													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
@@ -307,7 +307,7 @@ if (!isset($_SESSION["u_id"])) {
 											</td>
 											<td colspan="2">
 												<form class="form-inline">
-													<input type="text" class="form-control" width="" name="" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
+													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
 													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
@@ -338,7 +338,7 @@ if (!isset($_SESSION["u_id"])) {
 											</td>
 											<td colspan="2">
 												<form class="form-inline">
-													<input type="text" class="form-control" width="" name="" id="<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
+													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
 													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px" id="<?php echo $rowDolgozo['m_id']; ?>">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
@@ -369,7 +369,7 @@ if (!isset($_SESSION["u_id"])) {
 											</td>
 											<td colspan="2">
 												<form class="form-inline">
-													<input type="text" class="form-control" width="" name="" id="<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
+													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
 													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px" id="<?php echo $rowDolgozo['m_id']; ?>">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
@@ -399,7 +399,7 @@ if (!isset($_SESSION["u_id"])) {
 											</td>
 											<td colspan="2">
 												<form class="form-inline">
-													<input type="text" class="form-control" width="" name="" id="<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
+													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
 													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
@@ -647,7 +647,7 @@ if (!isset($_SESSION["u_id"])) {
 				var secsec = secName[1]
 				var secName = secsec.slice(0, 1).toUpperCase()
 				userName = fName + '' + secName
-				var szoveg = $("#" + id).val()
+				var szoveg = $("#m" + id).val()
 				if (szoveg == '' || szoveg == '-') {
 
 				} else {
