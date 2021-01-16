@@ -16,6 +16,9 @@ if (!isset($_SESSION["u_id"])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+        <!-- <script src="https://www.gstatic.com/charts/loader.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
         <link rel="stylesheet" type="text/css" href="style.css">
 
     </head>
@@ -143,7 +146,7 @@ if (!isset($_SESSION["u_id"])) {
                                 <label for="#terulet">Szervezeti egység:</label>
                                 <select id="terulet" class="form-control" require></select>
                                 <label for="#pozicio">Pozició: </label>
-                                <input type="text" class="form-control" id="pozicio" require/>
+                                <input type="text" class="form-control" id="pozicio" require />
                                 <label for="kezdDatum">Kezdési dátum</label>
                                 <input type="date" class="form-control" id="kezdDatum" require>
                             </div>
@@ -155,42 +158,48 @@ if (!isset($_SESSION["u_id"])) {
                     </div>
                 </div>
             </div>
+            <br>
+            <div id="chart" class="bg-light rounded shadow mb-5 p-2">
+                <canvas id="canv"></canvas>
+            </div>
+            <br>
         </div>
         <script>
             $(document).ready(function() {
                 loadKereses()
-                
+                chartLoad()
+
             });
-            $('#addModal').on('show.bs.modal', function(){
+            $('#addModal').on('show.bs.modal', function() {
                 loadTerulet()
             });
-            var loadTerulet = function(){
+            var loadTerulet = function() {
                 $.ajax({
                     url: 'szellemi/getTerulet.php',
                     type: 'POST',
                     data: {},
-                    success: function(res){
+                    success: function(res) {
                         var terulet = []
                         var obj = JSON.parse(res)
-                        for( i in obj){
+                        for (i in obj) {
                             terulet += '<option data-id="' + obj[i].t_id + '">' + obj[i].terulet + '</option>'
                         }
                         $('#terulet').html(terulet)
                     },
-                    error: function(errorRes){
+                    error: function(errorRes) {
                         console.log(errorRes)
                     }
                 });
             }
-            $('#newKereses').click(function(){
+            $('#newKereses').click(function() {
                 var d = $('#kezdDatum').val()
                 var p = $('#pozicio').val()
                 var t = $('#terulet :selected').data('id')
 
-                    addKereses(t, p, d)
+                addKereses(t, p, d)
 
             });
-            var addKereses = function(ter, pozi, datum){
+            var addKereses = function(ter, pozi, datum) {
                 $.ajax({
                     url: 'szellemi/addKereses.php',
                     type: 'POST',
@@ -199,10 +208,10 @@ if (!isset($_SESSION["u_id"])) {
                         pozi: pozi,
                         kDatum: datum
                     },
-                    success: function(res){
+                    success: function(res) {
                         location.reload()
                     },
-                    error: function(errorRes){
+                    error: function(errorRes) {
 
                     }
                 });
@@ -222,15 +231,15 @@ if (!isset($_SESSION["u_id"])) {
 
                         for (i in obj) {
                             if (parseInt(obj[i].allapot) == 0) {
-                                if(hatarIdoDatum(obj[i].kezdDatum) > 45){
+                                if (hatarIdoDatum(obj[i].kezdDatum) > 45) {
                                     var d = new Date()
-                                    var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
+                                    var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
                                     lejartraJelent(obj[i].k_id, today)
-                                }else{
-                                aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent('+obj[i].k_id+')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
+                                } else {
+                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
                                 }
                             } else if (parseInt(obj[i].allapot) == 1) {
-                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + elteltIdo(obj[i].kezdDatum, obj[i].keszDatum) + '</td><td>' + 'Sikeres' + '</td></tr>'
+                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum)) + '</td><td>' + 'Sikeres' + '</td></tr>'
                             } else {
                                 lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td></tr>'
                             }
@@ -241,33 +250,24 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 });
             }
-            var lejartraJelent = function(id, datum){
+            var lejartraJelent = function(id, datum) {
                 $.ajax({
                     url: 'szellemi/lejartKereses.php',
                     type: 'POST',
                     data: {
-                        id : id,
-                        datum : datum
+                        id: id,
+                        datum: datum
                     },
-                    success: function(res){
-                        console.log(res)
+                    success: function(res) {
+                        //console.log(res)
                         location.reload();
                     },
-                    error: function(errorRes){
+                    error: function(errorRes) {
                         console.log(errorRes)
                     }
                 })
             }
-            $('.keszVege').click(function(){
-                alert('megnyomva')
-                var button = $(this)
-                var id = button.data('id')
-                console.log(id)
-            })
-            $('.keszVege').on('click', function(){
-                alert('.')
-            })
-            var keszreJelent = function(id){
+            var keszreJelent = function(id) {
                 //alert('megy ' + id )
                 var d = new Date()
                 var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
@@ -275,13 +275,13 @@ if (!isset($_SESSION["u_id"])) {
                     url: 'szellemi/keresesKesz.php',
                     type: 'POST',
                     data: {
-                        id : id,
+                        id: id,
                         datum: today
                     },
-                    success: function(res){
+                    success: function(res) {
                         location.reload()
                     },
-                    error: function(errorRes){
+                    error: function(errorRes) {
                         console.log(res)
                     }
                 })
@@ -309,6 +309,61 @@ if (!isset($_SESSION["u_id"])) {
                 var diff = new Date(end - start)
                 var days = diff / 1000 / 60 / 60 / 24
                 return days
+            }
+            var chartLoad = function() {
+                var label = ["Aktív", "Kész", "Lejárt"]
+                var adat = []
+                $.ajax({
+                    url: 'szellemi/szellemiAdatok.php',
+                    type: 'POST',
+                    data: {
+
+                    },
+                    success: function(res) {
+                        //console.log(res)
+                        var obj = JSON.parse(res)
+                        for (i in obj) {
+                            adat.push(parseInt(obj[i].db))
+                        }
+                        cRajz(label, adat, 'canv', 'doughnut', 'Állapot', 'Szellemi keresések eloszlása (db)')
+                    },
+                    error: function(errorRes) {
+                        console.log(errorRes)
+                    }
+                })
+            }
+            var cRajz = function(label, adat, canv, typ, cim1, foCim) {
+                var chartdata = {
+                    labels: label,
+                    datasets: [{
+                        data: adat,
+                        label: cim1,
+                        backgroundColor: ['rgba(9, 132, 227,0.75)', 'rgba(0, 184, 148,0.75)', 'rgba(255, 118, 117,0.75)'],
+                        borderColor: ['rgba(9, 132, 227,0.75)', 'rgba(0, 184, 148,0.75)', 'rgba(255, 118, 117,0.75)'],
+                        hoverBackgroundColor: ['rgba(9, 132, 227,1)', 'rgba(0, 184, 148,1.0)', 'rgba(255, 118, 117,1)'],
+                        hoverBorderColor: ['rgba(9, 132, 227,1)', 'rgba(0, 184, 148,1.0)', 'rgba(255, 118, 117,1)'],
+                        borderWidth: 0.5
+                    }, ],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: false,
+                            position: 'top'
+                        }
+                    }
+                };
+                var ctx = document.getElementById(canv).getContext('2d');
+                var barGraph = new Chart(ctx, {
+                    type: typ,
+                    data: chartdata,
+                    options: {
+                        title: {
+                            display: true,
+                            text: foCim
+                        }
+                    }
+                });
             }
         </script>
     </body>
