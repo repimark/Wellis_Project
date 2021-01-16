@@ -106,7 +106,7 @@ if (!isset($_SESSION["u_id"])) {
                         </h2>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="card-body" id="lejart">
+                        <div class="card-body">
                             <!-- Ide kerülnek a lejárt keresések -->
                             <table class="table table-striped">
                                 <thead class="thead-dark">
@@ -222,7 +222,13 @@ if (!isset($_SESSION["u_id"])) {
 
                         for (i in obj) {
                             if (parseInt(obj[i].allapot) == 0) {
+                                if(hatarIdoDatum(obj[i].kezdDatum) > 45){
+                                    var d = new Date()
+                                    var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
+                                    lejartraJelent(obj[i].k_id, today)
+                                }else{
                                 aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent('+obj[i].k_id+')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
+                                }
                             } else if (parseInt(obj[i].allapot) == 1) {
                                 kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + elteltIdo(obj[i].kezdDatum, obj[i].keszDatum) + '</td><td>' + 'Sikeres' + '</td></tr>'
                             } else {
@@ -234,6 +240,23 @@ if (!isset($_SESSION["u_id"])) {
                         $('#lejart').html(lejart)
                     }
                 });
+            }
+            var lejartraJelent = function(id, datum){
+                $.ajax({
+                    url: 'szellemi/lejartKereses.php',
+                    type: 'POST',
+                    data: {
+                        id : id,
+                        datum : datum
+                    },
+                    success: function(res){
+                        console.log(res)
+                        location.reload();
+                    },
+                    error: function(errorRes){
+                        console.log(errorRes)
+                    }
+                })
             }
             $('.keszVege').click(function(){
                 alert('megnyomva')
