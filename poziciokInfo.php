@@ -242,7 +242,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td colspan="2">
 												<form class="form-inline">
 													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
-													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px">
+													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px" id="<?php echo $rowDolgozo['m_id']; ?>">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
 															<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
@@ -275,7 +275,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td colspan="2">
 												<form class="form-inline">
 													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
-													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px">
+													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px" id="<?php echo $rowDolgozo['m_id']; ?>">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
 															<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
@@ -308,7 +308,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td colspan="2">
 												<form class="form-inline">
 													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
-													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px">
+													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px" id="<?php echo $rowDolgozo['m_id']; ?>">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
 															<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
@@ -417,7 +417,7 @@ if (!isset($_SESSION["u_id"])) {
 								?>
 								<tr>
 									<td colspan="6" class="table-danger">
-										<h5>Ehhez a pizicióhoz még nincs dolgozó.</h5>
+										<h5>Ehhez a pozicióhoz még nincs dolgozó.</h5>
 									</td>
 								</tr>
 							<?php
@@ -647,7 +647,7 @@ if (!isset($_SESSION["u_id"])) {
 				var secsec = secName[1]
 				var secName = secsec.slice(0, 1).toUpperCase()
 				userName = fName + '' + secName
-				var szoveg = $("#m" + id).val()
+				var szoveg = $('#m' + id).val()
 				if (szoveg == '' || szoveg == '-') {
 
 				} else {
