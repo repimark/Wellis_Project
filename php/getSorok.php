@@ -17,7 +17,7 @@ while ($sorokROW = mysqli_fetch_assoc($sorokQRY)) {
                     </h2>
                 </div>
 
-                <div id="sor<?php echo $sorokROW['s_id']; ?>" class="collapse " aria-labelledby="headingOne" data-parent="#acc<?php echo $sorokROW['s_id']; ?>">
+                <div id="sor<?php echo $sorokROW['s_id']; ?>" class="collapse show" aria-labelledby="headingOne" data-parent="#acc<?php echo $sorokROW['s_id']; ?>">
                     <div class="card card-body">
                         <?php include 'temp.php'; ?>
                     </div>
