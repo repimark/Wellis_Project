@@ -64,13 +64,13 @@
             $pid = $rowPozicio["p_id"];
             $dolgozoSQL = "SELECT dolgozok.d_id AS 'id', dolgozok.t_id AS 'ter_id', dolgozok.p_id AS 'pozi_id', dolgozok.d_nev AS 'nev', allapot.a_elnevezes AS 'allapot', dolgozok.a_id AS 'a_id', megjegyzes.m_szoveg AS 'Megjegyzes', megjegyzes.m_id AS 'm_id', dolgozok.b_datum as 'belepes' FROM dolgozok, allapot, megjegyzes WHERE dolgozok.d_id = megjegyzes.d_id AND dolgozok.a_id = allapot.a_id AND megjegyzes.m_szoveg IS NOT NULL AND dolgozok.p_id = '" . $pid . "'";
             $dolgozoResult = $conn->query($dolgozoSQL);
-            if ($dolgozoResult->num_rows >  0) {
+            if ($dolgozoResult->num_rows > 0) {
                 while ($rowDolgozo = $dolgozoResult->fetch_assoc()) {
                     if ($rowDolgozo["a_id"] == 1) {
                         ?>
-                                    <tr class="" style="">
+                                    <tr>
                                         <td class="colorScheme" style="background-color:#33CC00!important;width: 1px!important;border:1px solid #343a40;"></td>
-                                        <td class="" style=""><?php echo $rowDolgozo["nev"];  ?></td>
+                                        <td><?php echo $rowDolgozo["nev"];  ?></td>
                                         <td class="dolgozo"><?php echo $rowDolgozo["allapot"]; ?></td>
                                         <td colspan="" class=" text-right">
                                             <button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">

@@ -36,6 +36,7 @@ if (!isset($_SESSION["u_id"])) {
 		<th>Pozíció</th>
 		<th>Kiléptetés dátum</th>
 		<th>Beléptetés dátum</th>
+		<th>Műveletek</th>
 	</thead>
 	<tbody class="table-dark">
 		<!-- DOLGOZÓK KILISTÁZÁSA -->
@@ -43,6 +44,37 @@ if (!isset($_SESSION["u_id"])) {
 	</tbody>
 	</table>
  </div>
+ <script>
+	$('.visszaVon').click(function(){
+		var button = $(this)
+		var ter = button.data('terulet')
+		var poz = button.data('pozi')
+		var nev = button.data('nev')
+		var datum = button.data('datum')
+		var all = button.data('allapot')
+		var kid = button.data('kid')
+		//alert('terulet:' + ter + ', Pozicio: ' + poz + ', Név: ' + nev + ', Dátum : '+ datum)	
+		$.ajax({
+			url: 'php/addUser.php',
+			type: 'POST',
+			data: {
+				nev: nev,
+				pozi: poz,
+				terulet: ter,
+				allapot: all,
+				datum: datum,
+				kid: kid
+			},
+			success: function(res){
+				alert(res)
+				location.reload()
+			},
+			error: function(errorRes){
+				console.log(errorRes)
+			}
+		})
+	})
+ </script>
 </body>
 </html>
 <?php } ?>
