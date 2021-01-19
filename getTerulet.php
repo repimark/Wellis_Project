@@ -7,7 +7,7 @@ $result = $conn->query($sql);
 		while($row = $result->fetch_assoc()) {
 			//SQL LEKÉRDEZÉSEK
 			$sqligenyMennyiseg = "SELECT SUM(i_db) FROM `igeny` WHERE t_id = '".$row["id"]."'";
-			$sqlDolgozoMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '1' OR t_id = '".$row["id"]."' AND a_id = '3'";
+			$sqlDolgozoMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '1' OR t_id = '".$row["id"]."' AND a_id = '3' OR t_id = '".$row["id"]."' AND a_id = '7' OR t_id = '".$row["id"]."' AND a_id = '8'";
 			$sqlkolcsonzottMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '4'";
 			$sqlbelepoMennyiseg = "SELECT COUNT(d_id) FROM `dolgozok` WHERE t_id = '".$row["id"]."' AND a_id = '5' OR t_id = '".$row["id"]."' AND a_id = '6'";
 			

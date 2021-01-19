@@ -9,7 +9,7 @@
         $teruletQry = $conn->query($sqlGetTerulet);
         while($ter = $teruletQry->fetch_assoc()){
             // allapot 1
-            $allapotsql = "SELECT COUNT(d_id) as db FROM dolgozok WHERE a_id = 1 AND t_id = ".$ter["t_id"]." OR a_id = 3 AND t_id = ".$ter["t_id"];
+            $allapotsql = "SELECT COUNT(d_id) as db FROM dolgozok WHERE a_id = 1 AND t_id = ".$ter["t_id"]." OR a_id = 3 AND t_id = ".$ter["t_id"]." OR a_id = 7 AND t_id = ".$ter["t_id"]." OR a_id = 8 AND t_id = ".$ter["t_id"];
             $qry1 = $conn->query($allapotsql);
             $result1 = $qry1->fetch_row();
             // allapot 2
