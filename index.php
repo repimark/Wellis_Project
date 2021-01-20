@@ -65,7 +65,7 @@ if (!isset($_SESSION["u_id"])) {
   </head>
 
   <body>
-
+    
     <?php
     //Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
     if ($_SESSION["jog"] == "1") {
@@ -83,6 +83,11 @@ if (!isset($_SESSION["u_id"])) {
     </div>
     <?php include 'contents/footer.php'; ?>
     <script>
+      $(document).ready(function(){
+        if(<?php echo $_SESSION["jog"] ?> == "2"){
+          $('.btn').attr('disabled', true)
+        }
+      })
       var megjegyzMent = function(id){
         
         var szov = $('#v' + id).val()
