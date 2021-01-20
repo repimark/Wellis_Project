@@ -55,7 +55,6 @@
         nev: nev
       },
       success: function(Result){
-        //alert(Result)
         $('#valasz').html(Result)
         $('#alert').show()
         
