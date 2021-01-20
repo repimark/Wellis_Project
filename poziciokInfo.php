@@ -867,21 +867,7 @@ if (!isset($_SESSION["u_id"])) {
 							console.log(errorRes)
 						}
 					});
-					$.ajax({
-						url: 'igenyRendezes.php',
-						type: 'POST',
-						cache: false,
-						data: {
-							i_sajat: 0,
-							p_id: pozicio_id
-						},
-						success: function(res) {
-						
-						},
-						error: function(errorRes){
-
-						}
-					});
+					
 				} else {
 					$.ajax({
 						url: 'php/belepesVisszavonas.php',
@@ -895,6 +881,21 @@ if (!isset($_SESSION["u_id"])) {
 						},
 						error: function(errorRes) {
 							console.log(errorRes)
+						}
+					});
+					$.ajax({
+						url: 'igenyRendezes.php',
+						type: 'POST',
+						cache: false,
+						data: {
+							i_sajat: 0,
+							p_id: pozicio_id
+						},
+						success: function(res) {
+						
+						},
+						error: function(errorRes){
+
 						}
 					});
 				}
