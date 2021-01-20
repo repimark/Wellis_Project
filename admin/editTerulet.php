@@ -141,20 +141,23 @@ if (!isset($_SESSION["a_id"])) {
 			});
 		};
 		$('.container').ready(function(){
+			var lines = []
+			lines += '<li class="list-group-item add"><button onclick="add()" data-toggle="modal" data-target="#addModal" class="btn addNew"><span class="text-success">+</span>Új Terület hozzáadása</button></li>';
 			$.ajax({
 				url: 'php/getTerulet.php',
 				type: 'POST',
 				cache: false,
 				success: function(Result){
 					var objJSON = JSON.parse(Result);
-					var lines = '<li class="list-group-item add"><button onclick="add()" data-toggle="modal" data-target="#addModal" class="btn addNew"><span class="text-success">+</span>Új Terület hozzáadása</button></li>';
+					
 					//alert(objJSON)
   					for (var i = objJSON.length - 1; i >= 0; i--) {
   						lines += '<li class="list-group-item" data-terulet="'+objJSON[i].t_id+'">'+objJSON[i].t_elnevezes+'   <button data-terulet="'+objJSON[i].t_id+'" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
   					}
-  					$('#list').html(lines)
+  					
 				}
 			})
+			$('#list').html(lines)
 		});
 
 	</script>
