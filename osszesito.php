@@ -36,12 +36,29 @@ if (!isset($_SESSION["u_id"])) {
 			<div class="charts w-75 bg-light">
 				<canvas id="myChart" class="bg-light rounded shadow mb-5"></canvas>
 			</div>
+			<div class="kilepesi-adatok row">
+				<div class="havi-kilepett col text-center bg-light rounded m-2 p-2">
+					<h4>Havi kilépett dolgozók</h4>
+					<hr>
+					<p id="havi" class=" text-danger">X fő</p>
+				</div>
+				<div class="heti-kilepett col text-center bg-light rounded m-2 p-2">
+					<h4>Heti kilépett dolgozók</h4>
+					<hr>
+					<p id="heti" class=" text-danger">X fő</p>
+				</div>
+			</div>
+			<br>
 		</div>
 		<script>
 			$('.container').ready(function() {
 				//alert('betöltött');
 				getOsszesito()
 				getCharts()
+				var d = new Date()
+				var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
+				loadHavi(today)
+				loadHeti(today)
 			});
 			var getOsszesito = function() {
 				//console.log("Belépett")
@@ -168,6 +185,59 @@ if (!isset($_SESSION["u_id"])) {
 					}
 				});
 			}
+			var loadHavi = function(today) {
+				var kilepett = 0
+                $.ajax({
+                    url: "adatok/getHaviValtozas.php",
+                    method: "POST",
+                    data: {
+                        today: today
+                    },
+                    success: function(data) {
+                        //console.log(data)
+                        var obj = JSON.parse(data)
+                        for (i in obj) {
+                            //teruletLabel.push(data[i].terulet)
+                            //adat.push(obj[i].db)
+                            //teruletLabel.push(obj[i].terulet)
+                            //belepett.push(parseInt(obj[i].belep))
+                            //kilepett.push(parseInt(obj[i].kilep))
+							kilepett += parseInt(obj[i].kilep)
+                            
+                        }
+                        //hetiRajz(teruletLabel, kilepett, belepett, 'canv3', 'bar', 'Havi Kilépett Dolgozók', 'Havi Belépett Dolgozók', 'Havi Munkaerő változások (fő)')
+						$('#havi').text(kilepett + ' Fő')
+                    },
+                    error: function(error) {
+                        //console.log(error)
+                    }
+                });
+            }
+            var loadHeti = function(today){
+				var kilepett = 0
+                $.ajax({
+                    url: 'adatok/getHetiValtozas.php',
+                    type: 'POST',
+                    data: {
+                        today: today,
+                    },
+                    success: function(res){
+                        var obj = JSON.parse(res)
+                        for (i in obj) {
+                            // hetiBelepett.push(obj[i].belep)
+                            // hetiKilepett.push(obj[i].kilep)
+                            // hetiTerulet.push(obj[i].terulet)
+							kilepett += parseInt(obj[i].kilep)
+
+                        }
+                        //hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók', 'Heti Munkaerő változások (fő)')
+						$('#heti').text(kilepett + ' Fő')
+                    },
+                    error: function(errorData){
+                        console.log(errorData)
+                    }
+                });
+            }
 		</script>
 	</body>
 

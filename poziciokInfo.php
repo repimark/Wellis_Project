@@ -892,10 +892,10 @@ if (!isset($_SESSION["u_id"])) {
 							p_id: pozicio_id
 						},
 						success: function(res) {
-						
+							
 						},
 						error: function(errorRes){
-
+							alert(errorRes)
 						}
 					});
 				}

@@ -82,6 +82,29 @@ if (!isset($_SESSION["u_id"])) {
 
     </div>
     <?php include 'contents/footer.php'; ?>
+    <script>
+      var megjegyzMent = function(id){
+        
+        var szov = $('#v' + id).val()
+        //alert('ID: ' + id + ' szöveg: ' + szov)
+        $.ajax({
+          url: 'php/addTeruletMegjegyzes.php',
+          type: 'POST',
+          data: {
+            id: id,
+            szov: szov
+          },
+          success: function(res){
+            //console.log(res)
+            location.reload()
+          },
+          error: function(data){
+            alert(data)
+          }
+        });
+
+      }
+    </script>
   </body>
 
   </html>
