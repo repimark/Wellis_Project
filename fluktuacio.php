@@ -24,8 +24,6 @@ if (!isset($_SESSION["u_id"])) {
 
     <body>
         <?php
-        include("contents/navbar.php");
-        
         if ($_SESSION["jog"] == "1") {
             require('contents/navbar.php');
         } else if ($_SESSION["jog"] == "2") {
