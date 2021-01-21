@@ -663,8 +663,8 @@ if (!isset($_SESSION["u_id"])) {
 						m_text: szoveg
 					},
 					success: function(NotesResult) {
-						alert(NotesResult)
-						//location.reload()
+						//alert(NotesResult)
+						location.reload()
 					},
 					error: function(error) {
 						console.log(error)
