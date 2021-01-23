@@ -56,7 +56,7 @@ if (!isset($_SESSION["u_id"])) {
 				getOsszesito()
 				getCharts()
 				var d = new Date()
-				var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
+				var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
 				loadHavi(today)
 				loadHeti(today)
 			});
@@ -126,45 +126,37 @@ if (!isset($_SESSION["u_id"])) {
 								datasets: [{
 										label: 'Dolgozo',
 										data: dolgozok,
-										backgroundColor: [
-											'rgba(255, 99, 132, 0.2)'
-										],
-										borderColor: [
-											'rgba(255, 99, 132, 1)'
-										],
+										backgroundColor: ['rgba(252, 92, 101,0.75)', 'rgba(253, 150, 68,0.75)', 'rgba(38, 222, 129,0.75)', 'rgba(43, 203, 186,0.75)', 'rgba(69, 170, 242,0.75)', 'rgba(75, 123, 236,0.75)', 'rgba(165, 94, 234,0.75)', 'rgba(209, 216, 224,0.75)', 'rgba(119, 140, 163,0.75)', 'rgba(254, 211, 48,0.75),rgba(235, 59, 90,0.75)', 'rgba(32, 191, 107,0.75)', 'rgba(75, 101, 132,0.75)'],
+										borderColor: ['rgba(252, 92, 101,1.0)', 'rgba(253, 150, 68,1.0)', 'rgba(38, 222, 129,1.0)', 'rgba(43, 203, 186,1.0)', 'rgba(69, 170, 242,1.0)', 'rgba(75, 123, 236,1.0)', 'rgba(165, 94, 234,1.0)', 'rgba(209, 216, 224,1.0)', 'rgba(119, 140, 163,1.0)', 'rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)', 'rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+										hoverBackgroundColor: ['rgba(252, 92, 101,1.0)', 'rgba(253, 150, 68,1.0)', 'rgba(38, 222, 129,1.0)', 'rgba(43, 203, 186,1.0)', 'rgba(69, 170, 242,1.0)', 'rgba(75, 123, 236,1.0)', 'rgba(165, 94, 234,1.0)', 'rgba(209, 216, 224,1.0)', 'rgba(119, 140, 163,1.0)', 'rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)', 'rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+										hoverBorderColor: 'rgba(0,0,0,1.0)',
 										borderWidth: 0.5
 									},
 									{
 										label: 'Kölcsönzött',
 										data: kolcsonzott,
-										backgroundColor: [
-											'rgba(255, 99, 132, 0.2)'
-										],
-										borderColor: [
-											'rgba(255, 99, 132, 1)'
-										],
+										backgroundColor: ['rgba(252, 92, 101,0.75)', 'rgba(253, 150, 68,0.75)', 'rgba(38, 222, 129,0.75)', 'rgba(43, 203, 186,0.75)', 'rgba(69, 170, 242,0.75)', 'rgba(75, 123, 236,0.75)', 'rgba(165, 94, 234,0.75)', 'rgba(209, 216, 224,0.75)', 'rgba(119, 140, 163,0.75)', 'rgba(254, 211, 48,0.75),rgba(235, 59, 90,0.75)', 'rgba(32, 191, 107,0.75)', 'rgba(75, 101, 132,0.75)'],
+										borderColor: ['rgba(252, 92, 101,1.0)', 'rgba(253, 150, 68,1.0)', 'rgba(38, 222, 129,1.0)', 'rgba(43, 203, 186,1.0)', 'rgba(69, 170, 242,1.0)', 'rgba(75, 123, 236,1.0)', 'rgba(165, 94, 234,1.0)', 'rgba(209, 216, 224,1.0)', 'rgba(119, 140, 163,1.0)', 'rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)', 'rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+										hoverBackgroundColor: ['rgba(252, 92, 101,1.0)', 'rgba(253, 150, 68,1.0)', 'rgba(38, 222, 129,1.0)', 'rgba(43, 203, 186,1.0)', 'rgba(69, 170, 242,1.0)', 'rgba(75, 123, 236,1.0)', 'rgba(165, 94, 234,1.0)', 'rgba(209, 216, 224,1.0)', 'rgba(119, 140, 163,1.0)', 'rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)', 'rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+										hoverBorderColor: 'rgba(0,0,0,1.0)',
 										borderWidth: 0.5
 									},
 									{
 										label: 'Belépő',
 										data: belepo,
-										backgroundColor: [
-											'rgba(255, 99, 132, 0.2)'
-										],
-										borderColor: [
-											'rgba(255, 99, 132, 1)'
-										],
+										backgroundColor: ['rgba(252, 92, 101,0.75)', 'rgba(253, 150, 68,0.75)', 'rgba(38, 222, 129,0.75)', 'rgba(43, 203, 186,0.75)', 'rgba(69, 170, 242,0.75)', 'rgba(75, 123, 236,0.75)', 'rgba(165, 94, 234,0.75)', 'rgba(209, 216, 224,0.75)', 'rgba(119, 140, 163,0.75)', 'rgba(254, 211, 48,0.75),rgba(235, 59, 90,0.75)', 'rgba(32, 191, 107,0.75)', 'rgba(75, 101, 132,0.75)'],
+										borderColor: ['rgba(252, 92, 101,1.0)', 'rgba(253, 150, 68,1.0)', 'rgba(38, 222, 129,1.0)', 'rgba(43, 203, 186,1.0)', 'rgba(69, 170, 242,1.0)', 'rgba(75, 123, 236,1.0)', 'rgba(165, 94, 234,1.0)', 'rgba(209, 216, 224,1.0)', 'rgba(119, 140, 163,1.0)', 'rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)', 'rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+										hoverBackgroundColor: ['rgba(252, 92, 101,1.0)', 'rgba(253, 150, 68,1.0)', 'rgba(38, 222, 129,1.0)', 'rgba(43, 203, 186,1.0)', 'rgba(69, 170, 242,1.0)', 'rgba(75, 123, 236,1.0)', 'rgba(165, 94, 234,1.0)', 'rgba(209, 216, 224,1.0)', 'rgba(119, 140, 163,1.0)', 'rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)', 'rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+										hoverBorderColor: 'rgba(0,0,0,1.0)',
 										borderWidth: 0.5
 									},
 									{
 										label: 'Igény',
 										data: igeny,
-										backgroundColor: [
-											'rgba(255, 99, 132, 0.2)'
-										],
-										borderColor: [
-											'rgba(255, 99, 132, 1)'
-										],
+										backgroundColor: ['rgba(252, 92, 101,0.75)', 'rgba(253, 150, 68,0.75)', 'rgba(38, 222, 129,0.75)', 'rgba(43, 203, 186,0.75)', 'rgba(69, 170, 242,0.75)', 'rgba(75, 123, 236,0.75)', 'rgba(165, 94, 234,0.75)', 'rgba(209, 216, 224,0.75)', 'rgba(119, 140, 163,0.75)', 'rgba(254, 211, 48,0.75),rgba(235, 59, 90,0.75)', 'rgba(32, 191, 107,0.75)', 'rgba(75, 101, 132,0.75)'],
+										borderColor: ['rgba(252, 92, 101,1.0)', 'rgba(253, 150, 68,1.0)', 'rgba(38, 222, 129,1.0)', 'rgba(43, 203, 186,1.0)', 'rgba(69, 170, 242,1.0)', 'rgba(75, 123, 236,1.0)', 'rgba(165, 94, 234,1.0)', 'rgba(209, 216, 224,1.0)', 'rgba(119, 140, 163,1.0)', 'rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)', 'rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+										hoverBackgroundColor: ['rgba(252, 92, 101,1.0)', 'rgba(253, 150, 68,1.0)', 'rgba(38, 222, 129,1.0)', 'rgba(43, 203, 186,1.0)', 'rgba(69, 170, 242,1.0)', 'rgba(75, 123, 236,1.0)', 'rgba(165, 94, 234,1.0)', 'rgba(209, 216, 224,1.0)', 'rgba(119, 140, 163,1.0)', 'rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)', 'rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+										hoverBorderColor: 'rgba(0,0,0,1.0)',
 										borderWidth: 0.5
 									},
 								]
@@ -187,57 +179,57 @@ if (!isset($_SESSION["u_id"])) {
 			}
 			var loadHavi = function(today) {
 				var kilepett = 0
-                $.ajax({
-                    url: "adatok/getHaviValtozas.php",
-                    method: "POST",
-                    data: {
-                        today: today
-                    },
-                    success: function(data) {
-                        //console.log(data)
-                        var obj = JSON.parse(data)
-                        for (i in obj) {
-                            //teruletLabel.push(data[i].terulet)
-                            //adat.push(obj[i].db)
-                            //teruletLabel.push(obj[i].terulet)
-                            //belepett.push(parseInt(obj[i].belep))
-                            //kilepett.push(parseInt(obj[i].kilep))
-							kilepett += parseInt(obj[i].kilep)
-                            
-                        }
-                        //hetiRajz(teruletLabel, kilepett, belepett, 'canv3', 'bar', 'Havi Kilépett Dolgozók', 'Havi Belépett Dolgozók', 'Havi Munkaerő változások (fő)')
-						$('#havi').text(kilepett + ' Fő')
-                    },
-                    error: function(error) {
-                        //console.log(error)
-                    }
-                });
-            }
-            var loadHeti = function(today){
-				var kilepett = 0
-                $.ajax({
-                    url: 'adatok/getHetiValtozas.php',
-                    type: 'POST',
-                    data: {
-                        today: today,
-                    },
-                    success: function(res){
-                        var obj = JSON.parse(res)
-                        for (i in obj) {
-                            // hetiBelepett.push(obj[i].belep)
-                            // hetiKilepett.push(obj[i].kilep)
-                            // hetiTerulet.push(obj[i].terulet)
+				$.ajax({
+					url: "adatok/getHaviValtozas.php",
+					method: "POST",
+					data: {
+						today: today
+					},
+					success: function(data) {
+						//console.log(data)
+						var obj = JSON.parse(data)
+						for (i in obj) {
+							//teruletLabel.push(data[i].terulet)
+							//adat.push(obj[i].db)
+							//teruletLabel.push(obj[i].terulet)
+							//belepett.push(parseInt(obj[i].belep))
+							//kilepett.push(parseInt(obj[i].kilep))
 							kilepett += parseInt(obj[i].kilep)
 
-                        }
-                        //hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók', 'Heti Munkaerő változások (fő)')
+						}
+						//hetiRajz(teruletLabel, kilepett, belepett, 'canv3', 'bar', 'Havi Kilépett Dolgozók', 'Havi Belépett Dolgozók', 'Havi Munkaerő változások (fő)')
+						$('#havi').text(kilepett + ' Fő')
+					},
+					error: function(error) {
+						//console.log(error)
+					}
+				});
+			}
+			var loadHeti = function(today) {
+				var kilepett = 0
+				$.ajax({
+					url: 'adatok/getHetiValtozas.php',
+					type: 'POST',
+					data: {
+						today: today,
+					},
+					success: function(res) {
+						var obj = JSON.parse(res)
+						for (i in obj) {
+							// hetiBelepett.push(obj[i].belep)
+							// hetiKilepett.push(obj[i].kilep)
+							// hetiTerulet.push(obj[i].terulet)
+							kilepett += parseInt(obj[i].kilep)
+
+						}
+						//hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók', 'Heti Munkaerő változások (fő)')
 						$('#heti').text(kilepett + ' Fő')
-                    },
-                    error: function(errorData){
-                        console.log(errorData)
-                    }
-                });
-            }
+					},
+					error: function(errorData) {
+						console.log(errorData)
+					}
+				});
+			}
 		</script>
 	</body>
 
