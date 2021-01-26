@@ -18,7 +18,7 @@
           <a class="dropdown-item" href="hetiIgeny.php">Igény teljesítések</a>
 
           <a class="dropdown-item" href="igenyPerPozi.php">Poziciónkénti igények</a>
-          <a class="dropdown-item" href="szellemi.php">Szellemi keresések</a>          
+          <a class="dropdown-item" href="szellemi.php"><span class="badge badge-info">Szellemi keresések</span></a>          
           <a class="dropdown-item" href="http://ozdwellis.repitsmark.xyz"><span class="badge badge-danger">Ózd</span></a>
         </div>
       </li>
