@@ -25,6 +25,6 @@ while($terulet = $teruletQRY->fetch_assoc()){
     }
     $RES[] = array("ter" => '-', "poz" => '-', "ig" => '-');
 }
-
+echo header('Content-Type: application/json');
 echo json_encode($RES);
 ?>

@@ -33,8 +33,8 @@ if (!isset($_SESSION["u_id"])) {
         require('connect.php');
         ?>
         <div class="container">
-            <h2 class="text-center brand"> Meddig maradtak az emberek </h2>
-            <div class="canvas-div w-75"><canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas></div>
+  <br/> 
+            <div class="canvas-div "><canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas></div>
         </div>
         <script>
             var piAlatt = 0
@@ -79,7 +79,7 @@ if (!isset($_SESSION["u_id"])) {
                     labels: labS,
                     datasets: [{
                         data: [parseInt(piAlatt), parseInt(piFelett), parseInt(evFelett)],
-                        label: 'Ki meddig maradt',
+                        label: 'kilépett',
                         backgroundColor: ['rgba(255, 118, 117,1.0)', 'rgba(0, 184, 148,1.0)'],
                         borderColor: ['rgba(255, 118, 117,1.0)', 'rgba(0,184,148,1.0)'],
                         hoverBackgroundColor: 'rgba(200,200,200,1.0)',

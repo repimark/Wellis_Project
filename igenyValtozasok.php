@@ -34,8 +34,8 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <h2 class="text-center brand"> Igény változások </h2>
-            <canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas>
             <canvas id="canv2" class="bg-light rounded shadow mb-5"></canvas>
+            <canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas>
         </div>
         <script>
             var minus = [];
