@@ -6,7 +6,8 @@
         $id = $_POST["t_id"];
         $sid = $_POST["sor"];
 		include '../connect.php';
-		$sql = "SELECT `pozicio`.`p_elnevezes` AS p_elnevezes ,`pozicio`.`p_id` AS p_id FROM `pozicio`, `k_terulet`, `Sorok` WHERE `Sorok`.`s_id` = `k_terulet`.`s_id` AND `k_terulet`.`p_id` = `pozicio`.`p_id` AND  `pozicio`.`t_id` = ".$id." AND `Sorok`.`s_id` = '".$sid."' ORDER BY p_id DESC";
+		$sql = "SELECT `pozicio`.`p_elnevezes` AS p_elnevezes ,`pozicio`.`p_id` AS p_id, `Sorok`.s_id AS sid, `Sorok`.s_elnevezes AS selnev FROM `pozicio`, `k_terulet`, `Sorok` WHERE `Sorok`.`s_id` = `k_terulet`.`s_id` AND `k_terulet`.`p_id` = `pozicio`.`p_id` AND  `pozicio`.`t_id` = ".$id." ORDER BY p_id DESC";
+		//$sql = "SELECT `Sorok`.s_id AS sid, `Sorok`.s_elnevezes AS selnev FROM `Sorok` WHERE `Sorok`.s_id = ".$sid."";
 		$result = $conn->query($sql) or die("Sikertelen lekérdezés");
 		while($r = mysqli_fetch_assoc($result)) {
     		$rows[] = $r;

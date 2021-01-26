@@ -25,7 +25,7 @@ if (!isset($_SESSION["a_id"])) {
 <body>
 	<?php include '../contents/AdminNavbar.php'; ?>
 	<div class="container p-5">
-		<ul id="list" class="list-group list-group-flush">
+		<ul id="list" class="list-group ">
 			
 		</ul>
 		<!-- ADD MODAL -->
@@ -149,12 +149,14 @@ if (!isset($_SESSION["a_id"])) {
 				cache: false,
 				success: function(Result){
 					var objJSON = JSON.parse(Result);
-					
-					//alert(objJSON)
-  					for (var i = objJSON.length - 1; i >= 0; i--) {
-  						lines += '<li class="list-group-item" data-terulet="'+objJSON[i].t_id+'">'+objJSON[i].t_elnevezes+'   <button data-terulet="'+objJSON[i].t_id+'" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
+					alert(Result)
+  					for (i in objJSON) {
+  						lines += '<li class="list-group-item" data-terulet="'+objJSON[i].t_id+'">'+objJSON[i].telnev+'   <button data-terulet="'+objJSON[i].t_id+'" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
   					}
   					
+				},
+				error: function(errorRes){
+					console.log(errorRes)
 				}
 			})
 			$('#list').html(lines)

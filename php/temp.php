@@ -1,7 +1,7 @@
 <table class="table table-borderless table-sm text-center rounded">
     <?php
     $sor = $sorokROW["s_id"];
-    $pozicioSQL = "SELECT pozicio.p_elnevezes AS 'p_elnevezes', pozicio.p_id AS 'p_id' FROM pozicio, k_terulet WHERE k_terulet.s_id = $sor AND k_terulet.p_id = pozicio.p_id AND pozicio.t_id = '$t_id' ORDER BY p_id ASC";
+    $pozicioSQL = "SELECT pozicio.p_elnevezes AS 'p_elnevezes', pozicio.p_id AS 'p_id', k_terulet.s_id AS 'sid' FROM pozicio, k_terulet WHERE k_terulet.s_id = $sor AND k_terulet.p_id = pozicio.p_id AND pozicio.t_id = '$t_id' ORDER BY p_id ASC";
     $pozicioResult = $conn->query($pozicioSQL);
 
     while ($rowPozicio = $pozicioResult->fetch_assoc()) {
@@ -73,7 +73,7 @@
                                         <td><?php echo $rowDolgozo["nev"];  ?></td>
                                         <td class="dolgozo"><?php echo $rowDolgozo["allapot"]; ?></td>
                                         <td colspan="" class=" text-right">
-                                            <button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
+                                            <button type="button" class="btn btn-secondary gomb" data-toggle="modal" data-target="#editModal" data-sor="<?php echo $rowPozicio["sid"]; ?>" data-whatever="<?php echo $rowDolgozo['nev']; ?>" data-id="<?php echo $rowDolgozo['id']; ?>" data-terulet="<?php echo $rowDolgozo['ter_id']; ?>" data-pozicio="<?php echo $rowDolgozo['pozi_id']; ?>" data-allapot="<?php echo $rowDolgozo['a_id']; ?>" data-id="<?php echo $rowPozicio['p_id']; ?>" data-belepes="<?php echo $rowDolgozo['belepes']; ?>">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />

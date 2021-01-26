@@ -1112,6 +1112,7 @@ if (!isset($_SESSION["u_id"])) {
 				var dolgozo_id = button.data('id')
 				//console.log(dolgozo_id)
 				var belepes = button.data('belepes')
+				var sor = button.data('sor')
 				var modal = $(this)
 				modal.find('#Modaltitle').text(nev + " szerkesztése")
 				modal.find('#edit_dolgozo-nev').val(nev)
@@ -1154,28 +1155,59 @@ if (!isset($_SESSION["u_id"])) {
 				} else {
 					$('#edit_sorSel').show()
 					$.ajax({
-						url: "php/getSorok_2.php",
+						url: "php/getSorok_2.php", 
 						type: "POST",
 						cache: false,
 						data: {
-							t_id: terulet_id
+							t_id: terulet_id,
+							sor: sor
+							
 						},
 						success: function(getPozicioResult) {
 							var obj = JSON.parse(getPozicioResult);
 							var lines = [];
+							var pozik = []
 							if (obj.length > 0) {
 								for (var i = obj.length - 1; i >= 0; i--) {
-									lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + ' | ' + obj[i].s_elnevezes + '</option>'
+									//lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + ' | ' + obj[i].s_elnevezes + '</option>'
+									if(obj[i].sid == sor){
+										lines += '<option class="" data-sor="' + obj[i].sid + '" selected>' + obj[i].selnev + '</option>'
+									}else{
+										lines += '<option class="" data-sor="' + obj[i].sid + '">' + obj[i].selnev + '</option>'
+									}
+									if(obj[i].p_id == pozicio_id)
+									{
+										pozik += '<option class="" data-id="' + obj[i].p_id + '" selected>' + obj[i].p_elnevezes + '</option>'
+									}else{
+										pozik += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + '</option>'
+									}
 								}
 							} else {
 								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 							}
-							$('#edit_pozicio_select').html(lines)
+							$('#edit_sor_select').html(lines)
+							$('#edit_pozicio_select').html(pozik)
 						},
 						error: function(error) {
 							//console.log(error)
 						}
 					});
+					// $.ajax({
+					// 	url: "getPozicioForUserAdd.php",
+					// 	type: "POST",
+					// 	cache: false,
+					// 	data: {
+					// 		t_id: terulet_id,
+					// 		p_id: pozicio_id
+					// 	},
+					// 	success: function(dataResult_pozi) {
+					// 		//console.log(dataResult_pozi)
+					// 		$('#edit_pozicio_select').html(dataResult_pozi);
+					// 	},
+					// 	error: function(error) {
+					// 		//console.log(error)
+					// 	}
+					// });
 				}
 				//Állapot lekérdezése
 				$.ajax({
