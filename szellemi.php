@@ -47,7 +47,7 @@ if (!isset($_SESSION["u_id"])) {
                         </h2>
                     </div>
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
                             <!-- Ide kerülnek az aktív keresések -->
                             <table class="table table-striped">
