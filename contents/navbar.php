@@ -29,9 +29,9 @@
           <!-- <a class="dropdown-item" href="kilepesiAdatok.php">Kilépési adatok</a> -->
           <a class="dropdown-item" href="meddigMaradt.php">Átlagos maradási idő</a>
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
-          <a class="dropdown-item" href="haviDolgozok.php">Fluktuáció és ép� fő-ben (havi)</a>
           <a class="dropdown-item" href="kolcsonzok.php">Kölcsönzőcégek megoszlása</a>
-          <a class="dropdown-item" href="fluktuacio.php">Fluktuácó és belépés  %-ba (havi / heti)</a>
+          <a class="dropdown-item" href="haviDolgozok.php">Fluktuáció és belépés fő-ben (havi)</a>
+          <a class="dropdown-item" href="fluktuacio.php">Fluktuácó és belépés  %-ba (havi)</a>
         </div>
       </li>
     </ul>
