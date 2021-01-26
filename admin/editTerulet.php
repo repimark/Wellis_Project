@@ -156,11 +156,11 @@ if (!isset($_SESSION["a_id"])) {
 					cache: false,
 					success: function(Result) {
 						var objJSON = JSON.parse(Result);
-						alert(Result)
+						//alert(Result)
 						for (i in objJSON) {
 							lines += '<li class="list-group-item" data-terulet="' + objJSON[i].t_id + '">' + objJSON[i].telnev + '   <button data-terulet="' + objJSON[i].t_id + '" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
 						}
-						alert(lines)
+						//alert(lines)
 						$('#list').html(lines)
 					},
 					error: function(errorRes) {
