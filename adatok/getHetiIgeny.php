@@ -6,7 +6,6 @@
         include '../connect.php';
         $RES = array();
         $today = $conn->real_escape_string($_POST["today"]);
-        //$today = '2020.12.26';
         $sql = "SELECT WEEK('$today') as het, COUNT(d_id) AS db FROM dolgozok WHERE YEAR(b_datum) = YEAR('$today') AND WEEK(b_datum) = WEEK('$today') AND a_id = 1";
         $qry = $conn->query($sql);
         $result = $qry->fetch_row();
