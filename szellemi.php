@@ -223,6 +223,7 @@ if (!isset($_SESSION["u_id"])) {
                     success: function(res) {
                         //alert(res)
                         var lines = []
+                        lines += '<option></option>'
                         var obj = JSON.parse(res)
                         for (i in obj) {
                             lines += '<option>' + obj[i].felado + '</option>'
