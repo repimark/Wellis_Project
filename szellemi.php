@@ -181,6 +181,8 @@ if (!isset($_SESSION["u_id"])) {
             });
             $('#felado').change(function() {
                 var felado = $('#felado :selected').val()
+                var aktiv, kesz, lejart = []
+
                 //alert(felado)
                 $.ajax({
                     url: 'szellemi/szures/sortByUser.php',
