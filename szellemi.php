@@ -181,7 +181,9 @@ if (!isset($_SESSION["u_id"])) {
             });
             $('#felado').change(function() {
                 var felado = $('#felado :selected').val()
-                var aktiv, kesz, lejart = []
+                var aktiv = []
+                var kesz = []
+                var lejart = []
 
                 //alert(felado)
                 $.ajax({
