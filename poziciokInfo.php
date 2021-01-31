@@ -148,7 +148,8 @@ if (!isset($_SESSION["u_id"])) {
 								</td>
 								<?php
 								while ($rowIgeny = $igenyResult->fetch_assoc()) {
-									$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 1 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 3 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 4 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 5 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 6 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 7 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 8";
+									$darabSQL = "SELECT COUNT(d_id) AS `db` FROM `dolgozok` WHERE p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 1 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 3 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 4 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 5 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 6 OR p_id = '" . $rowPozicio["p_id"] . "' AND a_id = 7 OR p_id = '".$rowPozicio['p_id']."' AND a_id = 8";
+									
 									$sajatDolgozo = $conn->query($darabSQL);
 									while ($rowDB = $sajatDolgozo->fetch_assoc()) {
 										$veglegesSajat = ((int)$rowIgeny["i_db"] - (int)$rowDB["db"]);
@@ -158,8 +159,8 @@ if (!isset($_SESSION["u_id"])) {
 
 									<td colspan="1" class="bg-dark">
 										<p style="margin:0">Saját igény: <?php echo $veglegesSajat; ?></p>
-										<button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
-										<button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">-</button>
+										<button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>" data-pozi="<?php echo $rowPozicio['p_id']; ?>">+</button>
+										<button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>" data-pozi="<?php echo $rowPozicio['p_id']; ?>">-</button>
 									</td>
 
 								<?php
@@ -704,6 +705,7 @@ if (!isset($_SESSION["u_id"])) {
 				var mennyiseg = parseInt($(this).attr('data-menny'))
 				var newMennyiseg = mennyiseg + 1
 				var id = $(this).attr('data-id')
+				var pozi = $(this).attr('data-pozi')
 				//console.log(id + ' , ' + newMennyiseg)
 				//alert(id+' igényben '+(mennyiseg+1)+' darab lesz')
 				$.ajax({
@@ -716,7 +718,7 @@ if (!isset($_SESSION["u_id"])) {
 					},
 					success: function(IgenyResult) {
 						//alert(IgenyResult)
-						igenyLog(id, '+')
+						igenyLog(pozi, '+')
 						//location.reload()
 					},
 					error: function(error) {
@@ -729,6 +731,7 @@ if (!isset($_SESSION["u_id"])) {
 				var newMennyiseg = 0
 				var newMennyiseg = mennyiseg - 1
 				var id = $(this).attr('data-id')
+				var pozi = $(this).attr('data-pozi')
 				//console.log(id + ' , ' + newMennyiseg)
 				//alert(id+' igényben '+(mennyiseg+1)+' darab lesz')
 				$.ajax({
@@ -741,7 +744,7 @@ if (!isset($_SESSION["u_id"])) {
 					},
 					success: function(IgenyResult) {
 						//location.reload()
-						igenyLog(id, '-')
+						igenyLog(pozi, '-')
 					},
 					error: function(error) {
 						//console.log(error)

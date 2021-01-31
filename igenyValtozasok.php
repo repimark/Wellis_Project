@@ -53,13 +53,14 @@ if (!isset($_SESSION["u_id"])) {
             var getValtozasAHonapban = function(year, month) {
                 $.ajax({
                     url: 'adatok/getIgenyValtozas.php',
-                    type: 'GET',
+                    type: 'POST',
                     data: {
                         year: year,
                         month: month
                     },
                     success: function(Data) {
                         //console.log(Data)
+                        alert(Data)
                         var obj = JSON.parse(Data);
                         for (i in obj) {
                             ////console.log(obj[i].muvelet)
