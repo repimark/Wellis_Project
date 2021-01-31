@@ -181,7 +181,7 @@ if (!isset($_SESSION["u_id"])) {
             });
             $('#felado').change(function() {
                 var felado = $('#felado :selected').val()
-                alert(felado)
+                //alert(felado)
                 $.ajax({
                     url: 'szellemi/szures/sortByUser.php',
                     type: 'POST',
@@ -221,7 +221,7 @@ if (!isset($_SESSION["u_id"])) {
                     type: 'POST',
 
                     success: function(res) {
-                        alert(res)
+                        //alert(res)
                         var lines = []
                         var obj = JSON.parse(res)
                         for (i in obj) {
