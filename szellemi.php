@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION["u_id"])) {
     header("location: login.php");
 } else {
+    $user = $_SESSION["u_name"];
 ?>
     <!DOCTYPE html>
     <html>
@@ -34,7 +35,11 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <br>
-            <h2 class="text-center "> Szellemi Keresések</h2>
+            <h2 class="text-center"> Szellemi Keresések</h2>
+            <div class="bg-light w-25 rounded p-2">
+                <p>Szűrés feladóra</p>
+                <select class="form-control " id="felado"></select>
+            </div>
             <br>
             <button id="newKer" class="btn btn-dark" data-toggle="modal" data-target="#addModal"><span class="badge badge-success">+</span> Új keresés hozzáadása</button> 
             <div class="accordion" id="accordionExample">
@@ -60,6 +65,7 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Keresés lezárása (dátum)</th>
                                         <th>Eltelt idő (nap)</th>
                                         <th>Eredmény</th>
+                                        <th>Feladó</th>
                                         <th>Műveletek</th>
                                     </tr>
                                 </thead>
@@ -90,7 +96,9 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Keresés határideje (45 nap)</th>
                                         <th>Keresés lezárása (dátum)</th>
                                         <th>Eltelt idő (nap)</th>
+                                        <th>Feladó</th>
                                         <th>Eredmény</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody id="kesz">
@@ -120,6 +128,7 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Keresés határideje (45 nap)</th>
                                         <th>Keresés lezárása (dátum)</th>
                                         <th>Eltelt idő (nap)</th>
+                                        <th>Feladó</th>
                                         <th>Eredmény</th>
                                     </tr>
                                 </thead>
@@ -168,8 +177,27 @@ if (!isset($_SESSION["u_id"])) {
             $(document).ready(function() {
                 loadKereses()
                 chartLoad()
-
+                getFelado()
             });
+            var getFelado = function(){
+                $.ajax({
+                    url: 'szellemi/szures/getUsers.php',
+                    type: 'GET',
+                    
+                    success: function(res){
+                        alert(res)
+                        var lines = []
+                        var obj = JSON.parse(res)
+                        for (i in obj){
+                            lines += '<option>' + obj[i].felado + '</option>'
+                        }
+                        $('#felado').html(lines)
+                    },
+                    error: function(errorRes){
+                        alert(errorRes)
+                    }
+                })
+            }
             $('#addModal').on('show.bs.modal', function() {
                 loadTerulet()
             });
@@ -195,24 +223,27 @@ if (!isset($_SESSION["u_id"])) {
                 var d = $('#kezdDatum').val()
                 var p = $('#pozicio').val()
                 var t = $('#terulet :selected').data('id')
+                var felado = '<?php echo $user;?>'
 
-                addKereses(t, p, d)
+                addKereses(t, p, d, felado)
 
             });
-            var addKereses = function(ter, pozi, datum) {
+            var addKereses = function(ter, pozi, datum, felado) {
                 $.ajax({
                     url: 'szellemi/addKereses.php',
                     type: 'POST',
                     data: {
                         terulet: ter,
                         pozi: pozi,
-                        kDatum: datum
+                        kDatum: datum,
+                        felado: felado
                     },
                     success: function(res) {
+                        //alert(res)
                         location.reload()
                     },
                     error: function(errorRes) {
-
+                        alert(errorRes)
                     }
                 });
             }
@@ -236,12 +267,12 @@ if (!isset($_SESSION["u_id"])) {
                                     var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
                                     lejartraJelent(obj[i].k_id, today)
                                 } else {
-                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
+                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
                                 }
                             } else if (parseInt(obj[i].allapot) == 1) {
-                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum)) + '</td><td>' + 'Sikeres' + '</td></tr>'
+                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td></tr>'
                             } else {
-                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td></tr>'
+                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + obj[i].felado + '</td><td>' + 'Aktív' + '</td></tr>'
                             }
                         }
                         $('#aktiv').html(aktiv)
