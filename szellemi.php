@@ -98,7 +98,7 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Eltelt idő (nap)</th>
                                         <th>Feladó</th>
                                         <th>Eredmény</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody id="kesz">
@@ -179,21 +179,57 @@ if (!isset($_SESSION["u_id"])) {
                 chartLoad()
                 getFelado()
             });
-            var getFelado = function(){
+            $('#felado').change(function() {
+                var felado = $('#felado :selected').val()
+                alert(felado)
+                $.ajax({
+                    url: 'szellemi/szures/sortByUser.php',
+                    type: 'POST',
+                    data: {
+                        felado: felado
+                    },
+                    success: function(res) {
+                        var obj = JSON.parse(res)
+
+                        for (i in obj) {
+                            if (parseInt(obj[i].allapot) == 0) {
+                                if (hatarIdoDatum(obj[i].kezdDatum) > 45) {
+                                    var d = new Date()
+                                    var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
+                                    lejartraJelent(obj[i].k_id, today)
+                                } else {
+                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
+                                }
+                            } else if (parseInt(obj[i].allapot) == 1) {
+                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td></tr>'
+                            } else {
+                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + obj[i].felado + '</td><td>' + 'Aktív' + '</td></tr>'
+                            }
+                        }
+                        $('#aktiv').html(aktiv)
+                        $('#kesz').html(kesz)
+                        $('#lejart').html(lejart)
+                    },
+                    error: function(errorRes) {
+                        alert(errorRes)
+                    }
+                })
+            })
+            var getFelado = function() {
                 $.ajax({
                     url: 'szellemi/szures/getUsers.php',
-                    type: 'GET',
-                    
-                    success: function(res){
+                    type: 'POST',
+
+                    success: function(res) {
                         alert(res)
                         var lines = []
                         var obj = JSON.parse(res)
-                        for (i in obj){
+                        for (i in obj) {
                             lines += '<option>' + obj[i].felado + '</option>'
                         }
                         $('#felado').html(lines)
                     },
-                    error: function(errorRes){
+                    error: function(errorRes) {
                         alert(errorRes)
                     }
                 })
@@ -223,7 +259,7 @@ if (!isset($_SESSION["u_id"])) {
                 var d = $('#kezdDatum').val()
                 var p = $('#pozicio').val()
                 var t = $('#terulet :selected').data('id')
-                var felado = '<?php echo $user;?>'
+                var felado = '<?php echo $_SESSION["u_name"]; ?>'
 
                 addKereses(t, p, d, felado)
 
