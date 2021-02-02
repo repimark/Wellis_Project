@@ -205,7 +205,7 @@ if (!isset($_SESSION["u_id"])) {
 						$('#haviKi').text(kilepett + ' Fő')
 					},
 					error: function(error) {
-						//console.log(error)
+						console.log(error)
 					}
 				});
 			}
@@ -258,7 +258,7 @@ if (!isset($_SESSION["u_id"])) {
 						$('#haviBe').text(belepett + ' Fő')
 					},
 					error: function(error) {
-						//console.log(error)
+						console.log(error)
 					}
 				});
 			}
@@ -277,7 +277,7 @@ if (!isset($_SESSION["u_id"])) {
 							// hetiKilepett.push(obj[i].kilep)
 							// hetiTerulet.push(obj[i].terulet)
 							belepett += parseInt(obj[i].belep)
-
+                            console.log(obj[i].belep + ' | ')
 						}
 						//hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók', 'Heti Munkaerő változások (fő)')
 						$('#hetiBe').text(belepett + ' Fő')
