@@ -36,6 +36,30 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <h2 class="text-center">Be- és Kilépett Dolgozók</h2>
+            <div class="kilepesi-adatok row">
+				<div class="havi-kilepett col text-center bg-light rounded m-2 p-2">
+					<h4>Havi kilépett dolgozók</h4>
+					<hr>
+					<p id="haviKi" class=" text-danger">X fő</p>
+				</div>
+				<div class="heti-kilepett col text-center bg-light rounded m-2 p-2">
+					<h4>Heti kilépett dolgozók</h4>
+					<hr>
+					<p id="hetiKi" class=" text-danger">X fő</p>
+				</div>
+			</div>
+            <div class="belepesi-adatok row">
+				<div class="havi-belepett col text-center bg-light rounded m-2 p-2">
+					<h4>Havi belépett dolgozók</h4>
+					<hr>
+					<p id="haviBe" class=" text-danger">X fő</p>
+				</div>
+				<div class="heti-belepett col text-center bg-light rounded m-2 p-2">
+					<h4>Heti belépett dolgozók</h4>
+					<hr>
+					<p id="hetiBe" class=" text-danger">X fő</p>
+				</div>
+			</div>
             <div id="chart_cont">
                 <br/>
                 <canvas id="canv3" class="bg-light rounded shadow mb-5"></canvas>
@@ -43,6 +67,7 @@ if (!isset($_SESSION["u_id"])) {
                 <canvas id="canv4" class="bg-light rounded shadow mb-5"></canvas>
                 <br/>
             </div>
+            
         </div>
         <script type="text/javascript">
             var teruletLabel = []
@@ -59,6 +84,11 @@ if (!isset($_SESSION["u_id"])) {
                 //loadDolgozok(y, m)
                 loadHavi(n)
                 loadHeti(n)
+                //számok
+				loadHaviKi(n)
+                loadHetiKi(n)
+                loadHaviBe(n)
+                loadHetiBe(n)
                 
             });
             var loadHavi = function(today) {
@@ -151,6 +181,112 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 });
             }
+            var loadHaviKi = function(today) {
+				var kilepett = 0
+				$.ajax({
+					url: "adatok/getHaviValtozas.php",
+					method: "POST",
+					data: {
+						today: today
+					},
+					success: function(data) {
+						//console.log(data)
+						var obj = JSON.parse(data)
+						for (i in obj) {
+							//teruletLabel.push(data[i].terulet)
+							//adat.push(obj[i].db)
+							//teruletLabel.push(obj[i].terulet)
+							//belepett.push(parseInt(obj[i].belep))
+							//kilepett.push(parseInt(obj[i].kilep))
+							kilepett += parseInt(obj[i].kilep)
+
+						}
+						//hetiRajz(teruletLabel, kilepett, belepett, 'canv3', 'bar', 'Havi Kilépett Dolgozók', 'Havi Belépett Dolgozók', 'Havi Munkaerő változások (fő)')
+						$('#haviKi').text(kilepett + ' Fő')
+					},
+					error: function(error) {
+						//console.log(error)
+					}
+				});
+			}
+			var loadHetiKi = function(today) {
+				var kilepett = 0
+				$.ajax({
+					url: 'adatok/getHetiValtozas.php',
+					type: 'POST',
+					data: {
+						today: today,
+					},
+					success: function(res) {
+						var obj = JSON.parse(res)
+						for (i in obj) {
+							// hetiBelepett.push(obj[i].belep)
+							// hetiKilepett.push(obj[i].kilep)
+							// hetiTerulet.push(obj[i].terulet)
+							kilepett += parseInt(obj[i].kilep)
+
+						}
+						//hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók', 'Heti Munkaerő változások (fő)')
+						$('#hetiKi').text(kilepett + ' Fő')
+					},
+					error: function(errorData) {
+						console.log(errorData)
+					}
+				});
+            }
+            var loadHaviBe = function(today) {
+				var belepett = 0
+				$.ajax({
+					url: "adatok/getHaviValtozas.php",
+					method: "POST",
+					data: {
+						today: today
+					},
+					success: function(data) {
+						//console.log(data)
+						var obj = JSON.parse(data)
+						for (i in obj) {
+							//teruletLabel.push(data[i].terulet)
+							//adat.push(obj[i].db)
+							//teruletLabel.push(obj[i].terulet)
+							//belepett.push(parseInt(obj[i].belep))
+							//kilepett.push(parseInt(obj[i].kilep))
+							belepett += parseInt(obj[i].belep)
+
+						}
+						//hetiRajz(teruletLabel, kilepett, belepett, 'canv3', 'bar', 'Havi Kilépett Dolgozók', 'Havi Belépett Dolgozók', 'Havi Munkaerő változások (fő)')
+						$('#haviBe').text(belepett + ' Fő')
+					},
+					error: function(error) {
+						//console.log(error)
+					}
+				});
+			}
+			var loadHetiBe = function(today) {
+				var belepett = 0
+				$.ajax({
+					url: 'adatok/getHetiValtozas.php',
+					type: 'POST',
+					data: {
+						today: today,
+					},
+					success: function(res) {
+						var obj = JSON.parse(res)
+						for (i in obj) {
+							// hetiBelepett.push(obj[i].belep)
+							// hetiKilepett.push(obj[i].kilep)
+							// hetiTerulet.push(obj[i].terulet)
+							belepett += parseInt(obj[i].belep)
+
+						}
+						//hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók', 'Heti Munkaerő változások (fő)')
+						$('#hetiBe').text(belepett + ' Fő')
+					},
+					error: function(errorData) {
+						console.log(errorData)
+					}
+				});
+			}
         </script>
     </body>
 
