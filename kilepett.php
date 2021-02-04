@@ -28,7 +28,8 @@ if (!isset($_SESSION["u_id"])) {
     require('connect.php');
     ?>
  <div class="container">
- 	<h1 class="text-center">Kilépett dolgozók</h1>
+	 <h1 class="text-center">Kilépett dolgozók</h1>
+	 <button class="btn btn-success" id="export">Excel export</button>
  	<table border=1 class='table table-striped'>
 	<thead class="thead-dark">	
 		<th>Név</th>
@@ -74,6 +75,10 @@ if (!isset($_SESSION["u_id"])) {
 			}
 		})
 	})
+	$('#export').click(function() {
+			//alert("pressed")
+				window.open("excel/kilepettUsers.php", "_blank")
+			});
  </script>
 </body>
 </html>
