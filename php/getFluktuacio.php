@@ -4,7 +4,7 @@ if (!isset($_SESSION['u_id'])) {
     header('location:login.php');
 } else {
     include '../connect.php';
-    $ev = $conn->real_escape_string($_GET["today"]);
+    $ev = $conn->real_escape_string($_POST["today"]);
     $dataArray = array();
     $sqlTerulet = "SELECT t_id, t_elnevezes FROM terulet";
     $qryTerulet = $conn->query($sqlTerulet);
