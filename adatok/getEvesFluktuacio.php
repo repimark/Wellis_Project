@@ -12,8 +12,8 @@ if (!isset($_SESSION['u_id'])) {
     while ($row_3 = mysqli_fetch_assoc($qryTerulet)) {
         for ($i = 1; $i <= 12; $i++) {
             $sqlAll = "SELECT COUNT(d_nev) AS db FROM `dolgozok` WHERE t_id = " . $row_3["t_id"];
-            $sqlKilepett = "SELECT COUNT(d_nev) AS db FROM `kilepett` WHERE t_id = " . $row_3["t_id"] . " AND MONTH(k_datum) = MONTH('$i')";
-            $sqlBelepo = "SELECT COUNT(d_nev) AS db FROM `dolgozok` WHERE t_id = " . $row_3["t_id"] . " AND MONTH(b_datum) = MONTH('$i')";
+            $sqlKilepett = "SELECT COUNT(d_nev) AS db FROM `kilepett` WHERE t_id = " . $row_3["t_id"] . " AND MONTH(k_datum) = '$i'";
+            $sqlBelepo = "SELECT COUNT(d_nev) AS db FROM `dolgozok` WHERE t_id = " . $row_3["t_id"] . " AND MONTH(b_datum) = '$i'";
 
             $qryAll = $conn->query($sqlAll) or die("sikertelen 1");
             $qryKilepett = $conn->query($sqlKilepett) or die("sikertelen 2");
@@ -28,10 +28,10 @@ if (!isset($_SESSION['u_id'])) {
                 $atlagosLetszam = (float)$row_all[0];
             }
 
-            $kilepesi = (float)$row_1[0];//(((float)$row_1[0] * 100.0 )/ (float)$atlagosLetszam);
+            $kilepesi = $row_1[0];//(((float)$row_1[0] * 100.0 )/ (float)$atlagosLetszam);
             //$kilepesi = (float)$atlagosLetszam;
-            $belepesi = (float)$row_2[0];//(((float)$row_2[0]  * 100.00)  / (float)$atlagosLetszam);
-            $dataArray[] = array('honap' => $i, 'terulet' => $row_3["t_elnevezes"], 'be' => (float)$belepesi, 'ki' => (float)$kilepesi);
+            $belepesi = $row_2[0];//(((float)$row_2[0]  * 100.00)  / (float)$atlagosLetszam);
+            $dataArray[] = array('honap' => $i, 'terulet' => $row_3["t_elnevezes"], 'be' => $belepesi, 'ki' => $kilepesi);
         }
     }
     //header("Content-Type: application/json");
