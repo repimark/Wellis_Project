@@ -29,7 +29,7 @@ if (!isset($_SESSION['u_id'])) {
         //echo $atlagosLetszam . '<br>';
         $kilepesi = (float)(($row_1[0] *100) / (float)$atlagosLetszam);
         $belepesi = (float)(($row_2[0] *100) / (float)$atlagosLetszam);
-        $dataArray[] = array('terulet' => $row_3["t_elnevezes"], 'be' => round((float)$belepesi, 2), 'ki' => round((float)$kilepesi, 2));
+        $dataArray[] = array('terulet' => $row_3["t_elnevezes"], 'be' => round($belepesi, 2), 'ki' => round($kilepesi, 2));
     }
     echo json_encode($dataArray);
 }
