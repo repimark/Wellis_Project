@@ -23,14 +23,14 @@ if (!isset($_SESSION['u_id'])) {
             $row_1 = $qryKilepett->fetch_row();
             $row_2 = $qryBelepo->fetch_row();
             // SZÁMOLÁS 
-            $atlagosLetszam = 1.5;
+            $atlagosLetszam = 1;
             if ($row_all[0] > 0) {
-                $atlagosLetszam = (float)$row_all[0] - 10.5;
+                $atlagosLetszam = (float)$row_all[0];
             }
 
             $kilepesi = (((float)$row_1[0] * 100.0 )/ (float)$atlagosLetszam);
             //$kilepesi = (float)$atlagosLetszam;
-            $belepesi = (((float)$row_2[0]  * 100.25)  / (float)$atlagosLetszam) + 1.25;
+            $belepesi = (((float)$row_2[0]  * 100.00)  / (float)$atlagosLetszam);
             $dataArray[] = array('honap' => $i, 'terulet' => $row_3["t_elnevezes"], 'be' => (float)$belepesi, 'ki' => (float)$kilepesi);
         }
     }
