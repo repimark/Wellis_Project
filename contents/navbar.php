@@ -8,7 +8,7 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dolgozók kezelése
+          Menü
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="users.php">Dolgozók szerkesztése</a>
@@ -34,7 +34,7 @@
           <a class="dropdown-item" href="haviDolgozok.php">Fluktuáció és belépés fő-ben (havi)</a>
           <a class="dropdown-item" href="fluktuacio.php">Fluktuácó és belépés  %-ba (havi)</a>
         </div>
-      </li>
+      </li> 
     </ul>
     <input id="search" class="rounded mr-sm-2" width="100" aria-label="Keresés" type="search" placeholder="Keresés"/>
     <span class="navbar-text p-1"><?php echo $_SESSION["u_name"]; ?> <a href="php/logout.php">Kijelentkezés</a></span>
