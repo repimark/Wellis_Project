@@ -28,9 +28,9 @@ if (!isset($_SESSION['u_id'])) {
                 $atlagosLetszam = (float)$row_all[0];
             }
 
-            $kilepesi = (float)(((float)$row_1[0] * 100.0 )/ (float)$atlagosLetszam);
+            $kilepesi = (float)$row_1[0];//(((float)$row_1[0] * 100.0 )/ (float)$atlagosLetszam);
             //$kilepesi = (float)$atlagosLetszam;
-            $belepesi = (float)(((float)$row_2[0]  * 100.00)  / (float)$atlagosLetszam);
+            $belepesi = (float)$row_2[0];//(((float)$row_2[0]  * 100.00)  / (float)$atlagosLetszam);
             $dataArray[] = array('honap' => $i, 'terulet' => $row_3["t_elnevezes"], 'be' => (float)$belepesi, 'ki' => (float)$kilepesi);
         }
     }
