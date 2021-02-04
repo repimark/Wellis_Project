@@ -1,6 +1,6 @@
 <?php 
 	include("connect.php");
-	$sql = "SELECT kilepett.b_datum AS 'be', kilepett.d_nev AS 'nev', kilepett.k_datum AS 'datum', terulet.t_elnevezes AS 'terulet', pozicio.p_elnevezes AS 'pozicio', pozicio.p_id AS 'pid', terulet.t_id AS 'tid', kilepett.k_id AS 'kid', kilepett.a_id AS 'aid'  FROM kilepett, terulet, pozicio WHERE kilepett.p_id = pozicio.p_id AND kilepett.t_id = terulet.t_id ORDER BY kilepett.k_id DESC";
+	$sql = "SELECT kilepett.b_datum AS 'be', kilepett.d_nev AS 'nev', kilepett.k_datum AS 'datum', terulet.t_elnevezes AS 'terulet', pozicio.p_elnevezes AS 'pozicio', pozicio.p_id AS 'pid', terulet.t_id AS 'tid', kilepett.k_id AS 'kid', kilepett.a_id AS 'aid'  FROM kilepett, terulet, pozicio WHERE kilepett.p_id = pozicio.p_id AND kilepett.t_id = terulet.t_id ORDER BY kilepett.k_datum DESC";
 	$result = $conn->query($sql);
 	while($row = $result->fetch_assoc()){
 	?>
