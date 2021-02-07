@@ -49,7 +49,7 @@ if (!isset($_SESSION["u_id"])) {
             var evesBelepes = []
             
             var honapok = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December" ]
-            var honapValues = ['2021.01.01','2021.02.01','2021.03.01','2021.04.01','2021.05.01','2021.06.01','2021.07.01','2021.08.01','2021.09.01','2021.10.01','2021.11.01','2021.12.01']
+            var honapValues = ['2021-01-15','2021-02-15','2021-03-15','2021-04-01','2021-05-01','2021-06-01','2021-07-01','2021-08-01','2021-09-01','2021-10-01','2021-11-01','2021-12-01']
 
             $(document).ready(function(){
 
@@ -99,10 +99,11 @@ if (!isset($_SESSION["u_id"])) {
                 evesTerulet = []
                 evesKilepes = []
                 $.ajax({
-                    url: 'adatok/getEvesFluktuacio.php',
+                    url: 'php/getFluktuacio.php',
                     type: 'POST',
                     today: honap,
                     success: function(res){
+                        alert(res)
                         var obj = JSON.parse(res)
                         for (i in obj){
                             console.log(obj[i].terulet)
