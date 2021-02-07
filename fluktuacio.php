@@ -44,9 +44,9 @@ if (!isset($_SESSION["u_id"])) {
             var terulet = []
             var belepesi = []
             var kilepesi = []
-            var evesTerulet = []
-            var evesKilepes = []
-            var evesBelepes = []
+            // var evesTerulet = []
+            // var evesKilepes = []
+            // var evesBelepes = []
             
             var honapok = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December" ]
             var honapValues = ['2021-01-15','2021-02-15','2021-03-15','2021-04-01','2021-05-01','2021-06-01','2021-07-01','2021-08-01','2021-09-01','2021-10-01','2021-11-01','2021-12-01']
@@ -96,9 +96,9 @@ if (!isset($_SESSION["u_id"])) {
                 });
             }
             var getEvesFluktuacio = function(honap, honapText){
-                evesTerulet = []
-                evesKilepes = []
-                evesBelepes = []
+                var evesTerulet = []
+                var evesKilepes = []
+                var evesBelepes = []
                 $.ajax({
                     url: 'php/getFluktuacio.php',
                     type: 'POST',
@@ -106,10 +106,10 @@ if (!isset($_SESSION["u_id"])) {
                         today: honap
                     },
                     success: function(res){
-                        alert(res)
+                        //alert(res)
                         var obj = JSON.parse(res)
                         for (i in obj){
-                            console.log(obj[i].terulet)
+                            //console.log(obj[i].terulet)
                             evesTerulet.push(obj[i].terulet)
                             evesBelepes.push(parseFloat(obj[i].be))
                             evesKilepes.push(parseFloat(obj[i].ki))
@@ -145,7 +145,7 @@ if (!isset($_SESSION["u_id"])) {
                 });
             }
             var rajz = function() {
-
+                
                 var chartdata = {
                     
                     labels: terulet,
@@ -185,6 +185,7 @@ if (!isset($_SESSION["u_id"])) {
                 });
             }
             var rajzHeti = function(terulet,adat,canv, cim){
+                var barGraph2 = null
                 var chartdata = {
                     
                     labels: terulet,
@@ -203,7 +204,7 @@ if (!isset($_SESSION["u_id"])) {
 
                         },
                         responsive: true,
-                        maintainAspectRatio: false,
+                        maintainAspectRatio: true,
                         legend: {
                             display: false,
                             position: 'top'
@@ -211,7 +212,7 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 };
                 var ctx = document.getElementById(canv).getContext('2d');
-                var barGraph = new Chart(ctx, {
+                barGraph2 = new Chart(ctx, {
                     type: 'bar',
                     data: chartdata,
                     options: {
@@ -220,7 +221,8 @@ if (!isset($_SESSION["u_id"])) {
                             text: cim + ' havi kilépési adatok %-ban'
                         }
                     }
-                });
+                })
+                //barGraph.reset()
             }
         </script>
     </body>
