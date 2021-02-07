@@ -44,6 +44,7 @@ if (!isset($_SESSION["u_id"])) {
             var terulet = []
             var belepesi = []
             var kilepesi = []
+            var barGraph2
             // var evesTerulet = []
             // var evesKilepes = []
             // var evesBelepes = []
@@ -99,6 +100,7 @@ if (!isset($_SESSION["u_id"])) {
                 var evesTerulet = []
                 var evesKilepes = []
                 var evesBelepes = []
+                rajzHeti(evesTerulet, evesKilepes, 'canvEv', honapText)
                 $.ajax({
                     url: 'php/getFluktuacio.php',
                     type: 'POST',
@@ -185,7 +187,11 @@ if (!isset($_SESSION["u_id"])) {
                 });
             }
             var rajzHeti = function(terulet,adat,canv, cim){
-                var barGraph2 = null
+
+                if(barGraph2){
+                    barGraph2.destroy();
+                }
+                
                 var chartdata = {
                     
                     labels: terulet,
@@ -194,21 +200,21 @@ if (!isset($_SESSION["u_id"])) {
                             label: cim,
                             backgroundColor: ['rgba(252, 92, 101,0.75)','rgba(253, 150, 68,0.75)','rgba(38, 222, 129,0.75)','rgba(43, 203, 186,0.75)','rgba(69, 170, 242,0.75)','rgba(75, 123, 236,0.75)','rgba(165, 94, 234,0.75)','rgba(209, 216, 224,0.75)','rgba(119, 140, 163,0.75)','rgba(254, 211, 48,0.75),rgba(235, 59, 90,0.75)','rgba(32, 191, 107,0.75)', 'rgba(75, 101, 132,0.75)'],
                             borderColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
-                            hoverBackgroundColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
-                            hoverBorderColor: 'rgba(0,0,0,1.0)',
+                            //hoverBackgroundColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
+                            //hoverBorderColor: 'rgba(0,0,0,1.0)',
                             borderWidth: 1
                         }
                     ],
                     options: {
-                        tooltips: {
-
-                        },
-                        responsive: true,
+                        responsive: false,
                         maintainAspectRatio: true,
                         legend: {
                             display: false,
                             position: 'top'
                         },
+                        hover:{
+                            intersect: false
+                        }
                     }
                 };
                 var ctx = document.getElementById(canv).getContext('2d');
@@ -219,6 +225,9 @@ if (!isset($_SESSION["u_id"])) {
                         title: { 
                             display: true,
                             text: cim + ' havi kilépési adatok %-ban'
+                        },
+                        hover: {
+                            intersect: false
                         }
                     }
                 })
