@@ -101,7 +101,9 @@ if (!isset($_SESSION["u_id"])) {
                 $.ajax({
                     url: 'php/getFluktuacio.php',
                     type: 'POST',
-                    today: honap,
+                    data: {
+                        today: honap
+                    },
                     success: function(res){
                         alert(res)
                         var obj = JSON.parse(res)
