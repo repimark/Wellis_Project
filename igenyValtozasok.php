@@ -33,6 +33,9 @@ if (!isset($_SESSION["u_id"])) {
         require('connect.php');
         ?>
         <div class="container">
+            <div class="changeHonap">
+                <select id="dateSelector" class="form-control"></select>
+            </div>
             <h2 class="text-center brand"> Igény változások </h2>
             <canvas id="canv2" class="bg-light rounded shadow mb-5"></canvas>
             <canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas>
@@ -42,21 +45,30 @@ if (!isset($_SESSION["u_id"])) {
             var minusLabel = [];
             var plus = [];
             var plusLabel = [];
+            var honapok = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December" ]
+            var honapValues = ['2021-01-15','2021-02-15','2021-03-15','2021-04-01','2021-05-01','2021-06-01','2021-07-01','2021-08-01','2021-09-01','2021-10-01','2021-11-01','2021-12-01']
             $(document).ready(function() {
-                var today = new Date()
-                var year = today.getFullYear();
-                var month = today.getMonth() + 1;
-                getValtozasAHonapban(year, month)
+                var honapokVal = []
+                for (i in honapok){
+                    honapokVal += '<option value="' + honapValues[i] + '">' + honapok[i] + '</option>'
+                }
+                $('#dateSelector').html(honapokVal)
+                var d = new Date()
+                var day = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
+                getValtozasAHonapban(day)
                 rajz(minusLabel, minus, 'canv1', '-')
                 rajz(plusLabel, plus, 'canv2', '+')
             });
-            var getValtozasAHonapban = function(year, month) {
+            $('#dateSelector').change(function(){
+                var dateV = $('#dateSelector').val()
+                getValtozasAHonapban(dateV)
+            })
+            var getValtozasAHonapban = function(today) {
                 $.ajax({
                     url: 'adatok/getIgenyValtozas.php',
-                    type: 'POST',
+                    type: 'GET',
                     data: {
-                        year: year,
-                        month: month
+                        today: today
                     },
                     success: function(Data) {
                         //console.log(Data)
