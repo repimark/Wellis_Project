@@ -34,22 +34,46 @@ if (!isset($_SESSION["u_id"])) {
             <h1 class="text-center p-5">Fluktuációs adatok</h1>
             <div class="charts bg-light">
                 <canvas id="canv" class="bg-light rounded shadow mb-5"></canvas>
-               <!-- <canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas>-->
             </div>
-
+            <div class="chartsEves bg-light">
+                <select class="form-control" id="honap"></select>
+                <canvas id="canvEv" class="bg-light rounded shadow mb-5"></canvas>
+            </div>
         </div>
         <script>
-            $('.container').ready(function() {
-                //alert('betöltött');
-                getDolgozok()
-                getHetiFluktu()
-            });
             var terulet = []
             var belepesi = []
             var kilepesi = []
-            var hetiTerulet = []
-            var hetiKilepes = []
-            var hetiBelepes = []
+            var evesTerulet = []
+            var evesKilepes = []
+            var evesBelepes = []
+            
+            var honapok = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December" ]
+            var honapValues = ['2021.01.01','2021.02.01','2021.03.01','2021.04.01','2021.05.01','2021.06.01','2021.07.01','2021.08.01','2021.09.01','2021.10.01','2021.11.01','2021.12.01']
+
+            $(document).ready(function(){
+
+                var selectLines = []
+                for(i in honapok){
+                    selectLines += '<option value="' + honapValues[i] + '">' + honapok[i] + '</option>'
+                }
+                $('#honap').html(selectLines)
+            })
+
+            $('#honap').change(function(){
+                var honapVal = $('#honap :selected').val()
+                var honapText = $('#honap :selected').text()
+                //alert(honapVal + ' / ' + honapText)
+                getEvesFluktuacio(honapVal, honapText)
+            })
+
+            $('.container').ready(function() {
+                getDolgozok()
+                //getHetiFluktu()
+                //getEvesFluktuacio()
+                //rajzHeti(honapokVar[i], honapokAdat[i], canvas, honapokVar[i], honapok[i])
+            });
+            
             var getHetiFluktu = function(){
                 var d = new Date()
                 var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
@@ -71,6 +95,28 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 });
             }
+            var getEvesFluktuacio = function(honap, honapText){
+                evesTerulet = []
+                evesKilepes = []
+                $.ajax({
+                    url: 'adatok/getEvesFluktuacio.php',
+                    type: 'POST',
+                    today: honap,
+                    success: function(res){
+                        var obj = JSON.parse(res)
+                        for (i in obj){
+                            console.log(obj[i].terulet)
+                            evesTerulet.push(obj[i].terulet)
+                            evesBelepes.push(parseFloat(obj[i].be))
+                            evesKilepes.push(parseFloat(obj[i].ki))
+                        }       
+                        rajzHeti(evesTerulet, evesKilepes, 'canvEv', honapText)                 
+                    },
+                    error: function(errorRes){
+                        alert(errorRes)
+                    }
+                })
+            }
             var getDolgozok = function(obj) {
                 var d = new Date()
                 var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
@@ -82,7 +128,7 @@ if (!isset($_SESSION["u_id"])) {
                         today: today
                     },
                     success: function(res) {
-                        console.log(res)
+                        //console.log(res)
                         var objJSON = JSON.parse(res);
                         for (i in objJSON) {
                             terulet.push(objJSON[i].terulet)
@@ -99,15 +145,7 @@ if (!isset($_SESSION["u_id"])) {
                 var chartdata = {
                     
                     labels: terulet,
-                    datasets: [{
-                            data: belepesi,
-                            label: 'Belépési adatok',
-                            backgroundColor: ['rgba(252, 92, 101,0.75)','rgba(253, 150, 68,0.75)','rgba(38, 222, 129,0.75)','rgba(43, 203, 186,0.75)','rgba(69, 170, 242,0.75)','rgba(75, 123, 236,0.75)','rgba(165, 94, 234,0.75)','rgba(209, 216, 224,0.75)','rgba(119, 140, 163,0.75)','rgba(254, 211, 48,0.75),rgba(235, 59, 90,0.75)','rgba(32, 191, 107,0.75)', 'rgba(75, 101, 132,0.75)'],
-                            borderColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
-                            hoverBackgroundColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
-                            hoverBorderColor: 'rgba(0,0,0,1.0)',
-                            borderWidth: 1
-                        },
+                     datasets: [
                         {
                         data: kilepesi,
                             label: 'Kilépési adatok',
@@ -137,27 +175,18 @@ if (!isset($_SESSION["u_id"])) {
                     options: {
                         title: { 
                             display: true,
-                            text: 'Havi Be és Kilépési adatok %-ban'
+                            text: 'Havi kilépési adatok %-ban'
                         }
                     }
                 });
             }
-            var rajzHeti = function(){
+            var rajzHeti = function(terulet,adat,canv, cim){
                 var chartdata = {
                     
-                    labels: hetiTerulet,
+                    labels: terulet,
                     datasets: [{
-                            data: hetiBelepes,
-                            label: 'Belépési adatok',
-                            backgroundColor: ['rgba(252, 92, 101,0.75)','rgba(253, 150, 68,0.75)','rgba(38, 222, 129,0.75)','rgba(43, 203, 186,0.75)','rgba(69, 170, 242,0.75)','rgba(75, 123, 236,0.75)','rgba(165, 94, 234,0.75)','rgba(209, 216, 224,0.75)','rgba(119, 140, 163,0.75)','rgba(254, 211, 48,0.75),rgba(235, 59, 90,0.75)','rgba(32, 191, 107,0.75)', 'rgba(75, 101, 132,0.75)'],
-                            borderColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
-                            hoverBackgroundColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
-                            hoverBorderColor: 'rgba(0,0,0,1.0)',
-                            borderWidth: 1
-                        },
-                        {
-                        data: hetiKilepes,
-                            label: 'Kilépési adatok',
+                            data: adat,
+                            label: cim,
                             backgroundColor: ['rgba(252, 92, 101,0.75)','rgba(253, 150, 68,0.75)','rgba(38, 222, 129,0.75)','rgba(43, 203, 186,0.75)','rgba(69, 170, 242,0.75)','rgba(75, 123, 236,0.75)','rgba(165, 94, 234,0.75)','rgba(209, 216, 224,0.75)','rgba(119, 140, 163,0.75)','rgba(254, 211, 48,0.75),rgba(235, 59, 90,0.75)','rgba(32, 191, 107,0.75)', 'rgba(75, 101, 132,0.75)'],
                             borderColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
                             hoverBackgroundColor: ['rgba(252, 92, 101,1.0)','rgba(253, 150, 68,1.0)','rgba(38, 222, 129,1.0)','rgba(43, 203, 186,1.0)','rgba(69, 170, 242,1.0)','rgba(75, 123, 236,1.0)','rgba(165, 94, 234,1.0)','rgba(209, 216, 224,1.0)','rgba(119, 140, 163,1.0)','rgba(254, 211, 48,1.0),rgba(235, 59, 90,1.0)','rgba(32, 191, 107,1.0)', 'rgba(75, 101, 132,1.0)'],
@@ -174,17 +203,17 @@ if (!isset($_SESSION["u_id"])) {
                         legend: {
                             display: false,
                             position: 'top'
-                        }
+                        },
                     }
                 };
-                var ctx = document.getElementById('canv1').getContext('2d');
+                var ctx = document.getElementById(canv).getContext('2d');
                 var barGraph = new Chart(ctx, {
                     type: 'bar',
                     data: chartdata,
                     options: {
                         title: { 
                             display: true,
-                            text: 'Heti Be és Kilépési adatok %-ban'
+                            text: cim + ' havi kilépési adatok %-ban'
                         }
                     }
                 });
