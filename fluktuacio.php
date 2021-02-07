@@ -98,6 +98,7 @@ if (!isset($_SESSION["u_id"])) {
             var getEvesFluktuacio = function(honap, honapText){
                 evesTerulet = []
                 evesKilepes = []
+                evesBelepes = []
                 $.ajax({
                     url: 'php/getFluktuacio.php',
                     type: 'POST',
