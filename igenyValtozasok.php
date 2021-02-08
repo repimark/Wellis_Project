@@ -72,7 +72,7 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     success: function(Data) {
                         //console.log(Data)
-                        alert(Data)
+                        //alert(Data)
                         var obj = JSON.parse(Data);
                         for (i in obj) {
                             ////console.log(obj[i].muvelet)
