@@ -1,6 +1,6 @@
 <?php  
 include '../connect.php';
-$terulet = $conn->escape_string($_GET["id"]);
+$terulet = $conn->real_escape_string($_GET["id"]);
 $sql = "SELECT dolgozok.d_nev, terulet.t_elnevezes, pozicio.p_elnevezes FROM dolgozok, terulet, pozicio, allapot WHERE terulet.t_id = dolgozok.t_id AND pozicio.p_id = dolgozok.p_id AND allapot.a_id = dolgozok.a_id AND dolgozok.t_id = $terulet ORDER BY d_nev";
 $setRec = mysqli_query($conn, $sql);
 $ternev = '';  
