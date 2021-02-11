@@ -1321,9 +1321,9 @@ if (!isset($_SESSION["u_id"])) {
 				}
 			});
 			$('#export').click(function() {
-				//alert('Pressed')
+				
 				var t_id = $('#export').data('terulet');
-				window.open("excel/ex.php?id=" + t_id, "_blank")
+				window.open("/excel/ex.php?id=" + t_id, "_blank")
 			});
 		</script>
 	</body>
