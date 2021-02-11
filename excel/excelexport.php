@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 /*******EDIT LINES 3-8*******/
 $DB_Server = "localhost:3306"; //MySQL Server    
 $DB_Username = "root"; //MySQL Username     
@@ -48,4 +48,4 @@ print("\n");
         print(trim($schema_insert));
         print "\n";
     }   
-?>
+?> -->

@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 // Connection 
 session_start();
 if (!isset($_SESSION["u_id"])) {
@@ -35,4 +35,4 @@ while ($row = $user_query->fetch_assoc()) {
 }
 fclose($out);
 }
-?>
+?> -->
