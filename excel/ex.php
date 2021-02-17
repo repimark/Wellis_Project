@@ -5,13 +5,13 @@ $sql = "SELECT dolgozok.d_nev, terulet.t_elnevezes, pozicio.p_elnevezes FROM dol
 $setRec = mysqli_query($conn, $sql);
 $ternev = '';  
 $columnHeader = '';  
-$columnHeader = "Nevek" . "\t" . "Terulet" . "\t" . "Pozicio" . "\t";  
+$columnHeader = "Nevek" . ";" . "Terulet" . ";" . "Pozicio" . ";";  
 $setData = '';  
   while ($rec = mysqli_fetch_row($setRec)) {  
     $rowData = '';  
     $ternev = $rec[1];
     foreach ($rec as $value) {  
-        $value = '"' . $value . '"' . "\t";  
+        $value = '"' . $value . '"' . ";";  
         $rowData .= $value;  
     }  
     $setData .= trim($rowData) . "\n";  
