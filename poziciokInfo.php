@@ -690,11 +690,7 @@ if (!isset($_SESSION["u_id"])) {
 						pid: pozicio
 					},
 					success: function(res) {
-						if (res == "Sikerült") {
-							location.reload()
-						} else {
-							alert(res)
-						}
+						location.reload()
 					},
 					error: function(error) {
 						//console.log(error)
