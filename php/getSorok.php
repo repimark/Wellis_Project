@@ -4,6 +4,9 @@
 $sorokSQL = "SELECT s_id, s_elnevezes FROM Sorok";
 $sorokQRY = $conn->query($sorokSQL) or die("Nem sikerült a lekérdezés");
 while ($sorokROW = mysqli_fetch_assoc($sorokQRY)) {
+    $sorOsszLetszam = "SELECT COUNT(`dolgozok`.`d_id`) AS db FROM `k_terulet`, `pozicio`, `dolgozok`, `Sorok` WHERE `k_terulet`.`p_id` = `pozicio`.`p_id` AND `pozicio`.`p_id`= `dolgozok`.`p_id` AND `k_terulet`.`s_id` = `Sorok`.`s_id` AND `Sorok`.`s_id` = ".$sorokROW["s_id"];
+    $qrySOL = $conn->query($sorOsszLetszam) or die("Nem sikerült a sor db lekérdezés");
+    $SorDBEredmeny = $qrySOL->fetch_row();
 ?>
 
     <div class="container">
@@ -12,7 +15,9 @@ while ($sorokROW = mysqli_fetch_assoc($sorokQRY)) {
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
                         <button class="btn  btn-block text-left" type="button" data-toggle="collapse" data-target="#sor<?php echo $sorokROW['s_id']; ?>" aria-expanded="true" aria-controls="collapseOne">
-                            <?php echo $sorokROW["s_elnevezes"]; ?>
+                            <?php echo $sorokROW["s_elnevezes"];?>                              
+                            <t></t>    
+                            <span class="p-2 badge badge-secondary">Létszám: <?php echo $SorDBEredmeny[0];?></span>
                         </button>
                     </h2>
                 </div>
@@ -25,4 +30,5 @@ while ($sorokROW = mysqli_fetch_assoc($sorokQRY)) {
             </div>
         </div>
     </div>
+    
 <?php } ?>

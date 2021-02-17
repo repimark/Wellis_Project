@@ -1,5 +1,6 @@
 <table class="table table-borderless table-sm text-center rounded">
     <?php
+    
     $sor = $sorokROW["s_id"];
     $pozicioSQL = "SELECT pozicio.p_elnevezes AS 'p_elnevezes', pozicio.p_id AS 'p_id', k_terulet.s_id AS 'sid' FROM pozicio, k_terulet WHERE k_terulet.s_id = $sor AND k_terulet.p_id = pozicio.p_id AND pozicio.t_id = '$t_id' ORDER BY p_id ASC";
     $pozicioResult = $conn->query($pozicioSQL);
@@ -19,6 +20,7 @@
                         $sajatDolgozo = $conn->query($darabSQL);
                         while ($rowDB = $sajatDolgozo->fetch_assoc()) {
                             $veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"];
+                            
                         }
 
                 ?>
@@ -27,6 +29,7 @@
                             <p style="margin:0">Saját igény: <?php echo $veglegesSajat; ?></p>
                             <button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
                             <button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">-</button>
+                            
                         </td>
 
                     <?php
@@ -38,8 +41,7 @@
                         }
                     ?>
                         <td colspan="2" class="bg-dark">
-                            <p style="margin:0">Kölcsönzött igény: <?php echo $veglegesKolcson;
-                                                                    ?></p>
+                            <p style="margin:0">Kölcsönzött igény: <?php echo $veglegesKolcson;?></p>
                             <button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
                             <button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">-</button>
                         </td>
@@ -306,6 +308,7 @@
             ?>
             <tr style="height: 40px"></tr>
         </tbody>
+        
     <?php
     }
     ?>
