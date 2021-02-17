@@ -32,7 +32,7 @@
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
           <a class="dropdown-item" href="kolcsonzok.php">Kölcsönzőcégek megoszlása</a>
           <a class="dropdown-item" href="haviDolgozok.php">Fluktuáció és belépés fő-ben (havi)</a>
-          <a class="dropdown-item" href="fluktuacio.php">Fluktuácó %-ba (havi)</a>
+          <a class="dropdown-item" href="fluktuacio.php">Fluktuácó %-ban (havi)</a>
         </div>
       </li> 
     </ul>
