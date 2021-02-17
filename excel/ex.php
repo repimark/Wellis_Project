@@ -19,7 +19,8 @@ $setData = '';
   
 header("Content-type: application/octet-stream; charset=UTF-8");  
 header("Content-Disposition: attachment; filename=$ternev.xls");  
-header("Pragma: no-cache");  
+header("Pragma: no-cache"); 
+header("Cache-Control: max-age=0");
 header("Expires: 0");  
 echo pack("CCC", 0xef, 0xbb, 0xbf);
   echo ucwords($columnHeader) . "\n" . $setData . "\n";  
