@@ -17,7 +17,7 @@ $setData = '';
     $setData .= trim($rowData) . "\n";  
 }  
   
-header("Content-type: application/ms-excel; charset=UTF-8");  
+header("Content-type: application/octet-stream; charset=UTF-8");  
 header("Content-Disposition: attachment; filename=$ternev.xls");  
 header("Pragma: no-cache");  
 header("Expires: 0");  
