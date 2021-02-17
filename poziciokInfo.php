@@ -715,10 +715,10 @@ if (!isset($_SESSION["u_id"])) {
 					success: function(IgenyResult) {
 						//alert(IgenyResult)
 						igenyLog(pozi, '+')
-						//location.reload()
+						location.reload()
 					},
 					error: function(error) {
-						//console.log(error)
+						console.log(error)
 					}
 				});
 			});
@@ -739,11 +739,11 @@ if (!isset($_SESSION["u_id"])) {
 						menny: newMennyiseg
 					},
 					success: function(IgenyResult) {
-						//location.reload()
 						igenyLog(pozi, '-')
+						location.reload()
 					},
 					error: function(error) {
-						//console.log(error)
+						console.log(error)
 					}
 				});
 			});
@@ -1323,6 +1323,5 @@ if (!isset($_SESSION["u_id"])) {
 			});
 		</script>
 	</body>
-
-	</html>
+</html>
 <?php } ?>
