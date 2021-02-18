@@ -17,7 +17,7 @@ while ($sorokROW = mysqli_fetch_assoc($sorokQRY)) {
                         <button class="btn  btn-block text-left" type="button" data-toggle="collapse" data-target="#sor<?php echo $sorokROW['s_id']; ?>" aria-expanded="true" aria-controls="collapseOne">
                             <?php echo $sorokROW["s_elnevezes"];?>                              
                             <t></t>    
-                            <span class="p-2 badge badge-secondary">Létszám: <?php echo $SorDBEredmeny[0];?></span>
+                            <span class="p-2 badge badge-secondary">Létszám: <?php echo $SorDBEredmeny[0];?> fő</span>
                         </button>
                     </h2>
                 </div>

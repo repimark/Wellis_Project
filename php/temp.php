@@ -1,6 +1,6 @@
 <table class="table table-borderless table-sm text-center rounded">
     <?php
-    
+    $letszam = 0;
     $sor = $sorokROW["s_id"];
     $pozicioSQL = "SELECT pozicio.p_elnevezes AS 'p_elnevezes', pozicio.p_id AS 'p_id', k_terulet.s_id AS 'sid' FROM pozicio, k_terulet WHERE k_terulet.s_id = $sor AND k_terulet.p_id = pozicio.p_id AND pozicio.t_id = '$t_id' ORDER BY p_id ASC";
     $pozicioResult = $conn->query($pozicioSQL);
@@ -20,15 +20,17 @@
                         $sajatDolgozo = $conn->query($darabSQL);
                         while ($rowDB = $sajatDolgozo->fetch_assoc()) {
                             $veglegesSajat = (int)$rowIgeny["i_db"] - (int)$rowDB["db"];
-                            
+                            $letszam = $rowDB["db"];
                         }
 
                 ?>
 
                         <td colspan="1" class="bg-dark">
+                            <span class="badge badge-info">Létszám: <?php echo $letszam;?> fő</span>
                             <p style="margin:0">Saját igény: <?php echo $veglegesSajat; ?></p>
                             <button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">+</button>
                             <button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>">-</button>
+                            
                             
                         </td>
 
