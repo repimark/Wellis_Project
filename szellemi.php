@@ -202,7 +202,7 @@ if (!isset($_SESSION["u_id"])) {
                                     var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
                                     lejartraJelent(obj[i].k_id, today)
                                 } else {
-                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
+                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Készre jelent</button><button type="button" class="btn btn-danger" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button>' + '</td></tr>'
                                 }
                             } else if (parseInt(obj[i].allapot) == 1) {
                                 kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td></tr>'
@@ -308,7 +308,7 @@ if (!isset($_SESSION["u_id"])) {
                                     var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
                                     lejartraJelent(obj[i].k_id, today)
                                 } else {
-                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
+                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button>' + '</td></tr>'
                                 }
                             } else if (parseInt(obj[i].allapot) == 1) {
                                 kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td></tr>'
@@ -355,6 +355,21 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     error: function(errorRes) {
                         console.log(res)
+                    }
+                })
+            }
+            var keresesTorlese = function(id) {
+                $.ajax({
+                    url: 'szellemi/deleteKeres.php',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function(res){
+                        location.reload()
+                    },
+                    error: function(errRes){
+                        alert(errorRes)
                     }
                 })
             }
