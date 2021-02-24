@@ -98,7 +98,7 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Eltelt idő (nap)</th>
                                         <th>Feladó</th>
                                         <th>Eredmény</th>
-
+                                        <th>Művelet</th>
                                     </tr>
                                 </thead>
                                 <tbody id="kesz">
@@ -130,6 +130,7 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Eltelt idő (nap)</th>
                                         <th>Feladó</th>
                                         <th>Eredmény</th>
+                                        <th>Művelet</th>
                                     </tr>
                                 </thead>
                                 <tbody id="lejart">
@@ -311,9 +312,9 @@ if (!isset($_SESSION["u_id"])) {
                                     aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button>' + '</td></tr>'
                                 }
                             } else if (parseInt(obj[i].allapot) == 1) {
-                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td></tr>'
+                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum))) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td><td><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button></td></tr>'
                             } else {
-                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + obj[i].felado + '</td><td>' + 'Aktív' + '</td></tr>'
+                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + obj[i].felado + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button>' + '</td></tr>'
                             }
                         }
                         $('#aktiv').html(aktiv)
