@@ -343,7 +343,7 @@ if (!isset($_SESSION["u_id"])) {
                             } else if (parseInt(obj[i].allapot) == 1) {
                                 kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum))) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td><td><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button></td></tr>'
                             } else {
-                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(hatarIdoDatum(obj[i].kezdDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button>' + '</td></tr>'
+                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(hatarIdoDatum(obj[i].kezdDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button><button type="button" class="btn btn-info btn-2 w-100" onClick="keresesSzerk(' + obj[i].k_id + ' , `' + String(obj[i].pozicio) + '` , `' + obj[i].kezdDatum + '`)" data-id="' + obj[i].k_id + '">Szerkeszt</button>' + '</td></tr>'
                             }
                         }
                         $('#aktiv').html(aktiv)
@@ -370,7 +370,6 @@ if (!isset($_SESSION["u_id"])) {
                 })
             }
             var keszreJelent = function(id) {
-                //alert('megy ' + id )
                 var d = new Date()
                 var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
                 $.ajax({
