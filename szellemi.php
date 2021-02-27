@@ -197,7 +197,7 @@ if (!isset($_SESSION["u_id"])) {
                         <input type="text" id="editDate" class="form-control">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
                         <button type="button" class="btn btn-primary" id="editBtn">Mentés</button>
                     </div>
                 </div>
