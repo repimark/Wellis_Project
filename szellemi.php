@@ -21,7 +21,14 @@ if (!isset($_SESSION["u_id"])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
         <link rel="stylesheet" type="text/css" href="style.css">
+        <style>
+            .btn-2 {
+                height: 32px !important;
+                text-align: center !important;
+                vertical-align: middle;
 
+            }
+        </style>
     </head>
 
     <body>
@@ -174,6 +181,28 @@ if (!isset($_SESSION["u_id"])) {
             </div>
             <br>
         </div>
+        <div class="modal" id="editModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="#editPozi">Pozicíó</label>
+                        <input type="text" id="editPozi" class="form-control">
+                        <label for="#editDate">Feladás dátuma</label>
+                        <input type="text" id="editDate" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="editBtn">Mentés</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
             $(document).ready(function() {
                 loadKereses()
@@ -309,7 +338,7 @@ if (!isset($_SESSION["u_id"])) {
                                     var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
                                     lejartraJelent(obj[i].k_id, today)
                                 } else {
-                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(hatarIdoDatum(obj[i].kezdDatum)) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button>' + '</td></tr>'
+                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(hatarIdoDatum(obj[i].kezdDatum)) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-2 btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger btn-2 w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button><button type="button" class="btn btn-info btn-2 w-100" onClick="keresesSzerk(' + obj[i].k_id + ' , `' + String(obj[i].pozicio) + '` , `' + obj[i].kezdDatum + '`)" data-id="' + obj[i].k_id + '">Szerkeszt</button>' + '</td></tr>'
                                 }
                             } else if (parseInt(obj[i].allapot) == 1) {
                                 kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum))) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td><td><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button></td></tr>'
@@ -366,14 +395,44 @@ if (!isset($_SESSION["u_id"])) {
                     data: {
                         id: id
                     },
-                    success: function(res){
+                    success: function(res) {
                         location.reload()
                     },
-                    error: function(errRes){
+                    error: function(errRes) {
                         alert(errorRes)
                     }
                 })
             }
+            var keresesSzerk = function(id, pozi, datum) {
+                //alert('szerk ' + id)
+                $('#editModal').modal('show')
+                $('#editPozi').val(pozi)
+                $('#editDate').val(datum)
+                $('#editBtn').attr('data-id', id)
+            }
+            $('#editBtn').click(function(){
+                var id = $(this).data('id')
+                var pozi = $('#editPozi').val()
+                var datum = $('#editDate').val()
+                //alert( id + ':id , ' + pozi + ':pozi , ' + datum + ':datum')
+                $.ajax({
+                    url: 'szellemi/editSzellemi.php',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        pozi: pozi,
+                        datum: datum
+                    },
+                    success: function(res){
+                        console.log(res);
+                        location.reload();
+                        //alert(res)
+                    },
+                    error: function(errorRes){
+                        console.log(errorRes)
+                    }
+                })
+            })
             var hatarIdoDatum = function(kezdes) {
                 var d = new Date(kezdes)
                 //console.log(d.getFullYear() + '.' + (d.getMonth()+1)+'.'+d.getDate())
