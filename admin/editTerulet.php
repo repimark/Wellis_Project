@@ -92,11 +92,10 @@ if (!isset($_SESSION["a_id"])) {
 						elnev: ter
 					},
 					success: function(Result) {
-						if (Result == 'Sikeres') {
-							location.reload()
-						} else {
-							alert('Sikertelen')
-						}
+						location.reload()
+					},
+					error: function(errResult){
+						alert(errResult)
 					}
 				});
 			});
@@ -149,7 +148,7 @@ if (!isset($_SESSION["a_id"])) {
 			};
 			$('.container').ready(function() {
 				var lines = []
-				lines += '<li class="list-group-item add"><button onclick="add()" data-toggle="modal" data-target="#addModal" class="btn addNew"><span class="text-success">+</span>Új Terület hozzáadása</button></li>';
+				lines += '<li class="list-group-item add"><button data-toggle="modal" data-target="#addModal" class="btn addNew"><span class="text-success">+</span>Új Terület hozzáadása</button></li>';
 				$.ajax({
 					url: 'php/getTerulet.php',
 					type: 'POST',
