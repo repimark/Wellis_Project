@@ -14,7 +14,8 @@ if (!isset($_SESSION["a_id"])) {
 <body>
 	<?php include '../contents/AdminNavbar.php'; ?>
 	<div class="container p-3 text-center">
-		<h1 class="p-5 text-center">Hello Belló ez itt az admin felület !!! :D </h1>
+		<h1 class="p-5 text-center">Hilihalihalihó ez itt az admin felület</h1>
+		<img src="media/csaby.gif" width="400"/>
 	</div>
 </body>
 </html>

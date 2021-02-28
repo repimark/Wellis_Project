@@ -161,6 +161,7 @@ if (!isset($_SESSION["a_id"])) {
 					t_id : data
 				},
 				success: function(Result){
+					console.log(Result)
 					var obj = JSON.parse(Result);
 					var lines = [];
 					if (obj.length > 0) {
@@ -292,11 +293,12 @@ if (!isset($_SESSION["a_id"])) {
 				type: 'POST',
 				cache: false,
 				success: function(Result){
+					console.log(Result)
 					var objJSON = JSON.parse(Result);
 					var lines = [];
 					//alert(objJSON)
   					for (var i = objJSON.length - 1; i >= 0; i--) {
-  						lines += '<option class="list-group-item" data-terulet="'+objJSON[i].t_id+'">'+objJSON[i].t_elnevezes+'   </option>'
+  						lines += '<option class="list-group-item" data-terulet="'+objJSON[i].t_id+'">'+objJSON[i].telnev+'   </option>'
   					}
   					$(terulet).html(lines)
   					getPozicio('#pozicio')		
