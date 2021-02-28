@@ -139,6 +139,7 @@ if (!isset($_SESSION["u_id"])) {
 					$pozicioResult = $conn->query($pozicioSQL);
 
 					while ($rowPozicio = $pozicioResult->fetch_assoc()) {
+						$letszam = 0;
 						$igenySQL  = "SELECT i_id, i_db, i_sajat FROM igeny WHERE p_id = '" . $rowPozicio["p_id"] . "'";
 						$igenyResult = $conn->query($igenySQL); ?>
 						<thead class="text-center table-dark bg-dark">
@@ -153,14 +154,17 @@ if (!isset($_SESSION["u_id"])) {
 									$sajatDolgozo = $conn->query($darabSQL);
 									while ($rowDB = $sajatDolgozo->fetch_assoc()) {
 										$veglegesSajat = ((int)$rowIgeny["i_db"] - (int)$rowDB["db"]);
+										$letszam = (int)$rowDB["db"];
 									}
 
 								?>
-
+									
 									<td colspan="1" class="bg-dark">
 										<p style="margin:0">Saját igény: <?php echo $veglegesSajat; ?></p>
 										<button class="btn btn-secondary igenyPlus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>" data-pozi="<?php echo $rowPozicio['p_id']; ?>">+</button>
 										<button class="btn btn-secondary igenyMinus gomb" data-menny="<?php echo $rowIgeny['i_db']; ?>" data-id="<?php echo $rowIgeny['i_id']; ?>" data-pozi="<?php echo $rowPozicio['p_id']; ?>">-</button>
+										<br/>
+										<span class="badge badge-info">Létszám : <?php echo $letszam;?> Fő</span>
 									</td>
 
 								<?php
