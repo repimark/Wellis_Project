@@ -49,6 +49,7 @@ if (!isset($_SESSION["a_id"])) {
 					<select id="jogosultsag" class="form-control">
 						<option value="2">Vezető</option>
 						<option value="1">HR</option>
+						<option value="3">Kölcsönző</option>
 					</select>
 		        </form>
 		      </div>

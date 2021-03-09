@@ -3,6 +3,9 @@ session_start();
 if (!isset($_SESSION["u_id"])) {
   header("location: login.php");
 } else {
+  if ($_SESSION["jog"] == '3') {
+    header("location: igenyPerPozi.php");
+  }
 ?>
   <!DOCTYPE html>
   <html>
@@ -65,7 +68,7 @@ if (!isset($_SESSION["u_id"])) {
   </head>
 
   <body>
-    
+
     <?php
     //Ide kérjük be a fejlécet a menüt és az adatbázis kapcsolatot nyitjuk meg 
     if ($_SESSION["jog"] == "1") {
@@ -83,13 +86,13 @@ if (!isset($_SESSION["u_id"])) {
     </div>
     <?php include 'contents/footer.php'; ?>
     <script>
-      $(document).ready(function(){
-        if(<?php echo $_SESSION["jog"] ?> == "2"){
+      $(document).ready(function() {
+        if (<?php echo $_SESSION["jog"] ?> == "2") {
           $('.btn').attr('disabled', true)
         }
       })
-      var megjegyzMent = function(id){
-        
+      var megjegyzMent = function(id) {
+
         var szov = $('#v' + id).val()
         //alert('ID: ' + id + ' szöveg: ' + szov)
         $.ajax({
@@ -99,11 +102,11 @@ if (!isset($_SESSION["u_id"])) {
             id: id,
             szov: szov
           },
-          success: function(res){
+          success: function(res) {
             //console.log(res)
             location.reload()
           },
-          error: function(data){
+          error: function(data) {
             alert(data)
           }
         });

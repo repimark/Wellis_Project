@@ -38,6 +38,8 @@ if (!isset($_SESSION["u_id"])) {
             require('contents/navbar.php');
         } else if ($_SESSION["jog"] == "2") {
             require('contents/userNavbar.php');
+        }else if ($_SESSION["jog"] == "3"){
+            require('contents/kolcsonzoNavbar.php');
         }
         ?>
         <div class="container">
