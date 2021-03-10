@@ -38,6 +38,7 @@ if (!isset($_SESSION["u_id"])) {
             <br>
             <h2 class="text-center">Igények poziciónként</h2>
             <br>
+            <h5><button class="btn btn-success" id="export" data-terulet="<?php echo $t_id; ?>"><img src="excel.png" height="20"> Exportálás Excelbe</button></h5>
             <ul class="list-group list-group-flush rounded" id="result">
 
             </ul>
@@ -69,6 +70,11 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 })
             }
+            $('#export').click(function() {
+				
+				var t_id = $('#export').data('terulet');
+				window.open("excel/poziperigeny.php", "_blank")
+			});
         </script>
     </body>
 

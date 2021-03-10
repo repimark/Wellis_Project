@@ -21,6 +21,5 @@ header("Content-Disposition: attachment; filename=Mindenki_Export.xls");
 header("Pragma: no-cache");  
 header("Expires: 0");  
 echo pack("CCC", 0xef, 0xbb, 0xbf);
-  echo ucwords($columnHeader) . "\n" . $setData . "\n";  
- ?> 
- 
+  echo ucwords($columnHeader) . "\n" . $setData . "\n";
+?>
