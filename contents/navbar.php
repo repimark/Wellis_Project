@@ -34,6 +34,9 @@
           <a class="dropdown-item" href="haviDolgozok.php">Fluktuáció és belépés fő-ben (havi)</a>
           <a class="dropdown-item" href="fluktuacio.php">Fluktuácó %-ban (havi)</a>
         </div>
+      </li>
+      <li>
+        <a class="nav-link" href="FAQ.php">FAQ</a>
       </li> 
     </ul>
     <input id="search" class="rounded mr-sm-2" width="100" aria-label="Keresés" type="search" placeholder="Keresés"/>
