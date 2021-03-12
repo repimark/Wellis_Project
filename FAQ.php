@@ -79,11 +79,11 @@ if (!isset($_SESSION["u_id"])) {
             <br>
             <br>
             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#newModal"><span class="badge badge-success">+</span> új bejegyzés létrehozása</button>
-            <div class="accordion" id="felsorolasok">
+            <div class="accordion" id="bejegyzesek">
 
             </div>
 
-            <div class="modal" tabindex="-1" id="newModal">>
+            <div class="modal" tabindex="-1" id="newModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -95,13 +95,13 @@ if (!isset($_SESSION["u_id"])) {
                         <div class="modal-body">
                             <form>
                                 <div class="form-label-group">
-
-                                    <input type="text" class="form-control" id="title" placeholder="Cím" />
                                     <label for="title">Cím</label>
+                                    <input type="text" class="form-control" id="title"/>
+                                    
                                 </div>
                                 <div class="form-label-group">
                                     <label for="#content">Szöveg</label>
-                                    <textarea id="content" placeholder="Szöveg" rows="10" cols="10" class="form-control"></textarea>
+                                    <textarea id="content" rows="10" cols="10" class="form-control"></textarea>
                                 </div>
                             </form>
                         </div>
@@ -112,7 +112,7 @@ if (!isset($_SESSION["u_id"])) {
                     </div>
                 </div>
             </div>
-            <div class="modal" tabindex="-1" id="editModal">>
+            <div class="modal" tabindex="-1" id="editModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -124,13 +124,13 @@ if (!isset($_SESSION["u_id"])) {
                         <div class="modal-body">
                             <form>
                                 <div class="form-label-group">
-
-                                    <input type="text" class="form-control" id="editTitle" placeholder="Cím" />
                                     <label for="editTitle">Cím</label>
+                                    <input type="text" class="form-control" id="editTitle"/>
+
                                 </div>
                                 <div class="form-label-group">
                                     <label for="#editContent">Szöveg</label>
-                                    <textarea id="editContent" placeholder="Szöveg" rows="10" cols="10" class="form-control"></textarea>
+                                    <textarea id="editContent" rows="10" cols="10" class="form-control"></textarea>
                                 </div>
                             </form>
                         </div>
@@ -162,7 +162,7 @@ if (!isset($_SESSION["u_id"])) {
                             lines += '</button>'
                             lines += '</h2>'
                             lines += '</div>'
-                            lines += '<div id="collapse' + obj[i].id + '" class="collapse" aria-labelledby="heading' + obj[i].id + '" data-parent="#felsorolasok">'
+                            lines += '<div id="collapse' + obj[i].id + '" class="collapse" aria-labelledby="heading' + obj[i].id + '" data-parent="#bejegyzesek">'
                             lines += '<div class="card-body">'
                             lines += '<p id="cbc' + obj[i].id + '">' + obj[i].szoveg + '</p>'
                             lines += '<hr/>'
@@ -172,7 +172,7 @@ if (!isset($_SESSION["u_id"])) {
                             lines += '</div>'
                             lines += '</div>'
                         }
-                        $('#felsorolasok').html(lines)
+                        $('#bejegyzesek').html(lines)
                     }
                 })
             };
