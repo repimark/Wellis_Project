@@ -7,7 +7,6 @@
         $RES = array();
         $meli = 0;
         $trank = 0;
-        $workf = 0;
         $munkal = 0;
         $getw = 0;
         $ismeretlen = 0;
@@ -16,9 +15,7 @@
         while($row = $qry->fetch_assoc()){
             $nev = substr($row["d_nev"], -2);
             //echo $nev;
-            if($nev == " W"){
-                $workf++;
-            }else if($nev == "ML"){
+            if($nev == "ML"){
                 $munkal++;
             }else if($nev == " T"){
                 $trank++;
@@ -33,7 +30,7 @@
             
         }
         //echo "MunkaLand: ".$munkal.", Melicom: ".$meli.", TrankWalder: ".$trank.", Work4ce: ".$workf.", Ismeretlen cég: ".$ismeretlen;
-        $RES[] = array('ml' => $munkal, 'meli' => $meli, 'trank' => $trank, 'workf' => $workf, 'getw' => $getw, 'ism' => $ismeretlen);
+        $RES[] = array('ml' => $munkal, 'meli' => $meli, 'trank' => $trank, 'getw' => $getw, 'ism' => $ismeretlen);
         echo json_encode($RES);
         $conn->close();
     }

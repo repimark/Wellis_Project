@@ -568,7 +568,6 @@ if (!isset($_SESSION["u_id"])) {
 										<select id="kolcsonzoCeg" class="form-control">
 											<option></option>
 											<option>Trenkwalder</option>
-											<option>Workforce</option>
 											<option>Melicom</option>
 											<option>Munkaland</option>
 											<option>Getwork</option>
