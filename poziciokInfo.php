@@ -571,6 +571,7 @@ if (!isset($_SESSION["u_id"])) {
 											<option>Workforce</option>
 											<option>Melicom</option>
 											<option>Munkaland</option>
+											<option>Getwork</option>
 										</select>
 									</div>
 								</div>
@@ -1049,6 +1050,9 @@ if (!isset($_SESSION["u_id"])) {
 				var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
 				if (kolcsonzo == 'Munkaland') {
 					var newNev = nev + ' ML'
+				}
+				elseif (kolcsonzo == 'Getwork'){
+					var newNev = nev + ' GW'
 				} else {
 					var newNev = nev + ' ' + kolcsonzo.substring(0, 1)
 				}
