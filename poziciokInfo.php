@@ -1051,7 +1051,7 @@ if (!isset($_SESSION["u_id"])) {
 				if (kolcsonzo == 'Munkaland') {
 					var newNev = nev + ' ML'
 				}
-				elseif (kolcsonzo == 'Getwork'){
+				else if (kolcsonzo == 'Getwork'){
 					var newNev = nev + ' GW'
 				} else {
 					var newNev = nev + ' ' + kolcsonzo.substring(0, 1)
