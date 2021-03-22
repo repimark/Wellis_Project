@@ -22,11 +22,11 @@
             }else if($nev == " M"){
                 $meli++;
             }else if($nev == "GW"){
-                $meli++;
+                $getw++;
             }else{
                 $ismeretlen++;
             }
-            //$RES[] = array('terulet' => $row["t_elnevezes"], 'db' => (int)$result[0]);
+            
             
         }
         //echo "MunkaLand: ".$munkal.", Melicom: ".$meli.", TrankWalder: ".$trank.", Work4ce: ".$workf.", Ismeretlen cég: ".$ismeretlen;
