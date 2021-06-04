@@ -72,10 +72,11 @@ if (!isset($_SESSION["u_id"])) {
 						<label for="#kolcsonzoCeg">Kölcsönző cég</label>
 						<select id="kolcsonzoCeg" class="form-control">
 							<option></option>
-							<option>Trenkwalder</option>
-							<option>Melicom</option>
-							<option>Munkaland</option>
-							<option>Getwork</option>
+							<option value="WHC">WHC</option>
+							<option value="TW">Trenkwalder</option>
+							<option value="Mcom">Melicom</option>
+							<option value="MunkaL">Munkaland</option>
+							<option value="GW">Getwork</option>
 						</select>
 					</div>
 				</div>
@@ -144,8 +145,8 @@ if (!isset($_SESSION["u_id"])) {
 					var terulet = $('#teruletSelect option:selected').data('id')
 					var pozicio = $('#pozicioSelect option:selected').data('id')
 					var allapot = $('#allapotSelect option:selected').data('id')
-					var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
-					var newNev = nev + ' ' + kolcsonzo.substring(0, 1)
+					var kolcsonzo = $('#kolcsonzoCeg option:selected').val()
+					var newNev = nev + ' ' + kolcsonzo
 					var datum = ''
 					if ($('#belepesIdo').text().length > 0) {
 						var d = new Date();

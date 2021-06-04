@@ -567,7 +567,7 @@ if (!isset($_SESSION["u_id"])) {
 										<label for="#kolcsonzoCeg">Kölcsönző cég</label>
 										<select id="kolcsonzoCeg" class="form-control">
 											<option></option>
-											<option value="WHC">WH</option>
+											<option value="WHC">WHC</option>
 											<option value="TW">Trenkwalder</option>
 											<option value="Mcom">Melicom</option>
 											<option value="MunkaL">Munkaland</option>
