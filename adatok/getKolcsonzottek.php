@@ -9,20 +9,23 @@
         $trank = 0;
         $munkal = 0;
         $getw = 0;
+        $whc = 0;
         $ismeretlen = 0;
         $sql = "SELECT d_nev FROM dolgozok WHERE a_id = 4 OR a_id = 6";
         $qry = $conn->query($sql);
         while($row = $qry->fetch_assoc()){
-            $nev = substr($row["d_nev"], -2);
+            $nev = substr($row["d_nev"], -3);
             //echo $nev;
-            if($nev == "ML"){
+            if($nev == "kaL"){
                 $munkal++;
-            }else if($nev == " T"){
+            }else if($nev == " TW"){
                 $trank++;
-            }else if($nev == " M"){
+            }else if($nev == "com"){
                 $meli++;
-            }else if($nev == "GW"){
+            }else if($nev == " GW"){
                 $getw++;
+            }else if($nev == "WHC"){
+                $whc++;
             }else{
                 $ismeretlen++;
             }
@@ -30,7 +33,7 @@
             
         }
         //echo "MunkaLand: ".$munkal.", Melicom: ".$meli.", TrankWalder: ".$trank.", Work4ce: ".$workf.", Ismeretlen cég: ".$ismeretlen;
-        $RES[] = array('ml' => $munkal, 'meli' => $meli, 'trank' => $trank, 'getw' => $getw, 'ism' => $ismeretlen);
+        $RES[] = array('ml' => $munkal, 'meli' => $meli, 'trank' => $trank, 'getw' => $getw, 'ism' => $ismeretlen, 'whc' => $whc);
         echo json_encode($RES);
         $conn->close();
     }

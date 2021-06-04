@@ -38,7 +38,7 @@ if (!isset($_SESSION["u_id"])) {
         </div>
         <script>
             var adat = [];
-            var cim = ["Munkaland", "Melicom", "Trankwalder", "Getwork", "ismeretlen"];
+            var cim = ["Munkaland", "Melicom", "Trankwalder", "Getwork", "ismeretlen", "WHC"];
             $('.container').ready(function() {
                 loadKolcsonzok()
 
@@ -57,6 +57,7 @@ if (!isset($_SESSION["u_id"])) {
                         adat.push(obj[0].trank)
                         adat.push(obj[0].getw)
                         adat.push(obj[0].ism)
+                        adat.push(obj[0].whc)
 
                         rajz()
                     },

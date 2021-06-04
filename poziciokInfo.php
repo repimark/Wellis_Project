@@ -567,10 +567,11 @@ if (!isset($_SESSION["u_id"])) {
 										<label for="#kolcsonzoCeg">Kölcsönző cég</label>
 										<select id="kolcsonzoCeg" class="form-control">
 											<option></option>
-											<option>Trenkwalder</option>
-											<option>Melicom</option>
-											<option>Munkaland</option>
-											<option>Getwork</option>
+											<option value="WHC">WH</option>
+											<option value="TW">Trenkwalder</option>
+											<option value="Mcom">Melicom</option>
+											<option value="MunkaL">Munkaland</option>
+											<option value="GW">Getwork</option>
 										</select>
 									</div>
 								</div>
@@ -1046,15 +1047,15 @@ if (!isset($_SESSION["u_id"])) {
 				var terulet = $('#add_teruletSelect option:selected').data('id')
 				var pozicio = $('#add_pozicioSelect option:selected').data('id')
 				var allapot = $('#add_allapotSelect option:selected').data('id')
-				var kolcsonzo = $('#kolcsonzoCeg option:selected').text()
-				if (kolcsonzo == 'Munkaland') {
-					var newNev = nev + ' ML'
-				}
-				else if (kolcsonzo == 'Getwork'){
-					var newNev = nev + ' GW'
-				} else {
-					var newNev = nev + ' ' + kolcsonzo.substring(0, 1)
-				}
+				var kolcsonzo = $('#kolcsonzoCeg option:selected').val()
+				// if (kolcsonzo == 'Munkaland') {
+				// 	var newNev = nev + ' ML'
+				// }
+				// else if (kolcsonzo == 'Getwork'){
+				// 	var newNev = nev + ' GW'
+				// } else {
+				var newNev = nev + ' ' + kolcsonzo
+				//}
 				var datum = ''
 				if ($('#belepesIdo').val().length < 1) {
 					var d = new Date();
