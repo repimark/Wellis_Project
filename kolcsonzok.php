@@ -41,7 +41,6 @@ if (!isset($_SESSION["u_id"])) {
             var cim = ["Munkaland", "Melicom", "Trankwalder", "Getwork", "ismeretlen", "WHC"];
             $('.container').ready(function() {
                 loadKolcsonzok()
-
             })
             var loadKolcsonzok = function() {
                 $.ajax({

@@ -311,7 +311,8 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     success: function(res) {
                         //alert(res)
-                        location.reload()
+                        loadKereses()
+                        $('#addModal').modal('hide')
                     },
                     error: function(errorRes) {
                         alert(errorRes)
@@ -350,7 +351,9 @@ if (!isset($_SESSION["u_id"])) {
                         $('#kesz').html(kesz)
                         $('#lejart').html(lejart)
                     }
+                    
                 });
+                chartLoad()
             }
             var lejartraJelent = function(id, datum) {
                 $.ajax({
@@ -362,7 +365,7 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     success: function(res) {
                         //console.log(res)
-                        location.reload();
+                        loadKereses();
                     },
                     error: function(errorRes) {
                         console.log(errorRes)
@@ -380,7 +383,7 @@ if (!isset($_SESSION["u_id"])) {
                         datum: today
                     },
                     success: function(res) {
-                        location.reload()
+                       loadKereses()
                     },
                     error: function(errorRes) {
                         console.log(res)
@@ -395,7 +398,7 @@ if (!isset($_SESSION["u_id"])) {
                         id: id
                     },
                     success: function(res) {
-                        location.reload()
+                        loadKereses()
                     },
                     error: function(errRes) {
                         alert(errorRes)
@@ -424,7 +427,8 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     success: function(res){
                         console.log(res);
-                        location.reload();
+                        loadKereses();
+                        $('#editModal').modal('hide')
                         //alert(res)
                     },
                     error: function(errorRes){
