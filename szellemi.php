@@ -209,7 +209,10 @@ if (!isset($_SESSION["u_id"])) {
                 chartLoad()
                 getFelado()
             });
-            $('#felado').change(function() {
+            $('#felado').change(function(){
+                szures()
+            })
+            var szures = function() {
                 var felado = $('#felado :selected').val()
                 var aktiv = []
                 var kesz = []
@@ -248,7 +251,7 @@ if (!isset($_SESSION["u_id"])) {
                         alert(errorRes)
                     }
                 })
-            })
+            }
             var getFelado = function() {
                 $.ajax({
                     url: 'szellemi/szures/getUsers.php',
@@ -257,7 +260,7 @@ if (!isset($_SESSION["u_id"])) {
                     success: function(res) {
                         //alert(res)
                         var lines = []
-                        lines += '<option></option>'
+                        lines += '<option data-fun="all"></option>'
                         var obj = JSON.parse(res)
                         for (i in obj) {
                             lines += '<option>' + obj[i].felado + '</option>'
@@ -353,6 +356,13 @@ if (!isset($_SESSION["u_id"])) {
                     }
                     
                 });
+                var felado = $('#felado :selected').text()
+                console.log(felado + ' 360 sor')
+                if($('#felado :selected').text() == ''){
+                    console.log(felado + '362.sor')
+                }else{
+                    szures()
+                }
                 chartLoad()
             }
             var lejartraJelent = function(id, datum) {
@@ -399,6 +409,7 @@ if (!isset($_SESSION["u_id"])) {
                     },
                     success: function(res) {
                         loadKereses()
+                        
                     },
                     error: function(errRes) {
                         alert(errorRes)
